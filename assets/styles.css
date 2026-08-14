@@ -48,12 +48,12 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .nav-wrap { min-height: 78px; display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 28px; }
 .brand { display: inline-flex; align-items: center; gap: 11px; width: fit-content; direction: ltr; text-align: left; }
 .brand-mark {
-  position: relative; display: grid; place-items: center; width: 40px; height: 40px;
-  overflow: hidden; color: white; border-radius: 12px; background: var(--ink);
-  font-size: 12px; font-weight: 900; letter-spacing: .05em;
+  display: grid; place-items: center; flex: none;
+  width: 40px; height: 40px;
+  color: var(--ink); border-radius: 0;
+  background: transparent;
 }
-.brand-mark i { position: absolute; width: 55px; height: 55px; border: 1px solid rgba(255,255,255,.46); border-radius: 50%; transform: translate(18px, -18px); }
-.brand-mark b { position: relative; }
+.brand-mark svg { width: 40px; height: 40px; }
 .brand-copy strong { display: block; font-size: 14px; letter-spacing: .11em; }
 .brand-copy small { display: block; margin-top: -1px; color: var(--ink-soft); font-size: 10px; letter-spacing: .01em; }
 nav { display: flex; align-items: center; gap: 24px; color: var(--ink-soft); font-size: 13px; font-weight: 650; }
@@ -82,7 +82,8 @@ nav a:hover::after { transform: scaleX(1); }
 .button-secondary { color: var(--ink); border-color: var(--line-strong); background: rgba(255,255,255,.52); }
 .button-secondary:hover { border-color: var(--ink); background: var(--white); }
 .hero-identity { display: flex; align-items: center; flex-wrap: wrap; gap: 11px; margin-top: 35px; color: var(--ink-soft); font-size: 9px; font-weight: 700; letter-spacing: .075em; }
-.author-monogram { display: grid; place-items: center; width: 31px; height: 31px; color: var(--blue); border: 1px solid var(--blue); border-radius: 50%; font-size: 9px; font-weight: 900; }
+.hero-seal { display: grid; place-items: center; flex: none; width: 32px; height: 32px; color: var(--blue); }
+.hero-seal svg { width: 32px; height: 32px; }
 .hero-identity > div:nth-child(2) { display: grid; gap: 1px; }
 .hero-identity strong { color: var(--ink); font-size: 10px; }
 .hero-identity a { margin-inline-start: 7px; color: var(--blue-dark); text-decoration: underline; text-decoration-color: #b7caef; text-underline-offset: 3px; }
@@ -243,7 +244,10 @@ h2 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(38px, 4.1v
 
 footer { padding-block: 36px; color: var(--ink-soft); background: var(--paper); }
 .footer-grid { display: grid; grid-template-columns: 1.1fr 1fr 1.1fr; gap: 24px; align-items: center; }
-.footer-brand { display: grid; gap: 2px; }
+.footer-brand { display: flex; align-items: center; gap: 10px; }
+.footer-seal { display: grid; place-items: center; flex: none; width: 28px; height: 28px; color: var(--ink-soft); }
+.footer-seal svg { width: 28px; height: 28px; }
+.footer-brand > div { display: grid; gap: 2px; }
 .footer-brand strong { color: var(--ink); font-size: 13px; letter-spacing: .12em; }
 .footer-brand span { font-size: 11px; }
 .footer-links { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; font-size: 11px; font-weight: 700; }
