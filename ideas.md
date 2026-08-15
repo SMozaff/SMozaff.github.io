@@ -33,3 +33,9 @@
 **Wordmark & Logo.** The wordmark pairs a strong serif name with a three-bar red boundary mark. The logo itself is an abstract three-bar symbol, not typography, so it is usable as a favicon and an identity mark.
 
 **Signature Brand Color.** **Boundary Vermilion — #C94A33.**
+
+## Style Decisions
+
+### Hero systems animation
+
+The hero will add a compact, line-drawn system panel rather than a cinematic illustration. It will show three synchronized layers: a hardware board and edge nodes, a software service flow, and an architectural-pattern stack. Slow vermilion signal traces, restrained pulse states, and a moving verification cursor will suggest an active engineering system; the hero copy remains the primary reading layer. The complete panel becomes static when reduced motion is preferred.

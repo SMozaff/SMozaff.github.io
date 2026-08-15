@@ -89,15 +89,64 @@
     <section class="page-intro" id="top" aria-labelledby="intro-title">
       <div class="page-intro-grid">
         <aside class="folio-label" aria-label="Document reference">Personal folio<br>01 / 2026</aside>
-        <div class="intro-content">
-          <p class="eyebrow">Software architecture · interface-first engineering</p>
-          <h1 id="intro-title">Soheil<br><em>Mozaffari.</em></h1>
-          <p class="intro-lede">Author of <strong>IFEM — Interface-First Execution Methodology</strong>, with work focused on explicit interfaces, contract-driven coordination, and verifiable software execution in human and AI-assisted environments.</p>
-          <div class="intro-bottom">
-            <p>A personal site for work, publications, and independent records. The methodology itself is documented separately on the IFEM Doctrine site.</p>
-            <div class="boundary-mark" aria-label="Three explicit boundaries"><i></i><i></i><i></i></div>
+        <div class="hero-layout">
+          <div class="intro-content">
+            <p class="eyebrow">Software architecture · interface-first engineering</p>
+            <h1 id="intro-title">Soheil<br><em>Mozaffari.</em></h1>
+            <p class="intro-lede">Author of <strong>IFEM — Interface-First Execution Methodology</strong>, with work focused on explicit interfaces, contract-driven coordination, and verifiable software execution in human and AI-assisted environments.</p>
+            <div class="intro-bottom">
+              <p>A personal site for work, publications, and independent records. The methodology itself is documented separately on the IFEM Doctrine site.</p>
+              <div class="boundary-mark" aria-label="Three explicit boundaries"><i></i><i></i><i></i></div>
+            </div>
           </div>
+          <figure class="systems-panel" aria-labelledby="systems-panel-title">
+            <div class="systems-panel-top"><span>01 / systems in concert</span><span><i></i> verification live</span></div>
+            <svg class="systems-map" viewBox="0 0 520 530" role="img" aria-labelledby="systems-map-title systems-map-desc">
+              <title id="systems-map-title">Hardware, software, and architecture systems map</title>
+              <desc id="systems-map-desc">A diagram showing a hardware board feeding software services through an explicit contract and architectural verification layers.</desc>
+              <defs>
+                <pattern id="grid" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M 22 0 L 0 0 0 22" fill="none" stroke="currentColor" stroke-width=".7"/></pattern>
+                <linearGradient id="softGlow" x1="0" x2="1"><stop stop-color="#C94A33" stop-opacity=".32"/><stop offset="1" stop-color="#C94A33" stop-opacity="0"/></linearGradient>
+              </defs>
+              <rect class="map-grid" x="0" y="0" width="520" height="530" fill="url(#grid)"/>
+              <g class="hardware-layer">
+                <text class="map-label" x="30" y="55">HARDWARE / SIGNAL</text>
+                <rect class="hardware-board" x="30" y="76" width="182" height="167" rx="4"/>
+                <rect class="chip" x="84" y="122" width="78" height="64" rx="3"/>
+                <text class="map-micro" x="101" y="151">EDGE</text><text class="map-micro" x="96" y="170">MODULE</text>
+                <circle class="hardware-node node-one" cx="58" cy="103" r="6"/><circle class="hardware-node node-two" cx="184" cy="103" r="6"/><circle class="hardware-node node-three" cx="58" cy="215" r="6"/><circle class="hardware-node node-four" cx="184" cy="215" r="6"/>
+                <path class="board-wire wire-a" d="M64 103 H84 M162 103 H178 M64 215 H84 M162 215 H178 M123 186 V222"/>
+                <path class="signal-trace trace-one" d="M212 158 C258 158 244 132 287 132"/>
+              </g>
+              <g class="software-layer">
+                <text class="map-label" x="287" y="55">SOFTWARE / SERVICE</text>
+                <rect class="service-card service-a" x="287" y="78" width="194" height="58" rx="3"/>
+                <circle class="service-dot" cx="309" cy="107" r="5"/><text class="map-title" x="325" y="104">Interface API</text><text class="map-sub" x="325" y="121">versioned boundary</text>
+                <rect class="service-card service-b" x="287" y="151" width="194" height="58" rx="3"/>
+                <circle class="service-dot" cx="309" cy="180" r="5"/><text class="map-title" x="325" y="177">Domain service</text><text class="map-sub" x="325" y="194">owned behavior</text>
+                <rect class="service-card service-c" x="287" y="224" width="194" height="58" rx="3"/>
+                <circle class="service-dot" cx="309" cy="253" r="5"/><text class="map-title" x="325" y="250">Evidence stream</text><text class="map-sub" x="325" y="267">tests / telemetry</text>
+                <path class="service-link service-link-a" d="M384 136 V151 M384 209 V224"/>
+                <path class="signal-trace trace-two" d="M384 282 C384 318 346 314 346 350"/>
+              </g>
+              <g class="architecture-layer">
+                <text class="map-label" x="30" y="326">ARCHITECTURE / PATTERN</text>
+                <rect class="architecture-field" x="30" y="349" width="451" height="130" rx="4"/>
+                <rect class="pattern-layer pattern-one" x="56" y="374" width="299" height="22" rx="2"/>
+                <rect class="pattern-layer pattern-two" x="73" y="404" width="265" height="22" rx="2"/>
+                <rect class="pattern-layer pattern-three" x="91" y="434" width="229" height="22" rx="2"/>
+                <text class="pattern-text" x="68" y="390">INTENT</text><text class="pattern-text" x="86" y="420">CONTRACT</text><text class="pattern-text" x="104" y="450">IMPLEMENTATION</text>
+                <rect class="verify-frame" x="380" y="375" width="76" height="80" rx="2"/>
+                <path class="verify-tick" d="M399 416 l11 11 25 -28"/>
+                <text class="map-sub" x="389" y="443">VERIFY</text>
+                <path class="signal-trace trace-three" d="M356 416 H380"/>
+              </g>
+              <g class="map-cursor"><line x1="30" y1="498" x2="481" y2="498"/><circle cx="62" cy="498" r="5"/><text class="map-sub" x="82" y="503">explicit boundaries · continuous evidence · shared contract</text></g>
+            </svg>
+            <figcaption id="systems-panel-title"><span>Hardware → software → architecture</span><h2>One boundary, many implementations.</h2><p>A concise systems map for the work: signals, services, contracts, and verification move together.</p></figcaption>
+          </figure>
         </div>
+      </div>
       </div>
     </section>
 
