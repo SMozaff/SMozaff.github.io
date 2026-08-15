@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Soheil Mozaffari</title>
+  <desc id="desc">Software architecture, IFEM, and AI-assisted engineering.</desc>
+  <rect width="1200" height="630" fill="#F5F2EC"/>
+  <rect x="82" y="78" width="7" height="474" fill="#C94A33"/>
+  <g fill="#1D2227"><path d="M1014 80h104v18h-104zM1014 116h82v18h-82zM1014 152h104v18h-104z"/></g>
+  <g fill="#1D2227" font-family="Georgia, serif"><text x="122" y="194" font-size="79">Soheil</text><text x="122" y="282" font-size="79">Mozaffari</text></g>
+  <text x="122" y="360" font-family="Arial, sans-serif" font-size="27" fill="#51606B">Software architecture, interface-first engineering,</text>
+  <text x="122" y="398" font-family="Arial, sans-serif" font-size="27" fill="#51606B">and AI-assisted software execution.</text>
+  <line x1="122" y1="490" x2="780" y2="490" stroke="#B7B7B0" stroke-width="2"/>
+  <text x="122" y="531" font-family="Arial, sans-serif" font-size="22" letter-spacing="2" fill="#1D2227">SO-MUZAFF.GITHUB.IO</text>
+</svg>
