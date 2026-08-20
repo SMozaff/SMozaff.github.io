@@ -1,0 +1,2 @@
+/* Systems Ledger Persian refinement: retain Latin editorial hierarchy inside the RTL hero. */
+.fa-page .hero h1 { font-family: var(--display); }
