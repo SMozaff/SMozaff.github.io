@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://so-muzaff.github.io/sitemap.xml
+Sitemap: https://smozaff.github.io/sitemap.xml
