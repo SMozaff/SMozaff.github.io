@@ -6,19 +6,20 @@ import { defineConfig } from "vite";
 const rootDir = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
+  root: path.resolve(rootDir, "site-src"),
   plugins: [react()],
   resolve: {
     alias: {
-      "@": path.resolve(rootDir, "src"),
+      "@": path.resolve(rootDir, "site-src", "src"),
     },
   },
   build: {
-    outDir: "dist",
+    outDir: path.resolve(rootDir, "dist"),
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: path.resolve(rootDir, "index.html"),
-        fa: path.resolve(rootDir, "fa", "index.html"),
+        main: path.resolve(rootDir, "site-src", "index.html"),
+        fa: path.resolve(rootDir, "site-src", "fa", "index.html"),
       },
     },
   },
