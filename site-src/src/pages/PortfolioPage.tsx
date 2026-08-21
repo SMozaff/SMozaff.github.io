@@ -26,7 +26,7 @@ function Ltr({ children, className = "" }: { children: ReactNode; className?: st
   return <bdi className={className} lang="en" dir="ltr">{children}</bdi>;
 }
 
-const technicalTokens = /(Soheil Mozaffari|Raven Metadata Extractor|Rezvan Mesh|Watermelon MediaPlayer|ONYX Mission Operations|Interface-First Execution Methodology \(IFEM\)|IFEM|CLI|CI|FFI|CRDT|DOI|RTL|BLE|JNI|C2PA|EXIF|XMP|GPS|Rust|Kotlin|Python|Android|Bluetooth LE|Wi‑Fi Direct|Media3|ExoPlayer|Cloud Relay|Docker|Helm|Terraform|GitHub|ORCID|Systems Ledger)/;
+const technicalTokens = /(Soheil Mozaffari|Raven Metadata Extractor|Rezvan Mesh|Watermelon MediaPlayer|ONYX Framework|Interface-First Execution Methodology \(IFEM\)|IFEM|CLI|CI|FFI|CRDT|DOI|RTL|BLE|JNI|C2PA|EXIF|XMP|GPS|Rust|Kotlin|Python|Android|Bluetooth LE|Wi‑Fi Direct|Media3|ExoPlayer|Cloud Relay|Docker|Helm|Terraform|GitHub|ORCID|Systems Ledger)/;
 
 function BidiText({ text, isFa }: { text: string; isFa: boolean }) {
   if (!isFa) return <>{text}</>;
@@ -94,8 +94,8 @@ function EvidenceVisual({ kind }: { kind: Project["evidenceKind"] }) {
 
 function ProjectCard({ project, isFa }: { project: Project; isFa: boolean }) {
   const labels = isFa
-    ? { details: "بررسی پروندهٔ پروژه", problem: "مسئله", constraints: "محدودیت‌ها", architecture: "معماری", implementation: "پیاده‌سازی", evidence: "راستی‌آزمایی و شواهد", limits: "وضعیت و حدود فعلی", code: "مشاهدهٔ کد" }
-    : { details: "Open project record", problem: "Problem", constraints: "Constraints", architecture: "Architecture", implementation: "Implementation", evidence: "Verification & evidence", limits: "Current limits", code: "View code" };
+    ? { details: "بررسی پروندهٔ پروژه", problem: "مسئله", constraints: "محدودیت‌ها", architecture: "معماری", implementation: "پیاده‌سازی", evidence: "راستی‌آزمایی و شواهد", limits: "وضعیت و حدود فعلی", caseStudy: "مطالعهٔ موردی کامل", methodology: "روش‌شناسی IFEM", code: "مشاهدهٔ کد" }
+    : { details: "Open project record", problem: "Problem", constraints: "Constraints", architecture: "Architecture", implementation: "Implementation", evidence: "Verification & evidence", limits: "Current limits", caseStudy: "View full case study", methodology: "IFEM methodology", code: "View code" };
   return (
     <article className={`project-card project-${project.id}`} id={project.id}>
       <div className="project-serial" aria-hidden="true">{project.number}</div>
@@ -110,13 +110,15 @@ function ProjectCard({ project, isFa }: { project: Project; isFa: boolean }) {
         {project.id !== "ifem" && (
           <div className="ifem-relationship" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '1.5rem', fontSize: '0.85rem', color: 'var(--text-muted, #5a6665)', fontWeight: 500 }}>
             <Orbit size={14} style={{ color: 'var(--brand, #cf3e2a)' }} />
-            <span>{isFa ? "ساخته‌شده بر پایهٔ اصول IFEM" : "Built with IFEM principles"}</span>
+            <span>{isFa ? "نمایانگر اصول IFEM در عمل" : "Demonstrates IFEM principles in practice"}</span>
           </div>
         )}
         <div className="project-actions">
-          {project.primary && <a className="text-link" href={project.primary.href} target="_blank" rel="noreferrer">{project.primary.label}<ArrowUpRight size={15} /></a>}
-          {project.secondary && <a className="text-link" href={project.secondary.href} target="_blank" rel="noreferrer">{project.secondary.label}<FileText size={15} /></a>}
-          {project.github && <a className="text-link" href={project.github} target="_blank" rel="noreferrer">{labels.code}<Github size={15} /></a>}
+          {project.caseStudy && <a className="text-link case-study-link" href={project.caseStudy} target="_blank" rel="noopener noreferrer">{labels.caseStudy}<ExternalLink size={15} /></a>}
+          {project.primary && <a className="text-link" href={project.primary.href} target="_blank" rel="noopener noreferrer">{project.primary.label}<ArrowUpRight size={15} /></a>}
+          {project.secondary && <a className="text-link" href={project.secondary.href} target="_blank" rel="noopener noreferrer">{project.secondary.label}<FileText size={15} /></a>}
+          {project.id !== "ifem" && <a className="text-link" href={links.ifem} target="_blank" rel="noopener noreferrer">{labels.methodology}<Orbit size={15} /></a>}
+          {project.github && <a className="text-link" href={project.github} target="_blank" rel="noopener noreferrer">{labels.code}<Github size={15} /></a>}
         </div>
       </div>
       <aside className="evidence-panel">
