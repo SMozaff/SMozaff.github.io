@@ -87,23 +87,39 @@ function OnyxMediaGallery({ isFa }: { isFa: boolean }) {
   );
 }
 
-const rezvanMedia = [
-  { src: "/manus-storage/rezvanmesh-permissions.png", alt: "RezvanMesh permissions setup interface", label: "Permission setup" },
-  { src: "/manus-storage/rezvanmesh-network.png", alt: "RezvanMesh network topology interface", label: "Network topology" },
-  { src: "/manus-storage/rezvanmesh-emergency.png", alt: "RezvanMesh emergency alert interface", label: "Emergency alert" },
-  { src: "/manus-storage/rezvanmesh-diagnostics.png", alt: "RezvanMesh diagnostics interface", label: "Diagnostics" },
-  { src: "/manus-storage/rezvanmesh-broadcast.png", alt: "RezvanMesh broadcast-message interface", label: "Broadcast message" },
-] as const;
+const rezvanVisuals = {
+  permissions: { src: "/manus-storage/rezvanmesh-permissions.png", enAlt: "RezvanMesh permissions setup interface", faAlt: "رابط راه‌اندازی مجوزهای RezvanMesh" },
+  network: { src: "/manus-storage/rezvanmesh-network.png", enAlt: "RezvanMesh network topology interface", faAlt: "رابط توپولوژی شبکهٔ RezvanMesh" },
+  diagnostics: { src: "/manus-storage/rezvanmesh-diagnostics.png", enAlt: "RezvanMesh diagnostics interface", faAlt: "رابط تشخیص RezvanMesh" },
+  broadcast: { src: "/manus-storage/rezvanmesh-broadcast.png", enAlt: "RezvanMesh broadcast-message interface", faAlt: "رابط ارسال پیام RezvanMesh" },
+  emergency: { src: "/manus-storage/rezvanmesh-emergency.png", enAlt: "RezvanMesh emergency alert interface", faAlt: "رابط هشدار اضطراری RezvanMesh" },
+} as const;
 
-function RezvanMediaGallery({ isFa }: { isFa: boolean }) {
+function RezvanContextVisuals({ isFa }: { isFa: boolean }) {
   const copy = isFa
-    ? { aria: "شواهد رابط‌های موبایل RezvanMesh", eyebrow: "شواهد رابط کاربری", heading: "سطوح کاربردی ارتباط مش", note: "نشان‌ها و تصاویر ارائه‌شده سطوح رابط کاربریِ مجوزها، توپولوژی شبکه، هشدار، تشخیص و پیام‌رسانی را نشان می‌دهند؛ به‌تنهایی رفتار مش زنده، اعتبارسنجی چنددستگاهی یا کامل بودن محصول را اثبات نمی‌کنند.", labels: ["راه‌اندازی مجوزها", "توپولوژی شبکه", "هشدار اضطراری", "تشخیص", "ارسال پیام"] }
-    : { aria: "RezvanMesh mobile-interface evidence", eyebrow: "Mobile-interface evidence", heading: "Offline-mesh communication surfaces", note: "The supplied marks and captures document the permission, topology, alert, diagnostic, and message-composition surfaces only; they do not by themselves establish live mesh behavior, multi-device validation, or a complete product.", labels: ["Permission setup", "Network topology", "Emergency alert", "Diagnostics", "Broadcast message"] };
+    ? {
+        aria: "ارجاعات رابط کاربری RezvanMesh", eyebrow: "ارجاعات رابط کاربری", heading: "رابط، در متنِ مسئولیت‌ها", note: "این تصاویر مواد رابط کاربری ارائه‌شده‌اند و باید در کنار ساختار منبع، آزمون‌ها، گردش‌کار ساخت و روش آزمون روی دستگاه خوانده شوند؛ به‌تنهایی رفتار مش زنده، اعتبارسنجی چنددستگاهی یا کامل بودن محصول را اثبات نمی‌کنند.",
+        items: [
+          { label: "۰۱ / دسترسی", title: "مجوزها پیش از کشف همتا", body: "سطح راه‌اندازی، وابستگی‌های مجوز برای کشف و ارتباط نزدیک را پیش از آغاز تعامل با گره‌ها روشن می‌کند.", visuals: [rezvanVisuals.permissions] },
+          { label: "۰۲ / مشاهده‌پذیری", title: "توپولوژی به‌عنوان سطح کاربر", body: "نمای شبکه، گره‌ها، پیوندها و وضعیت انتقال را در یک سطح جداگانه برای مشاهدهٔ کاربر گرد می‌آورد.", visuals: [rezvanVisuals.network] },
+          { label: "۰۳ / راستی‌آزمایی", title: "تشخیص درون تجربهٔ کاربر", body: "سطح تشخیص، وضعیت‌های سلامت و شاخص‌های منتخب را برای بررسی کاربر نشان می‌دهد.", visuals: [rezvanVisuals.diagnostics] },
+          { label: "۰۴ / ارتباط و فوریت", title: "پیام عادی و هشدار اضطراری", body: "سطوح ارسال پیام و هشدار اضطراری، مسیرهای ارتباطی عادی و پرمخاطره را از هم متمایز می‌کنند.", visuals: [rezvanVisuals.broadcast, rezvanVisuals.emergency] },
+        ],
+      }
+    : {
+        aria: "RezvanMesh contextual interface references", eyebrow: "Contextual interface references", heading: "Interfaces in the flow of responsibility", note: "These are supplied interface materials to read alongside the source structure, tests, build workflow, and documented device procedure; they do not by themselves establish live mesh behavior, multi-device validation, or a complete product.",
+        items: [
+          { label: "01 / access", title: "Permissions before peer discovery", body: "The setup surface makes the permission dependencies for discovery and nearby communication legible before node interaction begins.", visuals: [rezvanVisuals.permissions] },
+          { label: "02 / observability", title: "Topology as a client surface", body: "The network view gathers nodes, links, and transport status into a separate surface for user inspection.", visuals: [rezvanVisuals.network] },
+          { label: "03 / verification", title: "Diagnostics within the experience", body: "The diagnostic surface presents health states and selected indicators for client-side inspection.", visuals: [rezvanVisuals.diagnostics] },
+          { label: "04 / communication & urgency", title: "Routine message and emergency alert", body: "The broadcast and emergency surfaces distinguish ordinary communication from high-urgency interaction paths.", visuals: [rezvanVisuals.broadcast, rezvanVisuals.emergency] },
+        ],
+      };
   return (
-    <section className="rezvan-media-gallery" aria-label={copy.aria}>
-      <div className="rezvan-media-gallery__intro"><img src="/manus-storage/rezvanmesh-icon-mark.png" alt="" aria-hidden="true" /><div><p className="evidence-label">{copy.eyebrow}</p><h4>{copy.heading}</h4></div></div>
-      <div className="rezvan-media-grid">{rezvanMedia.map((media, index) => <figure key={media.src}><img src={media.src} alt={media.alt} loading="lazy" /><figcaption>{copy.labels[index]}</figcaption></figure>)}</div>
-      <p className="rezvan-media-gallery__note">{copy.note}</p>
+    <section className="rezvan-context-flow" aria-label={copy.aria}>
+      <div className="rezvan-context-flow__intro"><img src="/manus-storage/rezvanmesh-icon-mark.png" alt="" aria-hidden="true" /><div><p className="evidence-label">{copy.eyebrow}</p><h4>{copy.heading}</h4></div></div>
+      <div className="rezvan-context-flow__items">{copy.items.map((item) => <figure className="rezvan-context-visual" key={item.label}><div className={`rezvan-context-visual__screens ${item.visuals.length > 1 ? "rezvan-context-visual__screens--paired" : ""}`}>{item.visuals.map((visual) => <img src={visual.src} alt={isFa ? visual.faAlt : visual.enAlt} loading="lazy" key={visual.src} />)}</div><figcaption><p className="evidence-label">{item.label}</p><h4>{item.title}</h4><p>{item.body}</p></figcaption></figure>)}</div>
+      <p className="rezvan-context-flow__note">{copy.note}</p>
     </section>
   );
 }
@@ -144,7 +160,7 @@ function ProjectCard({ project, isFa }: { project: Project; isFa: boolean }) {
         <p><BidiText text={project.proofDetail} isFa={isFa} /></p>
       </aside>
       {project.id === "onyx" && <OnyxMediaGallery isFa={isFa} />}
-      {project.id === "rezvan" && <RezvanMediaGallery isFa={isFa} />}
+      {project.id === "rezvan" && <RezvanContextVisuals isFa={isFa} />}
       <details className="project-detail">
         <summary>{labels.details}<ChevronDown size={17} aria-hidden="true" /></summary>
         <div className="detail-grid">
