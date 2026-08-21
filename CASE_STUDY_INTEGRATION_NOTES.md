@@ -39,3 +39,19 @@ The current `manus.space` case-study URLs are suitable for the present integrati
 5. the IFEM Doctrine Applications/case-study references
 
 Do not create duplicate canonical project identities during that migration.
+
+## Navigation, media, and motion refinement
+
+A second refinement pass addressed the usability and presentation issues found after the case-study integration:
+
+- Promoted **IFEM Doctrine** to a first-class destination in the main navigation, hero actions, methodology section, and professional-profile grid.
+- Added a direct **Zenodo** publication card beside GitHub, IFEM Doctrine, ORCID, and LinkedIn.
+- Made the English/Persian language switcher substantially more noticeable and sticky at the top of the viewport.
+- Added an explicit **Home / خانه** navigation target and preserved the brand-as-home behavior.
+- Added a floating **Back to top / بالا** control that appears after meaningful scrolling.
+- Replaced page-load-only section motion with **IntersectionObserver-based scroll reveals**, so content animates when it actually enters the viewport rather than finishing off-screen.
+- Extended the motion language to project records, evidence panels, methodology content, and profile cards while respecting `prefers-reduced-motion`.
+- Enlarged and emphasized project evidence media. Raven, Watermelon MediaPlayer, and Watermelon Vector Graphics Converter use actual project/interface imagery; Rezvan Mesh and ONYX retain clearly labeled conceptual architecture diagrams rather than synthetic product screenshots.
+- Added a small runtime enhancement layer (`site-enhancements.js`) so the already-built GitHub Pages bundle receives the same navigation and motion improvements without pretending that a full Vite rebuild occurred in this environment.
+
+The editable React source was updated in parallel so a later normal Vite build will preserve the same information architecture.

@@ -97,7 +97,7 @@ function ProjectCard({ project, isFa }: { project: Project; isFa: boolean }) {
     ? { details: "بررسی پروندهٔ پروژه", problem: "مسئله", constraints: "محدودیت‌ها", architecture: "معماری", implementation: "پیاده‌سازی", evidence: "راستی‌آزمایی و شواهد", limits: "وضعیت و حدود فعلی", caseStudy: "مطالعهٔ موردی کامل", methodology: "روش‌شناسی IFEM", code: "مشاهدهٔ کد" }
     : { details: "Open project record", problem: "Problem", constraints: "Constraints", architecture: "Architecture", implementation: "Implementation", evidence: "Verification & evidence", limits: "Current limits", caseStudy: "View full case study", methodology: "IFEM methodology", code: "View code" };
   return (
-    <article className={`project-card project-${project.id}`} id={project.id}>
+    <article className={`project-card project-${project.id}`} id={project.id} data-reveal>
       <div className="project-serial" aria-hidden="true">{project.number}</div>
       <div className="project-primary">
         <div className="project-meta"><span><BidiText text={project.category} isFa={isFa} /></span><span className="project-status"><CircleDot size={12} /><BidiText text={project.status} isFa={isFa} /></span></div>
@@ -121,7 +121,7 @@ function ProjectCard({ project, isFa }: { project: Project; isFa: boolean }) {
           {project.github && <a className="text-link" href={project.github} target="_blank" rel="noopener noreferrer">{labels.code}<Github size={15} /></a>}
         </div>
       </div>
-      <aside className="evidence-panel">
+      <aside className="evidence-panel" data-reveal>
         <p className="evidence-label"><BidiText text={project.evidenceLabel} isFa={isFa} /></p>
         <div className="evidence-visual"><EvidenceVisual kind={project.evidenceKind} /></div>
         <h4><BidiText text={project.proof} isFa={isFa} /></h4>
@@ -150,6 +150,8 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
   const htmlDir = isFa ? "rtl" : "ltr";
   const profileCards = [
     { label: "GitHub", href: links.github, icon: Github, value: "SMozaff" },
+    { label: "IFEM Doctrine", href: links.ifem, icon: BookOpen, value: "ifem-doctrine.github.io" },
+    { label: "Zenodo", href: links.primaryDoi, icon: FileText, value: "10.5281/zenodo.20621561" },
     { label: "ORCID", href: links.orcid, icon: Orbit, value: "0009-0001-2428-1295" },
     { label: "LinkedIn", href: links.linkedin, icon: Network, value: "su-muzaff" },
   ];
@@ -159,43 +161,43 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Soheil Mozaffari home"><BrandMark /><span><Ltr>Soheil Mozaffari</Ltr><small>{isFa ? "سامانه و نرم‌افزار" : "Systems & software"}</small></span></a>
         <nav aria-label={isFa ? "پیمایش اصلی" : "Main navigation"}>
-          <a href="#about">{copy.nav.about}</a><a href="#work">{copy.nav.work}</a><a href="#methodology">{copy.nav.methodology}</a><a href="#profiles">{copy.nav.profiles}</a><a href="#contact">{copy.nav.contact}</a>
+          <a href="#top">{isFa ? "خانه" : "Home"}</a><a href="#about">{copy.nav.about}</a><a href="#work">{copy.nav.work}</a><a href="#methodology">{copy.nav.methodology}</a><a className="nav-ifem" href={links.ifem} target="_blank" rel="noreferrer">{isFa ? "IFEM ↗" : "IFEM Doctrine ↗"}</a><a href="#profiles">{copy.nav.profiles}</a><a href="#contact">{copy.nav.contact}</a>
         </nav>
       </header>
       <main id="top">
         <section className="hero section-shell">
-          <div className="hero-copy">
+          <div className="hero-copy" data-reveal>
             <p className="eyebrow">{copy.eyebrow}</p>
             <h1><Ltr>Soheil Mozaffari</Ltr></h1>
             {isFa && <p className="localized-name">{copy.localizedName}</p>}
             <p className="role"><BidiText text={copy.role} isFa={isFa} /></p>
             <p className="hero-statement"><BidiText text={copy.hero} isFa={isFa} /></p>
-            <div className="hero-actions"><a className="button button-dark" href="#work">{copy.heroPrimary}<ArrowDownRight size={17} /></a><a className="button button-light" href="#methodology">{copy.heroSecondary}<ArrowDownRight size={17} /></a></div>
+            <div className="hero-actions"><a className="button button-dark" href="#work">{copy.heroPrimary}<ArrowDownRight size={17} /></a><a className="button button-light" href={links.ifem} target="_blank" rel="noreferrer">{copy.heroSecondary}<ArrowUpRight size={17} /></a></div>
           </div>
-          <div className="hero-art" aria-label={isFa ? "نشانهٔ تصویری مرزهای سامانه" : "System-boundary visual"}>
+          <div className="hero-art" data-reveal aria-label={isFa ? "نشانهٔ تصویری مرزهای سامانه" : "System-boundary visual"}>
             <img src={`${storage}/soheil-hero-systems-ledger_7e8329be.jpg`} alt="" />
             <p><BidiText text={copy.heroCaption} isFa={isFa} /></p>
           </div>
         </section>
 
-        <section id="about" className="about-section section-shell editorial-section">
+        <section id="about" className="about-section section-shell editorial-section" data-reveal>
           <p className="section-rail">{copy.aboutRail}</p>
           <div className="section-content"><p className="kicker">{copy.aboutKicker}</p><h2>{copy.aboutHeading}</h2><p><BidiText text={copy.aboutBody} isFa={isFa} /></p></div>
         </section>
 
-        <section id="work" className="work-section section-shell">
-          <div className="work-intro"><p className="section-rail">{copy.workRail}</p><div><p className="kicker">{copy.workKicker}</p><h2>{copy.projectsHeading}</h2><p><BidiText text={copy.workIntro} isFa={isFa} /></p></div></div>
+        <section id="work" className="work-section section-shell" data-reveal>
+          <div className="work-intro" data-reveal><p className="section-rail">{copy.workRail}</p><div><p className="kicker">{copy.workKicker}</p><h2>{copy.projectsHeading}</h2><p><BidiText text={copy.workIntro} isFa={isFa} /></p></div></div>
           <div className="project-list">{copy.projects.map((project) => <ProjectCard project={project} isFa={isFa} key={project.id} />)}</div>
         </section>
 
-        <section id="methodology" className="methodology-section section-shell editorial-section">
+        <section id="methodology" className="methodology-section section-shell editorial-section" data-reveal>
           <p className="section-rail">{copy.methodologyRail}</p>
-          <div className="section-content"><p className="kicker"><Ltr>IFEM</Ltr></p><h2>{copy.methodologyHeading}</h2><p><BidiText text={copy.methodologyBody} isFa={isFa} /></p><a className="text-link strong-link" href={links.primaryDoi} target="_blank" rel="noreferrer">{copy.methodologyCta}<ArrowUpRight size={16} /></a><blockquote><BidiText text={copy.methodologyQuote} isFa={isFa} /></blockquote></div>
+          <div className="section-content"><p className="kicker"><Ltr>IFEM</Ltr></p><h2>{copy.methodologyHeading}</h2><p><BidiText text={copy.methodologyBody} isFa={isFa} /></p><div className="methodology-actions"><a className="text-link strong-link" href={isFa ? "https://ifem-doctrine.github.io/fa/" : links.ifem} target="_blank" rel="noreferrer">{isFa ? "ورود به وب‌سایت IFEM" : "Explore IFEM Doctrine"}<ArrowUpRight size={16} /></a><a className="text-link strong-link" href={links.primaryDoi} target="_blank" rel="noreferrer">{copy.methodologyCta}<FileText size={16} /></a></div><blockquote data-reveal><BidiText text={copy.methodologyQuote} isFa={isFa} /></blockquote></div>
         </section>
 
-        <section id="profiles" className="profiles-section section-shell editorial-section">
+        <section id="profiles" className="profiles-section section-shell editorial-section" data-reveal>
           <p className="section-rail">{copy.profilesRail}</p>
-          <div className="section-content"><p className="kicker">{copy.profilesKicker}</p><h2>{copy.profilesHeading}</h2><p><BidiText text={copy.profilesBody} isFa={isFa} /></p><div className="profile-grid">{profileCards.map(({ label, href, icon: Icon, value }) => <a href={href} target="_blank" rel="noreferrer" className="profile-card" key={label}><Icon size={20} /><span>{label}</span><Ltr>{value}</Ltr><ArrowUpRight size={16} /></a>)}</div></div>
+          <div className="section-content"><p className="kicker">{copy.profilesKicker}</p><h2>{copy.profilesHeading}</h2><p><BidiText text={copy.profilesBody} isFa={isFa} /></p><div className="profile-grid">{profileCards.map(({ label, href, icon: Icon, value }) => <a href={href} target="_blank" rel="noreferrer" className="profile-card" data-reveal key={label}><Icon size={20} /><span>{label}</span><Ltr>{value}</Ltr><ArrowUpRight size={16} /></a>)}</div></div>
         </section>
       </main>
       <footer id="contact" className="site-footer">
@@ -203,6 +205,7 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
         <a className="footer-contact" href="mailto:Soheil.Mozaffari@gmail.com"><Mail size={17} /><Ltr>Soheil.Mozaffari@gmail.com</Ltr></a>
         <p className="footer-ledger">{isFa ? <><span>وب‌سایت حرفه‌ای / </span><Ltr>Systems Ledger</Ltr></> : "Professional website / Systems Ledger"}</p>
       </footer>
+      <a className="back-to-top" href="#top" aria-label={isFa ? "بازگشت به بالای صفحه" : "Back to top"}>{isFa ? "↑ بالا" : "↑ Top"}</a>
     </div>
   );
 }
