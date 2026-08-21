@@ -58,3 +58,18 @@ nav .nav-ifem:after{transform:scaleX(1);opacity:.55}
 @media(prefers-reduced-motion:reduce){.reveal-item{opacity:1!important;transform:none!important}.back-to-top{transition:none}}
 @media(max-width:1000px){.profile-grid{grid-template-columns:1fr}.site-header{top:3.35rem}}
 @media(max-width:600px){.language-bar{min-height:3.2rem;font-size:.78rem;padding:.72rem 1rem}.site-header{top:3.2rem}.evidence-visual,.evidence-visual img,.architecture-visual{min-height:13.5rem}.back-to-top{right:.8rem;bottom:.8rem}.fa-page .back-to-top{left:.8rem;right:auto}}
+
+/* ONYX case-study media: supplied mark and bounded client-surface evidence. */
+.onyx-logo-visual{width:100%;height:100%;min-height:clamp(15rem,23vw,21rem);object-fit:contain;background:#f7f9fb;padding:1.3rem}
+.onyx-media-gallery{grid-column:2/-1;border-top:1px solid var(--line);margin-top:1.35rem;padding-top:1.35rem}
+.onyx-media-gallery__intro{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:1rem}
+.onyx-media-gallery__intro .evidence-label{margin:0 0 .35rem}
+.onyx-media-gallery h4{margin:0;color:var(--ink);font-size:1.15rem;line-height:1.2}
+.onyx-media-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.65rem}
+.onyx-media-grid figure{margin:0;min-width:0;border:1px solid var(--line);background:var(--paper-bright)}
+.onyx-media-grid img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;transition:transform 350ms var(--ease-out)}
+.onyx-media-grid figure:hover img{transform:scale(1.02)}
+.onyx-media-grid figcaption{padding:.55rem .6rem;color:var(--text-muted);font-size:.7rem;font-weight:800;letter-spacing:.04em;line-height:1.25}
+.onyx-media-gallery__note{margin:1rem 0 0;max-width:60rem;color:var(--text-muted);font-size:.82rem;line-height:1.55}
+@media(max-width:1000px){.onyx-media-gallery,.fa-page .onyx-media-gallery{grid-column:1}.onyx-media-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.onyx-media-grid{grid-template-columns:1fr}.onyx-media-grid img{aspect-ratio:16/10}.onyx-media-gallery h4{font-size:1.05rem}}

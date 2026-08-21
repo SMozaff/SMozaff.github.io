@@ -76,19 +76,31 @@ function EvidenceVisual({ kind }: { kind: Project["evidenceKind"] }) {
       </svg>
     );
   }
+  return <img className="onyx-logo-visual" src="/manus-storage/onyx-logo.png" alt="ONYX Framework mark" loading="lazy" />;
+}
+
+const onyxMedia = [
+  { src: "/manus-storage/onyx-sign-in.webp", alt: "ONYX secure browser access sign-in interface", label: "Secure browser access" },
+  { src: "/manus-storage/onyx-operational-overview.png", alt: "ONYX operational overview interface", label: "Operational overview" },
+  { src: "/manus-storage/onyx-missions.png", alt: "ONYX mission portfolio interface", label: "Mission portfolio" },
+  { src: "/manus-storage/onyx-todos-targets.png", alt: "ONYX todos and targets interface", label: "Todos & targets" },
+  { src: "/manus-storage/onyx-staff-loans.png", alt: "ONYX staff-loan workflow interface", label: "Staff-loan workflow" },
+] as const;
+
+function OnyxMediaGallery({ isFa }: { isFa: boolean }) {
+  const copy = isFa
+    ? { aria: "شواهد رابط‌های کاربری ONYX", eyebrow: "شواهد رابط کاربری", heading: "سطوح کاربری سامانهٔ عملیات مأموریت", note: "تصاویر ارائه‌شده نمایی از رابط‌های کاربری هستند و به‌تنهایی کامل بودن محصول، استقرار عملیاتی یا رفتار سامانه را اثبات نمی‌کنند.", labels: ["دسترسی امن از مرورگر", "نمای عملیاتی", "پرتفوی مأموریت", "فهرست کارها و اهداف", "گردش‌کار واگذاری موقت"] }
+    : { aria: "ONYX client-surface evidence", eyebrow: "Client-surface evidence", heading: "Mission-operations interface surfaces", note: "The supplied captures document interface surfaces only; they do not by themselves establish a finished product, operational deployment, or system behavior.", labels: ["Secure browser access", "Operational overview", "Mission portfolio", "Todos & targets", "Staff-loan workflow"] };
   return (
-    <svg className="architecture-visual" viewBox="0 0 600 340" role="img" aria-label="ONYX conceptual system diagram">
-      <rect x="0" y="0" width="600" height="340" fill="#101416" />
-      <rect x="58" y="72" width="150" height="74" fill="#e8e5db" />
-      <rect x="225" y="132" width="150" height="74" fill="#cf3e2a" />
-      <rect x="392" y="72" width="150" height="74" fill="#e8e5db" />
-      <rect x="225" y="244" width="150" height="54" fill="#9aa4a3" />
-      <path d="M208 109H225M375 169H392M300 206V244M133 146V254M467 146V254" stroke="#cf3e2a" strokeWidth="2" />
-      <text x="133" y="103" textAnchor="middle" fill="#101416" fontSize="17" fontFamily="IBM Plex Sans">CORE / DOMAIN</text>
-      <text x="300" y="162" textAnchor="middle" fill="#fff8ea" fontSize="17" fontFamily="IBM Plex Sans">CRDT SYNC</text>
-      <text x="467" y="103" textAnchor="middle" fill="#101416" fontSize="17" fontFamily="IBM Plex Sans">INFRASTRUCTURE</text>
-      <text x="300" y="276" textAnchor="middle" fill="#101416" fontSize="13" fontFamily="IBM Plex Sans">CLIENT / TRANSPORT</text>
-    </svg>
+    <section className="onyx-media-gallery" aria-label={copy.aria}>
+      <div className="onyx-media-gallery__intro">
+        <div><p className="evidence-label">{copy.eyebrow}</p><h4>{copy.heading}</h4></div>
+      </div>
+      <div className="onyx-media-grid">
+        {onyxMedia.map((media, index) => <figure key={media.src}><img src={media.src} alt={media.alt} loading="lazy" /><figcaption>{copy.labels[index]}</figcaption></figure>)}
+      </div>
+      <p className="onyx-media-gallery__note">{copy.note}</p>
+    </section>
   );
 }
 
@@ -127,6 +139,7 @@ function ProjectCard({ project, isFa }: { project: Project; isFa: boolean }) {
         <h4><BidiText text={project.proof} isFa={isFa} /></h4>
         <p><BidiText text={project.proofDetail} isFa={isFa} /></p>
       </aside>
+      {project.id === "onyx" && <OnyxMediaGallery isFa={isFa} />}
       <details className="project-detail">
         <summary>{labels.details}<ChevronDown size={17} aria-hidden="true" /></summary>
         <div className="detail-grid">

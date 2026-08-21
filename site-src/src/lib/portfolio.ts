@@ -200,9 +200,9 @@ const faProjects: Project[] = [
       "جداسازی هسته، دامنه، کاربرد و زیرساخت",
       "پیکربندی‌های استقرار Docker، Helm و Terraform",
     ],
-    evidenceLabel: "شواهد — دامنه و انطباق",
-    proof: "شواهد دامنه و انطباق",
-    proofDetail: "ساختار مخزن، آزمون‌ها و ثبت انطباق در دسترس‌اند؛ این شواهد کامل بودن یک محصول عملیاتی را ثابت نمی‌کنند.",
+    evidenceLabel: "شواهد — نشان و رابط کاربری",
+    proof: "نشان ONYX و نماهای رابط کاربری",
+    proofDetail: "نشان و تصاویر ارائه‌شده، سطوح رابط کاربری را نشان می‌دهند و به‌تنهایی کامل بودن محصول، استقرار عملیاتی یا رفتار سامانه را اثبات نمی‌کنند.",
     evidenceKind: "onyx",
     github: "https://github.com/SMozaff/Onyx-Framwork", caseStudy: "https://onyxcase-bxl5ndbk.manus.space/",
     detail: {
@@ -312,7 +312,7 @@ const enProjects: Project[] = [
     id: "onyx", number: "05", title: "ONYX Framework", subtitle: "Mission Operations Architecture", category: "Systems Architecture / Distributed Systems", status: "Architecture Case Study — In Progress", evidenceKind: "onyx",
     summary: "An in-progress Rust-centric mission-operations architecture spanning local-first synchronization, persistence, observability, multiple client surfaces, transport layers, and deployment infrastructure.",
     highlights: ["Multi-crate Rust workspace", "CRDT and synchronization architecture", "Kernel / domain / application / infrastructure separation", "Docker, Helm, and Terraform deployment artifacts"],
-    evidenceLabel: "Scope / conformance", proof: "Scope and conformance artifacts", proofDetail: "Repository composition, test surfaces, and a conformance register are available; this is not presented as a finished mission-operations product.", github: "https://github.com/SMozaff/Onyx-Framwork", caseStudy: "https://onyxcase-bxl5ndbk.manus.space/",
+    evidenceLabel: "Mark / interface evidence", proof: "ONYX mark and interface captures", proofDetail: "The supplied mark and interface captures document client surfaces only; they do not by themselves establish a finished mission-operations product, operational deployment, or system behavior.", github: "https://github.com/SMozaff/Onyx-Framwork", caseStudy: "https://onyxcase-bxl5ndbk.manus.space/",
     detail: { problem: "Mission coordination needs authority-aware local operation and synchronization.", constraints: "Multi-platform and multi-transport work must remain modular while claims stay aligned with delivered scope.", architecture: "Kernel, domain, application, infrastructure, and transport responsibilities are separated across a Rust-centric workspace and several client surfaces.", implementation: "Rust workspace components, web/desktop/mobile surfaces, deployment scaffolding, tests, and conformance documentation.", evidence: "Repository architecture, test surface, infrastructure artifacts, and the conformance register.", limits: "Important areas remain incomplete. Cloud Relay is a blocking gap for certain multi-device claims; full FFI and conformance coverage are not claimed." },
   },
   {
