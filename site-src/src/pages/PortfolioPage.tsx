@@ -57,24 +57,7 @@ function EvidenceVisual({ kind }: { kind: Project["evidenceKind"] }) {
     return <img src={`${storage}/ifem-contract-boundaries_5ce6019e.jpg`} alt="IFEM contract-boundary document visual" loading="lazy" />;
   }
   if (kind === "rezvan") {
-    return (
-      <svg className="architecture-visual" viewBox="0 0 600 340" role="img" aria-label="Rezvan conceptual architecture diagram">
-        <rect x="0" y="0" width="600" height="340" fill="#101416" />
-        <path d="M70 77H238M362 77H530M70 263H238M362 263H530" stroke="#cf3e2a" strokeWidth="2" strokeDasharray="5 7" />
-        <rect x="238" y="44" width="124" height="72" fill="#e8e5db" />
-        <rect x="238" y="224" width="124" height="72" fill="#e8e5db" />
-        <rect x="222" y="134" width="156" height="72" fill="#cf3e2a" />
-        <text x="300" y="76" textAnchor="middle" fill="#101416" fontSize="18" fontFamily="IBM Plex Sans">ANDROID</text>
-        <text x="300" y="100" textAnchor="middle" fill="#101416" fontSize="13" fontFamily="IBM Plex Sans">Kotlin UI</text>
-        <text x="300" y="178" textAnchor="middle" fill="#fff8ea" fontSize="17" fontFamily="IBM Plex Sans">JNI BOUNDARY</text>
-        <text x="300" y="256" textAnchor="middle" fill="#101416" fontSize="18" fontFamily="IBM Plex Sans">RUST CORE</text>
-        <text x="300" y="280" textAnchor="middle" fill="#101416" fontSize="13" fontFamily="IBM Plex Sans">routing · crypto · session</text>
-        <text x="70" y="67" fill="#e8e5db" fontSize="13" fontFamily="IBM Plex Sans">BLE</text>
-        <text x="452" y="67" fill="#e8e5db" fontSize="13" fontFamily="IBM Plex Sans">WI-FI DIRECT</text>
-        <text x="70" y="284" fill="#e8e5db" fontSize="13" fontFamily="IBM Plex Sans">ENCRYPTED STORE</text>
-        <text x="418" y="284" fill="#e8e5db" fontSize="13" fontFamily="IBM Plex Sans">DEVICE TESTS</text>
-      </svg>
-    );
+    return <img className="rezvan-mark-visual" src="/manus-storage/rezvanmesh-coin-mark.png" alt="RezvanMesh project mark" loading="lazy" />;
   }
   return <img className="onyx-logo-visual" src="/manus-storage/onyx-logo.png" alt="ONYX Framework mark" loading="lazy" />;
 }
@@ -100,6 +83,27 @@ function OnyxMediaGallery({ isFa }: { isFa: boolean }) {
         {onyxMedia.map((media, index) => <figure key={media.src}><img src={media.src} alt={media.alt} loading="lazy" /><figcaption>{copy.labels[index]}</figcaption></figure>)}
       </div>
       <p className="onyx-media-gallery__note">{copy.note}</p>
+    </section>
+  );
+}
+
+const rezvanMedia = [
+  { src: "/manus-storage/rezvanmesh-permissions.png", alt: "RezvanMesh permissions setup interface", label: "Permission setup" },
+  { src: "/manus-storage/rezvanmesh-network.png", alt: "RezvanMesh network topology interface", label: "Network topology" },
+  { src: "/manus-storage/rezvanmesh-emergency.png", alt: "RezvanMesh emergency alert interface", label: "Emergency alert" },
+  { src: "/manus-storage/rezvanmesh-diagnostics.png", alt: "RezvanMesh diagnostics interface", label: "Diagnostics" },
+  { src: "/manus-storage/rezvanmesh-broadcast.png", alt: "RezvanMesh broadcast-message interface", label: "Broadcast message" },
+] as const;
+
+function RezvanMediaGallery({ isFa }: { isFa: boolean }) {
+  const copy = isFa
+    ? { aria: "شواهد رابط‌های موبایل RezvanMesh", eyebrow: "شواهد رابط کاربری", heading: "سطوح کاربردی ارتباط مش", note: "نشان‌ها و تصاویر ارائه‌شده سطوح رابط کاربریِ مجوزها، توپولوژی شبکه، هشدار، تشخیص و پیام‌رسانی را نشان می‌دهند؛ به‌تنهایی رفتار مش زنده، اعتبارسنجی چنددستگاهی یا کامل بودن محصول را اثبات نمی‌کنند.", labels: ["راه‌اندازی مجوزها", "توپولوژی شبکه", "هشدار اضطراری", "تشخیص", "ارسال پیام"] }
+    : { aria: "RezvanMesh mobile-interface evidence", eyebrow: "Mobile-interface evidence", heading: "Offline-mesh communication surfaces", note: "The supplied marks and captures document the permission, topology, alert, diagnostic, and message-composition surfaces only; they do not by themselves establish live mesh behavior, multi-device validation, or a complete product.", labels: ["Permission setup", "Network topology", "Emergency alert", "Diagnostics", "Broadcast message"] };
+  return (
+    <section className="rezvan-media-gallery" aria-label={copy.aria}>
+      <div className="rezvan-media-gallery__intro"><img src="/manus-storage/rezvanmesh-icon-mark.png" alt="" aria-hidden="true" /><div><p className="evidence-label">{copy.eyebrow}</p><h4>{copy.heading}</h4></div></div>
+      <div className="rezvan-media-grid">{rezvanMedia.map((media, index) => <figure key={media.src}><img src={media.src} alt={media.alt} loading="lazy" /><figcaption>{copy.labels[index]}</figcaption></figure>)}</div>
+      <p className="rezvan-media-gallery__note">{copy.note}</p>
     </section>
   );
 }
@@ -140,6 +144,7 @@ function ProjectCard({ project, isFa }: { project: Project; isFa: boolean }) {
         <p><BidiText text={project.proofDetail} isFa={isFa} /></p>
       </aside>
       {project.id === "onyx" && <OnyxMediaGallery isFa={isFa} />}
+      {project.id === "rezvan" && <RezvanMediaGallery isFa={isFa} />}
       <details className="project-detail">
         <summary>{labels.details}<ChevronDown size={17} aria-hidden="true" /></summary>
         <div className="detail-grid">

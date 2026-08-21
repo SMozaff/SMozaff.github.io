@@ -117,9 +117,9 @@ const faProjects: Project[] = [
       "ذخیره‌سازی محلی رمزنگاری‌شده",
       "هستهٔ Rust برای مسیریابی، رمزنگاری و مدیریت نشست",
     ],
-    evidenceLabel: "شواهد — معماری",
-    proof: "طرح مفهومی معماری و مرزها",
-    proofDetail: "این نمودار ساختار مفهومی سامانه را نشان می‌دهد و به‌همراه کد منبع و شواهد CI ارائه شده است؛ رفتار واقعی روی دستگاه را به‌تنهایی اثبات نمی‌کند.",
+    evidenceLabel: "شواهد — نشان و رابط موبایل",
+    proof: "نشان RezvanMesh و نماهای رابط موبایل",
+    proofDetail: "نشان‌ها و تصاویر ارائه‌شده فقط سطوح رابط کاربریِ برنامه را نشان می‌دهند؛ به‌تنهایی رفتار مش زنده، اعتبارسنجی چنددستگاهی یا کامل بودن محصول را اثبات نمی‌کنند.",
     evidenceKind: "rezvan",
     github: "https://github.com/SMozaff/Rezvan-Mesh", caseStudy: "https://rezvanmesh-ctebutsc.manus.space/",
     detail: {
@@ -291,7 +291,7 @@ const enProjects: Project[] = [
     id: "rezvan", number: "02", title: "Rezvan Mesh", subtitle: "Offline Android Communication", category: "Systems Architecture / Mobile Engineering", status: "Beta / validation in progress", evidenceKind: "rezvan",
     summary: "An Android peer-to-peer communication prototype combining Kotlin, Rust, Bluetooth LE, Wi-Fi Direct, and encrypted local storage for off-grid messaging scenarios.",
     highlights: ["Kotlin ↔ Rust JNI boundary", "BLE and Wi-Fi Direct transport work", "Local encrypted persistence", "Rust core for routing, crypto, and session responsibilities"],
-    evidenceLabel: "Architecture", proof: "Conceptual architecture / boundary sketch", proofDetail: "A conceptual sketch paired with repository source and CI evidence; it does not prove live device behavior.", github: "https://github.com/SMozaff/Rezvan-Mesh", caseStudy: "https://rezvanmesh-ctebutsc.manus.space/",
+    evidenceLabel: "Mark / mobile-interface evidence", proof: "RezvanMesh marks and mobile interfaces", proofDetail: "The supplied marks and captures document application surfaces only; they do not by themselves establish live mesh behavior, multi-device validation, or a complete product.", github: "https://github.com/SMozaff/Rezvan-Mesh", caseStudy: "https://rezvanmesh-ctebutsc.manus.space/",
     detail: { problem: "Communication may fail when normal connectivity is unavailable.", constraints: "The prototype cannot assume a central server or an ordinary network path.", architecture: "Android radio and interface concerns are separated from a Rust routing, crypto, and session core through JNI boundaries.", implementation: "BLE and Wi-Fi Direct transport work, encrypted local storage, Rust-core responsibilities, and device-oriented integration tooling.", evidence: "Visible source organization, Rust tests, Android build workflow, and documented physical-device procedure.", limits: "Multi-hop hardware validation, receiver voice playback, and relay behavior are not presented as complete or fully verified." },
   },
   {
