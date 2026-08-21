@@ -50,6 +50,9 @@ function EvidenceVisual({ kind }: { kind: Project["evidenceKind"] }) {
   if (kind === "media") {
     return <img src={`${storage}/watermelon-mediaplayer-ui_fcb60a06.png`} alt="Watermelon MediaPlayer design-system output" loading="lazy" />;
   }
+  if (kind === "vector") {
+    return <img src={`${storage}/watermelon-vector-converter.png`} alt="Watermelon Vector Converter interface" loading="lazy" />;
+  }
   if (kind === "ifem") {
     return <img src={`${storage}/ifem-contract-boundaries_5ce6019e.jpg`} alt="IFEM contract-boundary document visual" loading="lazy" />;
   }
@@ -104,6 +107,12 @@ function ProjectCard({ project, isFa }: { project: Project; isFa: boolean }) {
         <ul className="project-highlights">
           {project.highlights.map((highlight) => <li key={highlight}><BidiText text={highlight} isFa={isFa} /></li>)}
         </ul>
+        {project.id !== "ifem" && (
+          <div className="ifem-relationship" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '1.5rem', fontSize: '0.85rem', color: 'var(--text-muted, #5a6665)', fontWeight: 500 }}>
+            <Orbit size={14} style={{ color: 'var(--brand, #cf3e2a)' }} />
+            <span>{isFa ? "ساخته‌شده بر پایهٔ اصول IFEM" : "Built with IFEM principles"}</span>
+          </div>
+        )}
         <div className="project-actions">
           {project.primary && <a className="text-link" href={project.primary.href} target="_blank" rel="noreferrer">{project.primary.label}<ArrowUpRight size={15} /></a>}
           {project.secondary && <a className="text-link" href={project.secondary.href} target="_blank" rel="noreferrer">{project.secondary.label}<FileText size={15} /></a>}
@@ -173,7 +182,7 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
         </section>
 
         <section id="work" className="work-section section-shell">
-          <div className="work-intro"><p className="section-rail">{copy.workRail}</p><div><p className="kicker">{copy.workKicker}</p><h2>{copy.workHeading}</h2><p><BidiText text={copy.workIntro} isFa={isFa} /></p></div></div>
+          <div className="work-intro"><p className="section-rail">{copy.workRail}</p><div><p className="kicker">{copy.workKicker}</p><h2>{copy.projectsHeading}</h2><p><BidiText text={copy.workIntro} isFa={isFa} /></p></div></div>
           <div className="project-list">{copy.projects.map((project) => <ProjectCard project={project} isFa={isFa} key={project.id} />)}</div>
         </section>
 

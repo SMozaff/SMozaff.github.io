@@ -16,7 +16,7 @@ export type Project = {
   evidenceLabel: string;
   proof: string;
   proofDetail: string;
-  evidenceKind: "raven" | "rezvan" | "media" | "onyx" | "ifem";
+  evidenceKind: "raven" | "rezvan" | "media" | "onyx" | "ifem" | "vector";
   github?: string;
   primary?: { label: string; href: string };
   secondary?: { label: string; href: string };
@@ -59,6 +59,7 @@ export type PortfolioCopy = {
   profilesKicker: string;
   profilesHeading: string;
   profilesBody: string;
+  projectsHeading: string;
   projects: Project[];
 };
 
@@ -130,8 +131,34 @@ const faProjects: Project[] = [
     },
   },
   {
-    id: "mediaplayer",
+    id: "vector-converter",
     number: "۰۳",
+    title: "Watermelon Vector Graphics Converter",
+    category: "برنامهٔ موبایل / پردازش گرافیک",
+    status: "پروژهٔ فعال",
+    summary: "یک برنامهٔ پردازش گرافیک بومی برای Android که با لایه‌های مجزای کاربردی و پردازشی ساخته شده است.",
+    highlights: [
+      "جداسازی لایهٔ کاربردی از پردازشی",
+      "معماری بومی Android",
+      "پردازش گرافیک‌های برداری"
+    ],
+    evidenceLabel: "شواهد — معماری",
+    proof: "نمای رابط کاربری",
+    proofDetail: "تصویر رابط کاربری با لایه‌های تاریک و روشن",
+    evidenceKind: "vector",
+    github: "https://github.com/SMozaff/Watermelon-VectorConverter",
+    detail: {
+      problem: "پردازش گرافیک‌های برداری در موبایل نیازمند تفکیک واضح بین رابط کاربری و موتور پردازشی است.",
+      constraints: "عملیات پردازشی نباید در رشتهٔ اصلی (Main Thread) انجام شود و مرزهای آن باید شفاف باشد.",
+      architecture: "رابط کاربری و پردازش به‌طور کامل در لایه‌های جداگانه با ارتباط از طریق رابط‌های صریح قرار گرفته‌اند.",
+      implementation: "ساخته‌شده برای سیستم‌عامل Android با رعایت استانداردهای معماری مدرن.",
+      evidence: "کد منبع و تصاویر خروجی برنامه.",
+      limits: "این برنامه روی گرافیک‌های برداری خاصی متمرکز است و برای همهٔ فرمت‌های تصویر کاربرد ندارد."
+    },
+  },
+  {
+    id: "mediaplayer",
+    number: "۰۴",
     title: "Watermelon MediaPlayer",
     category: "مهندسی محصول / مهندسی موبایل",
     status: "در حال توسعه",
@@ -159,7 +186,7 @@ const faProjects: Project[] = [
   },
   {
     id: "onyx",
-    number: "۰۴",
+    number: "۰۵",
     title: "ONYX Mission Operations",
     category: "معماری سامانه / سامانه‌های توزیع‌شده",
     status: "مطالعهٔ موردی معماری — در حال توسعه",
@@ -187,7 +214,7 @@ const faProjects: Project[] = [
   },
   {
     id: "ifem",
-    number: "۰۵",
+    number: "۰۶",
     title: "Interface-First Execution Methodology (IFEM)",
     category: "پژوهش / روش‌شناسی / تألیف فنی",
     status: "روش‌شناسی / انتشار",
@@ -219,7 +246,7 @@ const faProjects: Project[] = [
 
 export const faCopy: PortfolioCopy = {
   locale: "fa",
-  nav: { about: "دربارهٔ من", work: "نمونه‌کارها", methodology: "روش‌شناسی", profiles: "پروفایل‌ها", contact: "تماس" },
+    nav: { about: "دربارهٔ من", work: "مطالعات موردی مهندسی", methodology: "روش‌شناسی", profiles: "پروفایل‌ها", contact: "تماس" },
   languageLabel: "English",
   languageHref: "/",
   eyebrow: "فعالیت مستقل / سامانه و نرم‌افزار",
@@ -234,7 +261,7 @@ export const faCopy: PortfolioCopy = {
   aboutHeading: "پیش از آن‌که پیاده‌سازی، تغییر را پرهزینه کند، مسئولیت را روشن کنید.",
   aboutBody: "تمرکز حرفه‌ای بر معماری نرم‌افزار، سامانه‌های پیچیده، مهندسی با کمک هوش مصنوعی و طراحی روش‌شناسی فنی است؛ با تأکید بر مرزهای روشن، قراردادهای صریح و مدل‌های اجرایی که پیاده‌سازی سنجیده و راستی‌آزمایی مستقل را ممکن می‌کنند.",
   workRail: "نمونه‌کارها",
-  workKicker: "نمونه‌کارهای مستند",
+  workKicker: "مطالعات موردی مهندسی",
   workHeading: "محصول، سامانه، معماری و روش‌شناسی.",
   workIntro: "این مسیر از یک ابزار مشخص شروع می‌شود، به مهندسی موبایل و معماری محصول می‌رسد، سپس یک مطالعهٔ موردی معماری را نشان می‌دهد و در نهایت به روش‌شناسی و تألیف فنی می‌رسد.",
   methodologyRail: "روش‌شناسی IFEM",
@@ -246,6 +273,7 @@ export const faCopy: PortfolioCopy = {
   profilesKicker: "پروفایل‌ها و راه‌های ارتباطی",
   profilesHeading: "پیوندهای مرجع برای کد منبع، سوابق انتشار و هویت حرفه‌ای.",
   profilesBody: "پیوندهای مرجع، دسترسی به کد منبع، شناسهٔ پژوهشی و سوابق حرفه‌ای را فراهم می‌کنند.",
+  projectsHeading: "Engineering Case Studies",
   projects: faProjects,
 };
 
@@ -265,21 +293,28 @@ const enProjects: Project[] = [
     detail: { problem: "Communication may fail when normal connectivity is unavailable.", constraints: "The prototype cannot assume a central server or an ordinary network path.", architecture: "Android radio and interface concerns are separated from a Rust routing, crypto, and session core through JNI boundaries.", implementation: "BLE and Wi-Fi Direct transport work, encrypted local storage, Rust-core responsibilities, and device-oriented integration tooling.", evidence: "Visible source organization, Rust tests, Android build workflow, and documented physical-device procedure.", limits: "Multi-hop hardware validation, receiver voice playback, and relay behavior are not presented as complete or fully verified." },
   },
   {
-    id: "mediaplayer", number: "03", title: "Watermelon MediaPlayer", subtitle: "Offline Android Media System", category: "Product Engineering / Mobile Engineering", status: "Active development", evidenceKind: "media",
+    id: "vector-converter", number: "03", title: "Watermelon Vector Graphics Converter", category: "Mobile Application / Graphics Processing", status: "Active project", evidenceKind: "vector",
+    summary: "A native Android graphics processing application built with separated application and processing layers.",
+    highlights: ["Application and processing layer separation", "Native Android architecture", "Vector graphics processing"],
+    evidenceLabel: "GUI capture", proof: "GUI capture", proofDetail: "Interface evidence showing light and dark modes.", github: "https://github.com/SMozaff/Watermelon-VectorConverter",
+    detail: { problem: "Vector graphics processing on mobile requires clear separation between the UI and the processing engine.", constraints: "Processing must not block the main thread and its boundaries must be transparent.", architecture: "UI and processing are strictly separated into distinct layers communicating through explicit interfaces.", implementation: "Built for the Android OS adhering to modern architecture standards.", evidence: "Source code and application output images.", limits: "Focused specifically on vector graphics and not intended as a universal image processor." }
+  },
+  {
+    id: "mediaplayer", number: "04", title: "Watermelon MediaPlayer", subtitle: "Offline Android Media System", category: "Product Engineering / Mobile Engineering", status: "Active development", evidenceKind: "media",
     summary: "A privacy-oriented offline Android media-player architecture built around explicit Kotlin interfaces, modular playback/storage/subtitle boundaries, and RTL-aware product design.",
     highlights: ["Strict modular boundaries", "Shared contract and interface module", "Media3 / ExoPlayer playback architecture", "Storage migration and subtitle-engine separation"],
     evidenceLabel: "Design system", proof: "Design-system artifact", proofDetail: "Design evidence only; it is not represented as proof of a released or complete consumer application.", github: "https://github.com/SMozaff/Watermelon-MediaPlayer",
     detail: { problem: "Local media users need a focused offline player with clean architecture and RTL-aware interaction.", constraints: "Privacy and maintainable module boundaries must remain legible as the feature set grows.", architecture: "Shared interfaces hold contracts while dedicated modules own playback, storage, subtitles, and presentation; the app boundary composes implementations.", implementation: "Kotlin and Compose modules with Media3, storage and subtitle boundaries, and CI-backed Android build and migration checks.", evidence: "Module structure, visible workflow configuration, and the visual-system artifact shown here.", limits: "No published consumer release is claimed. The visual-system artifact is not a running-product demonstration." },
   },
   {
-    id: "onyx", number: "04", title: "ONYX Mission Operations", category: "Systems Architecture / Distributed Systems", status: "Architecture Case Study — In Progress", evidenceKind: "onyx",
+    id: "onyx", number: "05", title: "ONYX Mission Operations", category: "Systems Architecture / Distributed Systems", status: "Architecture Case Study — In Progress", evidenceKind: "onyx",
     summary: "An in-progress Rust-centric mission-operations architecture spanning local-first synchronization, persistence, observability, multiple client surfaces, transport layers, and deployment infrastructure.",
     highlights: ["Multi-crate Rust workspace", "CRDT and synchronization architecture", "Kernel / domain / application / infrastructure separation", "Docker, Helm, and Terraform deployment artifacts"],
     evidenceLabel: "Scope / conformance", proof: "Scope and conformance artifacts", proofDetail: "Repository composition, test surfaces, and a conformance register are available; this is not presented as a finished mission-operations product.", github: "https://github.com/SMozaff/Onyx-Framwork",
     detail: { problem: "Mission coordination needs authority-aware local operation and synchronization.", constraints: "Multi-platform and multi-transport work must remain modular while claims stay aligned with delivered scope.", architecture: "Kernel, domain, application, infrastructure, and transport responsibilities are separated across a Rust-centric workspace and several client surfaces.", implementation: "Rust workspace components, web/desktop/mobile surfaces, deployment scaffolding, tests, and conformance documentation.", evidence: "Repository architecture, test surface, infrastructure artifacts, and the conformance register.", limits: "Important areas remain incomplete. Cloud Relay is a blocking gap for certain multi-device claims; full FFI and conformance coverage are not claimed." },
   },
   {
-    id: "ifem", number: "05", title: "Interface-First Execution Methodology (IFEM)", category: "Research / Methodology / Technical Writing", status: "Methodology / Publication", evidenceKind: "ifem",
+    id: "ifem", number: "06", title: "Interface-First Execution Methodology (IFEM)", category: "Research / Methodology / Technical Writing", status: "Methodology / Publication", evidenceKind: "ifem",
     summary: "A bilingual engineering methodology and publication system centered on explicit interfaces, contracts, responsibility boundaries, and independent verification.",
     highlights: ["Bilingual English/Persian doctrine site", "Dependency-free static delivery", "Semantic HTML and progressive enhancement", "Publication and DOI integration"],
     evidenceLabel: "Publication", proof: "Doctrine and publication records", proofDetail: "A supporting methodology/publication project, not a conventional software product or an industry-standard claim.", primary: { label: "Explore IFEM", href: links.ifem }, secondary: { label: "Read publication", href: links.primaryDoi }, github: "https://github.com/IFEM-doctrine/ifem-doctrine.github.io",
@@ -289,7 +324,7 @@ const enProjects: Project[] = [
 
 export const enCopy: PortfolioCopy = {
   locale: "en",
-  nav: { about: "About", work: "Selected work", methodology: "Methodology", profiles: "Profiles", contact: "Contact" },
+  nav: { about: "About", work: "Engineering Case Studies", methodology: "Methodology", profiles: "Profiles", contact: "Contact" },
   languageLabel: "فارسی",
   languageHref: "/fa/",
   eyebrow: "Independent practice / systems & software",
@@ -304,7 +339,7 @@ export const enCopy: PortfolioCopy = {
   aboutHeading: "Make responsibility explicit before implementation makes change expensive.",
   aboutBody: "I work across software architecture, complex systems, AI-assisted engineering, and technical-method design. My focus is practical: make boundaries, contracts, and execution models explicit enough for considered implementation and independent verification.",
   workRail: "Selected work",
-  workKicker: "Evidence-led portfolio",
+  workKicker: "Engineering Case Studies",
   workHeading: "Product, system, architecture, methodology.",
   workIntro: "The sequence moves from a focused tool through mobile engineering and product architecture, then an architecture case study, and finally technical methodology and authorship.",
   methodologyRail: "IFEM methodology",
@@ -316,6 +351,7 @@ export const enCopy: PortfolioCopy = {
   profilesKicker: "Profiles & contact paths",
   profilesHeading: "Reference links for source code, publication records, and professional identity.",
   profilesBody: "Use the reference links for source code, publication records, and professional history.",
+  projectsHeading: "Engineering Case Studies",
   projects: enProjects,
 };
 
