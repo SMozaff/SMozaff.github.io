@@ -49,6 +49,39 @@ function BrandMark() {
   );
 }
 
+function PrototypeWindow({ title, children, className = "" }: { title: string; children: ReactNode; className?: string }) {
+  return <section className={`prototype-window ${className}`} aria-label={title}><div className="prototype-window__bar"><span className="prototype-lights" aria-hidden="true"><i /><i /><i /></span><span>{title}</span></div><div className="prototype-window__body">{children}</div></section>;
+}
+
+function HeroKernelPanel({ isFa }: { isFa: boolean }) {
+  return <div className="hero-kernel-stack">
+    <PrototypeWindow title="dmesg / bound_core">
+      <div className="kernel-log"><span className="signal-green">[ok]</span> initialising boundary_registry<br /><span className="signal-green">[ok]</span> loading contract graph<br /><span className="signal-cyan">[run]</span> continuous_verification<br /><span className="signal-amber">[warn]</span> unverified claims isolated<br /><span className="signal-green">[ok]</span> {isFa ? "مسیر تعامل آماده است" : "interaction layer ready"}</div>
+    </PrototypeWindow>
+    <PrototypeWindow title="~/systems-ledger.ascii" className="ascii-window">
+      <pre aria-hidden="true">{`   .-=========-.\n  /   BOUND     \\\n |  /\\  /\\  /\\  |\n |  \\_/  \\_/  \\_  |\n  \\    CORE     /\n   '-=========-'`}</pre>
+    </PrototypeWindow>
+  </div>;
+}
+
+function HeroMonitorPanel() {
+  return <div className="hero-monitor-stack">
+    <PrototypeWindow title="htop / domain_monitor">
+      <div className="monitor-metric"><span>CPU</span><b><i style={{ width: "42%" }} /></b><em>42%</em></div>
+      <div className="monitor-metric"><span>MEM</span><b><i className="violet" style={{ width: "28%" }} /></b><em>28%</em></div>
+      <div className="monitor-processes"><span>PID&nbsp;&nbsp; DOMAIN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; STATUS</span><span><b>01</b> BOUND_CORE&nbsp; active</span><span><b>02</b> IFEM_LINEAGE&nbsp; linked</span><span><b>03</b> VERIFY_PATH&nbsp; ready</span></div>
+    </PrototypeWindow>
+    <PrototypeWindow title="lsmod / loaded_modules" className="module-window">
+      <div className="module-row"><span>BOUND</span><i /><b>ready</b></div><div className="module-row"><span>IFEM</span><i className="violet" /><b>lineage</b></div><div className="module-row"><span>VERIFY</span><i className="green" /><b>continuous</b></div>
+    </PrototypeWindow>
+  </div>;
+}
+
+function TechnicalMarquee() {
+  const tokens = ["BOUND", "IFEM LINEAGE", "CONTRACTS", "RESPONSIBILITY BOUNDARIES", "RUST", "KOTLIN", "CRDT", "C2PA", "AI-ASSISTED ENGINEERING", "CONTINUOUS VERIFICATION"];
+  return <div className="technical-marquee" aria-label="Technical focus areas"><div className="technical-marquee__track">{[...tokens, ...tokens].map((token, index) => <span key={`${token}-${index}`}><b>{token}</b><i>◆</i></span>)}</div></div>;
+}
+
 function EvidenceVisual({ kind }: { kind: Project["evidenceKind"] }) {
   if (kind === "raven") {
     return <img src={`${storage}/raven-metadata-gui_e2db5b00.png`} alt="Raven Metadata Extractor interface" loading="lazy" />;
@@ -215,6 +248,7 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
       </header>
       <main id="top">
         <section className="hero section-shell">
+          <HeroKernelPanel isFa={isFa} />
           <div className="hero-copy" data-reveal>
             <p className="eyebrow">{copy.eyebrow}</p>
             <h1><Ltr>Soheil Mozaffari</Ltr></h1>
@@ -224,12 +258,10 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
             <p className="hero-statement"><BidiText text={copy.hero} isFa={isFa} /></p>
             <div className="hero-actions"><a className="button button-dark" href={links.bound} target="_blank" rel="noreferrer">{copy.heroPrimary}<ArrowUpRight size={17} /></a><a className="button button-light" href={links.boundDoi} target="_blank" rel="noreferrer">{copy.heroSecondary}<FileText size={17} /></a></div>
           </div>
-          <div className="hero-art" data-reveal aria-label={isFa ? "نشانهٔ تصویری مرزهای سامانه" : "System-boundary visual"}>
-            <img src={`${storage}/soheil-hero-systems-ledger_7e8329be.jpg`} alt={isFa ? "تصویر انتزاعی از مرزهای سامانه و نرم‌افزار" : "Abstract systems-boundary visualization for software and systems architecture"} />
-            <p><BidiText text={copy.heroCaption} isFa={isFa} /></p>
-          </div>
+          <div className="hero-right-column"><HeroMonitorPanel /><div className="hero-art" data-reveal aria-label={isFa ? "نشانهٔ تصویری مرزهای سامانه" : "System-boundary visual"}><img src={`${storage}/soheil-hero-systems-ledger_7e8329be.jpg`} alt={isFa ? "تصویر انتزاعی از مرزهای سامانه و نرم‌افزار" : "Abstract systems-boundary visualization for software and systems architecture"} /><p><BidiText text={copy.heroCaption} isFa={isFa} /></p></div></div>
         </section>
 
+        <TechnicalMarquee />
         <InteractiveSystems locale={locale} />
 
         <section id="about" className="about-section section-shell editorial-section" data-reveal>
