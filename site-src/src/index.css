@@ -470,3 +470,14 @@ nav a:hover{color:var(--accent)}
 /* Part 4 identity hierarchy: BOUND is primary; IFEM remains lineage. */
 .authority-line{max-width:34rem;margin:.8rem 0 0;color:var(--accent);font:600 clamp(.68rem,1.1vw,.82rem)/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.04em}
 @media(max-width:700px){.authority-line{font-size:.64rem}}
+
+
+/* Part 5 authority records: factual publications and non-clickable forthcoming writing. */
+.authority-records{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem;margin-top:2rem}
+.authority-records__group{border-top:1px solid var(--line);padding-top:1rem}
+.publication-list,.writing-list{display:grid;gap:.75rem;margin-top:1rem}
+.publication-record,.writing-record{border:1px solid var(--line);background:rgba(255,255,255,.025);padding:1rem}
+.publication-record h3,.writing-record h3{margin:0;font-size:.92rem;line-height:1.45}
+.publication-record p{margin:.55rem 0;color:var(--text-muted);font-size:.78rem;line-height:1.5}
+.writing-record span{display:block;margin-top:.55rem;color:var(--accent);font:600 .68rem/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.04em;text-transform:uppercase}
+@media(max-width:700px){.authority-records{grid-template-columns:1fr}}

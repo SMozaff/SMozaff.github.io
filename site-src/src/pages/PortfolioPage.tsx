@@ -22,6 +22,12 @@ import InteractiveSystems from "@/components/InteractiveSystems";
 
 const storage = "https://smozaff.github.io/manus-storage";
 
+const writingTitles = [
+  "Why Parallel Software Engineering Fails at Boundaries",
+  "AI Coding Agents Need Boundaries Too: Building Reliable AI-Assisted Software Engineering",
+  "From IFEM to BOUND: The Evolution of Interface-First Execution Methodology",
+] as const;
+
 function Ltr({ children, className = "" }: { children: ReactNode; className?: string }) {
   return <bdi className={className} lang="en" dir="ltr">{children}</bdi>;
 }
@@ -183,11 +189,21 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
   const htmlDir = isFa ? "rtl" : "ltr";
   const profileCards = [
     { label: "GitHub", href: links.github, icon: Github, value: "SMozaff" },
-    { label: "IFEM Doctrine", href: links.ifem, icon: BookOpen, value: "ifem-doctrine.github.io" },
-    { label: "Zenodo", href: links.primaryDoi, icon: FileText, value: "10.5281/zenodo.20621561" },
+    { label: "BOUND Method", href: links.bound, icon: BookOpen, value: "bound-method.github.io" },
+    { label: "BOUND publication", href: links.boundDoi, icon: FileText, value: "10.5281/zenodo.22257583" },
+    { label: "IFEM lineage publication", href: links.primaryDoi, icon: FileText, value: "10.5281/zenodo.20621561" },
     { label: "ORCID", href: links.orcid, icon: Orbit, value: "0009-0001-2428-1295" },
     { label: "LinkedIn", href: links.linkedin, icon: Network, value: "su-muzaff" },
   ];
+  const publicationRecords = isFa
+    ? [
+        { title: "روش BOUND نسخهٔ ۳.۰ — توسعهٔ یکپارچهٔ مرز-محور", meta: "نویسنده: Soheil Mozaffari · نسخهٔ ۳.۰ · ۲۰۲۶ · Zenodo", href: links.boundDoi, label: "مطالعهٔ انتشار اصلی" },
+        { title: "روش‌شناسی اجرای رابط‌محور (IFEM): چارچوبی یکپارچه برای مهندسی نرم‌افزار با موازی‌سازی بالا و کمک هوش مصنوعی", meta: "روش‌شناسی پیشین / تبار BOUND · نسخهٔ ۲.۲ · Zenodo", href: links.primaryDoi, label: "مطالعهٔ انتشار تبار" },
+      ]
+    : [
+        { title: "BOUND Method v3.0 — Boundary-Oriented Unified Development", meta: "Author: Soheil Mozaffari · Version 3.0 · 2026 · Zenodo", href: links.boundDoi, label: "Read primary publication" },
+        { title: "The Interface-First Execution Methodology: A Unified Framework for High-Parallelism, AI-Assisted Software Engineering", meta: "Earlier methodology / BOUND lineage · Version 2.2 · Zenodo", href: links.primaryDoi, label: "Read lineage publication" },
+      ];
   return (
     <div className={`portfolio-page ${isFa ? "fa-page" : "en-page"}`} dir={htmlDir} lang={locale}>
       <a className="language-bar" href={copy.languageHref}>{copy.languageLabel}<ArrowDownRight size={16} /></a>
@@ -233,7 +249,7 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
 
         <section id="profiles" className="profiles-section section-shell editorial-section" data-reveal>
           <p className="section-rail">{copy.profilesRail}</p>
-          <div className="section-content"><p className="kicker">{copy.profilesKicker}</p><h2>{copy.profilesHeading}</h2><p><BidiText text={copy.profilesBody} isFa={isFa} /></p><div className="profile-grid">{profileCards.map(({ label, href, icon: Icon, value }) => <a href={href} target="_blank" rel="noreferrer" className="profile-card" data-reveal key={label}><Icon size={20} /><span>{label}</span><Ltr>{value}</Ltr><ArrowUpRight size={16} /></a>)}</div></div>
+          <div className="section-content"><p className="kicker">{copy.profilesKicker}</p><h2>{copy.profilesHeading}</h2><p><BidiText text={copy.profilesBody} isFa={isFa} /></p><div className="profile-grid">{profileCards.map(({ label, href, icon: Icon, value }) => <a href={href} target="_blank" rel="noreferrer" className="profile-card" data-reveal key={label}><Icon size={20} /><span>{label}</span><Ltr>{value}</Ltr><ArrowUpRight size={16} /></a>)}</div><div className="authority-records"><section className="authority-records__group"><p className="kicker">{copy.publicationsHeading}</p><p><BidiText text={copy.publicationsBody} isFa={isFa} /></p><div className="publication-list">{publicationRecords.map((record) => <article className="publication-record" key={record.title}><h3><BidiText text={record.title} isFa={isFa} /></h3><p><BidiText text={record.meta} isFa={isFa} /></p><a className="text-link" href={record.href} target="_blank" rel="noreferrer">{record.label}<ArrowUpRight size={15} /></a></article>)}</div></section><section className="authority-records__group"><p className="kicker">{copy.writingHeading}</p><p><BidiText text={copy.writingBody} isFa={isFa} /></p><div className="writing-list">{writingTitles.map((title) => <article className="writing-record" key={title}><h3><Ltr>{title}</Ltr></h3><span>{isFa ? "پیش‌رو / بدون پیوند منتشرشده" : "Forthcoming / no published link"}</span></article>)}</div></section></div></div>
         </section>
       </main>
       <footer id="contact" className="site-footer">

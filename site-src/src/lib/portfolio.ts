@@ -60,6 +60,10 @@ export type PortfolioCopy = {
   profilesKicker: string;
   profilesHeading: string;
   profilesBody: string;
+  publicationsHeading: string;
+  publicationsBody: string;
+  writingHeading: string;
+  writingBody: string;
   projectsHeading: string;
   projects: Project[];
 };
@@ -278,6 +282,10 @@ export const faCopy: PortfolioCopy = {
   profilesKicker: "پروفایل‌ها و راه‌های ارتباطی",
   profilesHeading: "پیوندهای مرجع برای کد منبع، سوابق انتشار و هویت حرفه‌ای.",
   profilesBody: "پیوندهای مرجع، دسترسی به کد منبع، شناسهٔ پژوهشی و سوابق حرفه‌ای را فراهم می‌کنند.",
+  publicationsHeading: "سوابق انتشار",
+  publicationsBody: "روش BOUND نسخهٔ ۳.۰ انتشار اصلی است؛ IFEM به‌عنوان روش‌شناسی پیشین و تبار مفهومی آن حفظ می‌شود.",
+  writingHeading: "نوشتار فنی",
+  writingBody: "مجموعهٔ مقاله‌های فنیِ مورد نظر برای انتشار در LinkedIn؛ تا زمان انتشار، پیوند یا تاریخ ساختگی ارائه نمی‌شود.",
   projectsHeading: "Engineering Case Studies",
   projects: faProjects,
 };
@@ -357,6 +365,10 @@ export const enCopy: PortfolioCopy = {
   profilesKicker: "Profiles & contact paths",
   profilesHeading: "Reference links for source code, publication records, and professional identity.",
   profilesBody: "Use the reference links for source code, publication records, and professional history.",
+  publicationsHeading: "Publication records",
+  publicationsBody: "BOUND Method v3.0 is the primary publication; IFEM remains preserved as the earlier methodology and conceptual lineage.",
+  writingHeading: "Technical Writing",
+  writingBody: "An intended LinkedIn article series. No unverified article URLs or invented publication dates are presented.",
   projectsHeading: "Engineering Case Studies",
   projects: enProjects,
 };

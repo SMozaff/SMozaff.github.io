@@ -79,7 +79,7 @@ function useTerminal(isFa: boolean) {
   ]);
   const commands: Record<string, TerminalLine[]> = {
     help: [
-      { tone: "accent", text: "available: help, about, projects, skills, contact, bound, ifem, lineage, neofetch, clear" },
+      { tone: "accent", text: "available: help, about, projects, skills, publications, writing, contact, bound, ifem, lineage, neofetch, clear" },
       { tone: "output", text: "commands expose verified portfolio facts only" },
     ],
     about: [
@@ -103,11 +103,25 @@ function useTerminal(isFa: boolean) {
     ],
     contact: [
       { tone: "output", text: `GitHub: ${links.github}` },
+      { tone: "output", text: `BOUND: ${links.bound}` },
+      { tone: "output", text: `BOUND publication: ${links.boundDoi}` },
       { tone: "output", text: `ORCID: ${links.orcid}` },
       { tone: "output", text: `LinkedIn: ${links.linkedin}` },
-      { tone: "output", text: `IFEM Doctrine: ${links.ifem}` },
-      { tone: "output", text: `Zenodo: ${links.primaryDoi}` },
+      { tone: "output", text: `IFEM lineage publication: ${links.primaryDoi}` },
       { tone: "output", text: "Email: Soheil.Mozaffari@gmail.com" },
+    ],
+    publications: [
+      { tone: "accent", text: "BOUND Method v3.0 — primary publication / 2026 / Zenodo" },
+      { tone: "output", text: `DOI: ${links.boundDoi}` },
+      { tone: "output", text: "IFEM v2.2 — earlier methodology / BOUND lineage" },
+      { tone: "output", text: `DOI: ${links.primaryDoi}` },
+    ],
+    writing: [
+      { tone: "accent", text: "Technical Writing — intended LinkedIn article series" },
+      { tone: "output", text: "Forthcoming: Why Parallel Software Engineering Fails at Boundaries" },
+      { tone: "output", text: "Forthcoming: AI Coding Agents Need Boundaries Too" },
+      { tone: "output", text: "Forthcoming: From IFEM to BOUND" },
+      { tone: "output", text: "No article links or dates presented until verified publication." },
     ],
     neofetch: [
       { tone: "accent", text: "SOHEIL MOZAFARI / BOUND METHOD v3.0" },
