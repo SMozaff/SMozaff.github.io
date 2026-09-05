@@ -71,12 +71,96 @@ tailwind.config = {
   input[type="range"] { accent-color: #22d3ee; }
 
   .vec-path { stroke-dasharray: 6 8; animation: traceFlow 2.6s linear infinite; }
+
+  /* ============ HERO ANIMATIONS ============ */
+
+  /* staged entrance */
+  @keyframes hIn {
+    from { opacity: 0; transform: translateY(28px); filter: blur(4px); }
+    to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+  }
+  .h-anim { opacity: 0; animation: hIn .9s cubic-bezier(.16,1,.3,1) forwards; }
+  .d1 { animation-delay: .05s; } .d2 { animation-delay: .18s; }
+  .d3 { animation-delay: .32s; } .d4 { animation-delay: .46s; }
+  .d5 { animation-delay: .60s; } .d6 { animation-delay: .74s; }
+  .d7 { animation-delay: .88s; } .d8 { animation-delay: 1.02s; }
+
+  /* expanding gradient bar under the title */
+  @keyframes barGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .h-bar { transform-origin: left; transform: scaleX(0); animation: barGrow 1s cubic-bezier(.16,1,.3,1) .7s forwards; }
+
+  /* floating formulas */
+  .float-eq {
+    position: absolute; font-family: "JetBrains Mono", monospace;
+    pointer-events: none; white-space: nowrap;
+    animation-name: driftEq; animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite; animation-direction: alternate;
+  }
+  @keyframes driftEq {
+    from { transform: translateY(0) translateX(0); }
+    to   { transform: translateY(-26px) translateX(8px); }
+  }
+
+  /* scanline sweep */
+  @keyframes scanSweep { 0% { top: -12%; opacity: 0; } 8% { opacity: 1; } 92% { opacity: 1; } 100% { top: 112%; opacity: 0; } }
+  .scanline {
+    position: absolute; left: 0; right: 0; height: 90px; pointer-events: none;
+    background: linear-gradient(to bottom, transparent, rgba(34,211,238,.06), rgba(34,211,238,.14), rgba(34,211,238,.06), transparent);
+    animation: scanSweep 7.5s linear infinite;
+  }
+
+  /* rotating HUD rings */
+  @keyframes spinSlow { to { transform: rotate(360deg); } }
+  @keyframes spinRev  { to { transform: rotate(-360deg); } }
+  .spin-slow { animation: spinSlow 26s linear infinite; }
+  .spin-rev  { animation: spinRev 18s linear infinite; }
+
+  /* CTA glow pulse */
+  @keyframes ctaPulse {
+    0%, 100% { box-shadow: 0 0 22px rgba(34,211,238,.25); }
+    50%      { box-shadow: 0 0 48px rgba(34,211,238,.55); }
+  }
+  .cta-glow { animation: ctaPulse 2.6s ease-in-out infinite; }
+
+  /* scroll indicator */
+  @keyframes scrollDot {
+    0%   { transform: translateY(0); opacity: 1; }
+    70%  { transform: translateY(14px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 0; }
+  }
+  .scroll-dot { animation: scrollDot 1.8s ease-in-out infinite; }
+
+  /* radar blip */
+  @keyframes blip {
+    0%, 100% { opacity: .15; transform: scale(.6); }
+    50%      { opacity: 1;   transform: scale(1.15); }
+  }
+  .blip { animation: blip 2.2s ease-in-out infinite; }
+  .blip.b2 { animation-delay: .9s; }
+
+  /* terminal breathing glow */
+  @keyframes termGlow {
+    0%, 100% { box-shadow: 0 0 0 rgba(34,211,238,0); }
+    50%      { box-shadow: 0 12px 70px -18px rgba(34,211,238,.35); }
+  }
+  .term-glow { animation: termGlow 4s ease-in-out infinite; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .h-anim { animation: none; opacity: 1; filter: none; }
+    .h-bar  { animation: none; transform: scaleX(1); }
+    .float-eq, .scanline { display: none; }
+    .spin-slow, .spin-rev, .cta-glow, .term-glow { animation: none; }
+  }
 </style>
 </head>
 <body class="antialiased text-slate-300 font-disp selection:bg-cyan-900 selection:text-cyan-100">
 
 <!-- scroll progress -->
 <div id="progressBar" class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-cyan-500 via-emerald-400 to-violet-500 z-[60] w-0"></div>
+
+<!-- mouse glow -->
+<div id="cursorGlow" class="fixed w-[520px] h-[520px] rounded-full pointer-events-none z-[5] opacity-70 mix-blend-screen"
+     style="background: radial-gradient(circle, rgba(34,211,238,0.09) 0%, rgba(34,211,238,0.03) 40%, transparent 65%); left: 50%; top: 30%;"></div>
 
 <!-- NAV -->
 <nav class="fixed top-0 w-full z-50 border-b border-line/60 bg-ink/85 backdrop-blur-md">
@@ -111,42 +195,107 @@ tailwind.config = {
 <!-- HERO -->
 <header id="top" class="relative min-h-screen flex items-center pt-16 overflow-hidden">
   <canvas id="heroCanvas" class="absolute inset-0 w-full h-full"></canvas>
-  <div class="absolute inset-0 tech-grid pointer-events-none"></div>
-  <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent pointer-events-none"></div>
+  <div id="heroGrid" class="absolute inset-[-40px] tech-grid pointer-events-none will-change-transform"></div>
+  <div id="floatFormulas" class="absolute inset-0 pointer-events-none z-[2]"></div>
+  <div class="scanline z-[3]"></div>
+  <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent pointer-events-none z-[3]"></div>
 
-  <div class="relative z-10 max-w-7xl mx-auto px-5 w-full grid lg:grid-cols-12 gap-12 items-center py-20">
-    <div class="lg:col-span-7">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-line bg-panel/60 mb-8 font-mono text-[11px] text-slate-400">
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-        INDEPENDENT PRACTICE / SYSTEMS &amp; SOFTWARE
+  <div class="relative z-10 max-w-7xl mx-auto px-5 w-full py-24">
+    <div id="heroInner" class="grid lg:grid-cols-12 gap-12 items-center will-change-transform">
+
+      <!-- LEFT -->
+      <div class="lg:col-span-7">
+        <div class="h-anim d1 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-line bg-panel/60 mb-8 font-mono text-[11px] text-slate-400">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          INDEPENDENT PRACTICE / SYSTEMS &amp; SOFTWARE
+        </div>
+
+        <div class="h-anim d2 flex items-start gap-3">
+          <h1 id="heroTitle" data-decode class="text-5xl md:text-7xl font-semibold tracking-tight text-white leading-[1.05]">SOHEIL MOZAFFARI</h1>
+          <span class="caret text-cyan-400 text-3xl md:text-5xl font-light mt-2 hidden md:inline">▌</span>
+        </div>
+        <div class="h-bar h-1 w-44 md:w-64 bg-gradient-to-r from-cyan-400 via-emerald-400 to-violet-500 mt-4 mb-7 rounded-full"></div>
+
+        <div class="h-anim d3 font-mono text-sm md:text-base text-slate-500 mb-5 flex items-center gap-3">
+          <span class="text-emerald-400">»</span>
+          <span>operating at the intersection of</span>
+          <span id="roleWord" class="font-semibold tracking-wide">INNOVATION</span>
+        </div>
+
+        <p class="h-anim d4 text-lg md:text-xl text-slate-400 max-w-2xl mb-4 leading-relaxed">
+          Software engineer • systems architect • creator of <span class="text-white font-medium">IFEM</span>.
+        </p>
+        <p class="h-anim d4 font-mono text-sm text-slate-500 max-w-2xl mb-10 leading-relaxed">
+          <span class="text-neon-amber">innovation</span> · <span class="text-neon-violet">mathematics</span> ·
+          <span class="text-neon-green">electronics</span> · <span class="text-neon-cyan">cybersecurity</span> ·
+          <span class="text-neon-rose">programming</span> — boundaries, responsibilities and verification paths kept explicit and traceable.
+        </p>
+
+        <div class="h-anim d5 flex flex-wrap gap-4 mb-12">
+          <a href="#work" class="cta-glow px-7 py-3 bg-cyan-400 text-ink font-semibold text-sm hover:bg-cyan-300 transition-colors rounded-sm">Review Case Studies</a>
+          <a href="https://ifem-doctrine.github.io/" target="_blank" rel="noopener" class="px-7 py-3 border border-line text-slate-300 font-medium text-sm hover:border-cyan-400/60 hover:text-white transition-all rounded-sm flex items-center gap-2">
+            Explore IFEM Doctrine
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+        </div>
+
+        <div class="h-anim d6 grid grid-cols-4 gap-4 max-w-lg">
+          <div class="border-l-2 border-neon-amber/60 pl-3">
+            <div id="cnt1" data-count="5" class="font-mono text-2xl md:text-3xl text-white">00</div>
+            <div class="font-mono text-[9px] md:text-[10px] text-slate-500 uppercase tracking-widest mt-1">Domains</div>
+          </div>
+          <div class="border-l-2 border-neon-green/60 pl-3">
+            <div id="cnt2" data-count="5" class="font-mono text-2xl md:text-3xl text-white">00</div>
+            <div class="font-mono text-[9px] md:text-[10px] text-slate-500 uppercase tracking-widest mt-1">Case Studies</div>
+          </div>
+          <div class="border-l-2 border-neon-violet/60 pl-3">
+            <div id="cnt3" data-count="1" class="font-mono text-2xl md:text-3xl text-white">00</div>
+            <div class="font-mono text-[9px] md:text-[10px] text-slate-500 uppercase tracking-widest mt-1">Doctrine</div>
+          </div>
+          <div class="border-l-2 border-neon-cyan/60 pl-3">
+            <div id="cnt4" data-count="2" class="font-mono text-2xl md:text-3xl text-white">00</div>
+            <div class="font-mono text-[9px] md:text-[10px] text-slate-500 uppercase tracking-widest mt-1">DOIs</div>
+          </div>
+        </div>
       </div>
-      <h1 id="heroTitle" data-decode class="text-5xl md:text-7xl font-semibold tracking-tight text-white leading-[1.05] mb-6">SOHEIL MOZAFFARI</h1>
-      <p class="text-lg md:text-xl text-slate-400 max-w-2xl mb-4 leading-relaxed">
-        Software engineer • systems architect • creator of <span class="text-white font-medium">IFEM</span>.
-      </p>
-      <p class="font-mono text-sm text-slate-500 max-w-2xl mb-10 leading-relaxed">
-        Working across <span class="text-neon-amber">innovation</span>, <span class="text-neon-violet">mathematics</span>,
-        <span class="text-neon-green">electronics</span>, <span class="text-neon-cyan">cybersecurity</span> and
-        <span class="text-neon-rose">programming</span> — keeping boundaries, responsibilities and verification paths explicit and traceable.
-      </p>
-      <div class="flex flex-wrap gap-4">
-        <a href="#work" class="px-7 py-3 bg-cyan-400 text-ink font-semibold text-sm hover:bg-cyan-300 transition-colors rounded-sm shadow-[0_0_30px_rgba(34,211,238,.35)]">Review Case Studies</a>
-        <a href="https://ifem-doctrine.github.io/" target="_blank" rel="noopener" class="px-7 py-3 border border-line text-slate-300 font-medium text-sm hover:border-cyan-400/60 hover:text-white transition-all rounded-sm flex items-center gap-2">
-          Explore IFEM Doctrine
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-        </a>
+
+      <!-- RIGHT -->
+      <div class="lg:col-span-5 relative h-anim d5">
+        <!-- HUD rings -->
+        <div class="absolute -top-14 -right-10 w-44 h-44 pointer-events-none opacity-40">
+          <div class="absolute inset-0 rounded-full border border-dashed border-cyan-400/40 spin-slow"></div>
+          <div class="absolute inset-4 rounded-full border border-dotted border-violet-400/40 spin-rev"></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <span class="blip w-2 h-2 rounded-full bg-cyan-400"></span>
+          </div>
+        </div>
+        <div class="absolute -bottom-10 -left-8 w-28 h-28 pointer-events-none opacity-30">
+          <div class="absolute inset-0 rounded-full border border-dashed border-emerald-400/40 spin-rev"></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <span class="blip b2 w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          </div>
+        </div>
+
+        <div class="term-glow border border-line rounded-md bg-panel/80 backdrop-blur overflow-hidden relative">
+          <div class="flex items-center gap-2 px-4 py-3 border-b border-line bg-ink/60">
+            <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80 animate-pulse"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80 animate-pulse" style="animation-delay:.4s"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80 animate-pulse" style="animation-delay:.8s"></span>
+            <span class="ml-3 font-mono text-[11px] text-slate-500">~/soheil — zsh</span>
+            <span class="ml-auto font-mono text-[10px] text-cyan-500/70 flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>LIVE
+            </span>
+          </div>
+          <div id="termBody" class="p-5 font-mono text-[12px] md:text-[13px] leading-relaxed min-h-[250px]"></div>
+        </div>
       </div>
     </div>
 
-    <div class="lg:col-span-5">
-      <div class="border border-line rounded-md bg-panel/80 backdrop-blur shadow-2xl overflow-hidden">
-        <div class="flex items-center gap-2 px-4 py-3 border-b border-line bg-ink/60">
-          <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
-          <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-          <span class="ml-3 font-mono text-[11px] text-slate-500">~/soheil — zsh</span>
-        </div>
-        <div id="termBody" class="p-5 font-mono text-[12px] md:text-[13px] leading-relaxed min-h-[240px]"></div>
+    <!-- scroll indicator -->
+    <div class="h-anim d8 absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+      <span class="font-mono text-[9px] tracking-[0.4em] text-slate-600">SCROLL</span>
+      <div class="w-5 h-9 rounded-full border border-line flex justify-center pt-1.5">
+        <span class="scroll-dot w-1 h-2 rounded-full bg-cyan-400"></span>
       </div>
     </div>
   </div>
@@ -527,7 +676,7 @@ function fitCanvas(cnv) {
   cnv.width = w * dpr; cnv.height = h * dpr;
   const ctx = cnv.getContext('2d');
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  return { ctx, w, h };
+  return { ctx: ctx, w: w, h: h };
 }
 
 /* ---------- scroll progress ---------- */
@@ -566,7 +715,60 @@ function masterTick(ts) {
 }
 requestAnimationFrame(masterTick);
 
-/* ---------- hero particle field ---------- */
+/* ---------- HERO: mouse parallax + cursor glow ---------- */
+(function () {
+  const heroSec = document.getElementById('top');
+  const gridEl = document.getElementById('heroGrid');
+  const innerEl = document.getElementById('heroInner');
+  const glowEl = document.getElementById('cursorGlow');
+  const heroMouse = { x: null, y: null, gx: 0, gy: 0, tx: 0, ty: 0, px: window.innerWidth / 2, py: window.innerHeight / 3 };
+
+  heroSec.addEventListener('mousemove', function (e) {
+    const rect = heroSec.getBoundingClientRect();
+    heroMouse.tx = (e.clientX - rect.left) / rect.width - 0.5;
+    heroMouse.ty = (e.clientY - rect.top) / rect.height - 0.5;
+    heroMouse.x = e.clientX - rect.left;
+    heroMouse.y = e.clientY - rect.top;
+    heroMouse.px = e.clientX; heroMouse.py = e.clientY;
+  });
+  heroSec.addEventListener('mouseleave', function () {
+    heroMouse.x = null; heroMouse.y = null; heroMouse.tx = 0; heroMouse.ty = 0;
+  });
+  window.heroMouse = heroMouse;
+
+  function paraTick() {
+    heroMouse.gx += (heroMouse.tx - heroMouse.gx) * 0.06;
+    heroMouse.gy += (heroMouse.ty - heroMouse.gy) * 0.06;
+    gridEl.style.transform = 'translate(' + (heroMouse.gx * -24).toFixed(2) + 'px,' + (heroMouse.gy * -24).toFixed(2) + 'px)';
+    innerEl.style.transform = 'translate(' + (heroMouse.gx * 12).toFixed(2) + 'px,' + (heroMouse.gy * 10).toFixed(2) + 'px)';
+    glowEl.style.left = (heroMouse.px - 260) + 'px';
+    glowEl.style.top = (heroMouse.py - 260) + 'px';
+    requestAnimationFrame(paraTick);
+  }
+  paraTick();
+})();
+
+/* ---------- HERO: floating formulas ---------- */
+(function () {
+  const holder = document.getElementById('floatFormulas');
+  const formulas = ['z ← z² + c', '∑ 1/n² = π²/6', 'AES-256', 'λx.λy. x', 'C = P ⊕ K', 'e^{iπ} + 1 = 0', '∂f/∂x', 'BLE ▸ RF', 'SHA-256', '∫ e^(−x²) dx', 'CRDT ⊔ merge', 'Kotlin ⇄ Rust', 'V = IR', '0b1101 ⊕ 0b0110'];
+  const palette = ['rgba(34,211,238,', 'rgba(167,139,250,', 'rgba(52,211,153,', 'rgba(251,191,36,', 'rgba(251,113,133,'];
+  for (let k = 0; k < 16; k++) {
+    const sp = document.createElement('span');
+    sp.className = 'float-eq';
+    sp.textContent = formulas[k % formulas.length];
+    const col = palette[(Math.random() * palette.length) | 0];
+    sp.style.left = (3 + Math.random() * 90) + '%';
+    sp.style.top = (6 + Math.random() * 82) + '%';
+    sp.style.fontSize = (9 + Math.random() * 5) + 'px';
+    sp.style.color = col + (0.1 + Math.random() * 0.14).toFixed(2) + ')';
+    sp.style.animationDuration = (5 + Math.random() * 7).toFixed(1) + 's';
+    sp.style.animationDelay = (-Math.random() * 6).toFixed(1) + 's';
+    holder.appendChild(sp);
+  }
+})();
+
+/* ---------- HERO: particle field (with cursor interaction) ---------- */
 (function () {
   const cnv = document.getElementById('heroCanvas');
   let ctx = null, W = 0, H = 0, parts = [];
@@ -591,11 +793,25 @@ requestAnimationFrame(masterTick);
   registerLoop(cnv, function () {
     if (!ctx) return;
     ctx.clearRect(0, 0, W, H);
+    const m = window.heroMouse;
     for (let a = 0; a < parts.length; a++) {
       const p = parts[a];
       p.x += p.vx; p.y += p.vy;
       if (p.x < 0 || p.x > W) p.vx *= -1;
       if (p.y < 0 || p.y > H) p.vy *= -1;
+
+      /* cursor attraction + links */
+      if (m && m.x !== null) {
+        const dx = m.x - p.x, dy = m.y - p.y;
+        const d2 = dx * dx + dy * dy;
+        if (d2 < 22500) {
+          const d = Math.sqrt(d2) || 1;
+          ctx.strokeStyle = 'rgba(52,211,153,' + (0.28 * (1 - d / 150)).toFixed(3) + ')';
+          ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(m.x, m.y); ctx.stroke();
+          p.vx += dx * 0.00004; p.vy += dy * 0.00004;
+        }
+      }
+
       for (let b = a + 1; b < parts.length; b++) {
         const q = parts[b];
         const dx = p.x - q.x, dy = p.y - q.y;
@@ -617,6 +833,62 @@ requestAnimationFrame(masterTick);
   });
 })();
 
+/* ---------- HERO: rotating role word (scramble) ---------- */
+(function () {
+  const el = document.getElementById('roleWord');
+  const roles = [
+    { w: 'INNOVATION',    c: '#fbbf24' },
+    { w: 'MATHEMATICS',   c: '#a78bfa' },
+    { w: 'ELECTRONICS',   c: '#34d399' },
+    { w: 'CYBERSECURITY', c: '#22d3ee' },
+    { w: 'PROGRAMMING',   c: '#fb7185' }
+  ];
+  const glyphs = '!<>-_/[]{}=+*^?#01';
+  let idx = 0;
+  function scrambleTo(text, color) {
+    el.style.color = color;
+    let frame = 0;
+    const total = 20;
+    function step() {
+      frame++;
+      let out = '';
+      for (let k = 0; k < text.length; k++) {
+        const revealAt = (k / text.length) * total * 0.7;
+        if (frame >= revealAt + 3) out += text[k];
+        else out += glyphs[(Math.random() * glyphs.length) | 0];
+      }
+      el.textContent = out;
+      if (frame < total) requestAnimationFrame(step);
+      else el.textContent = text;
+    }
+    step();
+  }
+  scrambleTo(roles[0].w, roles[0].c);
+  setInterval(function () {
+    idx = (idx + 1) % roles.length;
+    scrambleTo(roles[idx].w, roles[idx].c);
+  }, 2800);
+})();
+
+/* ---------- HERO: count-up stats ---------- */
+(function () {
+  const counters = document.querySelectorAll('[data-count]');
+  counters.forEach(function (el, i) {
+    const target = parseInt(el.dataset.count, 10);
+    const dur = 1200;
+    setTimeout(function () {
+      const t0 = performance.now();
+      function tickFn(now) {
+        const prog = Math.min((now - t0) / dur, 1);
+        const eased = 1 - Math.pow(1 - prog, 3);
+        el.textContent = String(Math.round(target * eased)).padStart(2, '0');
+        if (prog < 1) requestAnimationFrame(tickFn);
+      }
+      requestAnimationFrame(tickFn);
+    }, 900 + i * 180);
+  });
+})();
+
 /* ---------- terminal typing ---------- */
 (function () {
   const termLines = [
@@ -631,19 +903,19 @@ requestAnimationFrame(masterTick);
     { t: 'ACTIVE — building verifiable systems', c: 'text-amber-300' }
   ];
   const body = document.getElementById('termBody');
-  let li = 0;
   function sleep(ms) { return new Promise(function (res) { setTimeout(res, ms); }); }
   async function runTerm() {
-    for (; li < termLines.length; li++) {
+    await sleep(600);
+    for (let li = 0; li < termLines.length; li++) {
       const line = termLines[li];
       const div = document.createElement('div');
       div.className = line.c;
       body.appendChild(div);
       for (let ci = 0; ci <= line.t.length; ci++) {
         div.textContent = line.t.slice(0, ci);
-        await sleep(14);
+        await sleep(13);
       }
-      await sleep(160);
+      await sleep(150);
     }
     const cur = document.createElement('span');
     cur.className = 'caret text-emerald-400';
@@ -678,6 +950,8 @@ function decodeText(el) {
   }
   tick();
 }
+/* hero title decodes on load */
+setTimeout(function () { decodeText(document.getElementById('heroTitle')); }, 350);
 
 /* ---------- reveal observer ---------- */
 (function () {
@@ -685,7 +959,7 @@ function decodeText(el) {
     entries.forEach(function (ent) {
       if (ent.isIntersecting) {
         ent.target.classList.add('on');
-        if (ent.target.hasAttribute('data-decode')) decodeText(ent.target);
+        if (ent.target.hasAttribute('data-decode') && ent.target.id !== 'heroTitle') decodeText(ent.target);
         obs.unobserve(ent.target);
       }
     });
