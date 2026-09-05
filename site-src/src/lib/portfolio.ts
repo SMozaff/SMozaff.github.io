@@ -18,7 +18,6 @@ export type Project = {
   proofDetail: string;
   evidenceKind: "raven" | "rezvan" | "media" | "onyx" | "ifem" | "vector";
   github?: string;
-  caseStudy?: string;
   primary?: { label: string; href: string };
   secondary?: { label: string; href: string };
   detail: {
@@ -92,7 +91,7 @@ const faProjects: Project[] = [
     proof: "نمای واقعی رابط کاربری",
     proofDetail: "این تصویر فقط وجود و شکل رابط کاربری را نشان می‌دهد؛ دربارهٔ دقت تحلیل یا منشأ محتوا ادعای قطعی نمی‌کند.",
     evidenceKind: "raven",
-    github: "https://github.com/SMozaff/Raven-Metadata-Extractor", caseStudy: "https://ravenmeta-b9c2fz9g.manus.space/",
+    github: "https://github.com/SMozaff/Raven-Metadata-Extractor",
     detail: {
       problem: "بررسی فراداده معمولاً میان چند ابزار پراکنده است و رسیدن به یک تصویر منسجم از شواهد را دشوار می‌کند.",
       constraints: "نشانه‌های مرتبط با هوش مصنوعی باید محدود و توضیح‌پذیر بمانند و نباید به‌عنوان مدرک قطعی ارائه شوند.",
@@ -121,7 +120,7 @@ const faProjects: Project[] = [
     proof: "نشان RezvanMesh و نماهای رابط موبایل",
     proofDetail: "نشان‌ها و تصاویر ارائه‌شده فقط سطوح رابط کاربریِ برنامه را نشان می‌دهند؛ به‌تنهایی رفتار مش زنده، اعتبارسنجی چنددستگاهی یا کامل بودن محصول را اثبات نمی‌کنند.",
     evidenceKind: "rezvan",
-    github: "https://github.com/SMozaff/Rezvan-Mesh", caseStudy: "https://rezvanmesh-ctebutsc.manus.space/",
+    github: "https://github.com/SMozaff/Rezvan-Mesh",
     detail: {
       problem: "در نبود اتصال معمول، ارتباط میان دستگاه‌ها می‌تواند کاملاً قطع شود.",
       constraints: "نمونهٔ اولیه نباید به سرور مرکزی یا مسیر استاندارد شبکه وابسته باشد.",
@@ -147,7 +146,7 @@ const faProjects: Project[] = [
     proof: "نمای رابط کاربری",
     proofDetail: "تصویر رابط کاربری با لایه‌های تاریک و روشن",
     evidenceKind: "vector",
-    github: "https://github.com/SMozaff/Watermelon-VectorConverter", caseStudy: "https://watervector-hz2inn6j.manus.space/",
+    github: "https://github.com/SMozaff/Watermelon-VectorConverter",
     detail: {
       problem: "پردازش گرافیک‌های برداری در موبایل نیازمند تفکیک واضح بین رابط کاربری و موتور پردازشی است.",
       constraints: "عملیات پردازشی نباید در رشتهٔ اصلی (Main Thread) انجام شود و مرزهای آن باید شفاف باشد.",
@@ -175,7 +174,7 @@ const faProjects: Project[] = [
     proof: "خروجی سامانهٔ طراحی",
     proofDetail: "این تصویر یک خروجی طراحی است و اجرای کامل محصول یا انتشار عمومی آن را اثبات نمی‌کند.",
     evidenceKind: "media",
-    github: "https://github.com/SMozaff/Watermelon-MediaPlayer", caseStudy: "https://watermelonmp-b828xakc.manus.space/",
+    github: "https://github.com/SMozaff/Watermelon-MediaPlayer",
     detail: {
       problem: "کاربرانی که رسانه را به‌صورت محلی نگه می‌دارند به پخش‌کننده‌ای آفلاین با معماری روشن و تجربه‌ای سازگار با RTL نیاز دارند.",
       constraints: "با رشد قابلیت‌ها، حریم خصوصی و مرزهای ماژولی باید روشن و قابل‌نگه‌داری باقی بمانند.",
@@ -204,7 +203,7 @@ const faProjects: Project[] = [
     proof: "نشان ONYX و نماهای رابط کاربری",
     proofDetail: "نشان و تصاویر ارائه‌شده، سطوح رابط کاربری را نشان می‌دهند و به‌تنهایی کامل بودن محصول، استقرار عملیاتی یا رفتار سامانه را اثبات نمی‌کنند.",
     evidenceKind: "onyx",
-    github: "https://github.com/SMozaff/Onyx-Framwork", caseStudy: "https://onyxcase-bxl5ndbk.manus.space/",
+    github: "https://github.com/SMozaff/Onyx-Framwork",
     detail: {
       problem: "هماهنگی مأموریت به اجرای محلی با حدود اختیار روشن و سازوکار همگام‌سازی نیاز دارد.",
       constraints: "معماری چندسکویی با چند مسیر انتقال باید ماژولار بماند و ادعاها فقط به بخش‌هایی محدود شوند که واقعاً پیاده‌سازی شده‌اند.",
@@ -284,35 +283,35 @@ const enProjects: Project[] = [
     id: "raven", number: "01", title: "Raven Metadata Extractor", category: "Developer Tooling / Desktop Software", status: "Active project", evidenceKind: "raven",
     summary: "A cross-platform desktop and CLI tool for turning image-folder scans into explainable metadata reports across EXIF, XMP, GPS, C2PA, and carefully bounded AI-origin indicators.",
     highlights: ["Shared desktop and CLI execution path", "Multi-source metadata extraction", "Structured report and history generation", "Evidence tiers that distinguish indicators from proof"],
-    evidenceLabel: "GUI capture", proof: "GUI capture", proofDetail: "Interface evidence; not a claim of forensic certainty or AI-origin proof.", github: "https://github.com/SMozaff/Raven-Metadata-Extractor", caseStudy: "https://ravenmeta-b9c2fz9g.manus.space/",
+    evidenceLabel: "GUI capture", proof: "GUI capture", proofDetail: "Interface evidence; not a claim of forensic certainty or AI-origin proof.", github: "https://github.com/SMozaff/Raven-Metadata-Extractor",
     detail: { problem: "Metadata investigation is often fragmented across separate tools and hard to interpret as a whole.", constraints: "AI-origin indicators must remain explicitly bounded and must not be represented as proof.", architecture: "Source-specific extractors feed an explainable evidence model rather than a single opaque classification claim.", implementation: "Python application structure with GUI and CLI paths, reports, history, and optional C2PA or ML-related paths.", evidence: "Repository structure, cross-platform build workflow, and the real interface screenshot shown here.", limits: "No tagged release is presented here. AI-related signals are indicators within an evidence hierarchy, not a detector or forensic conclusion." },
   },
   {
     id: "rezvan", number: "02", title: "Rezvan Mesh", subtitle: "Offline Android Communication", category: "Systems Architecture / Mobile Engineering", status: "Beta / validation in progress", evidenceKind: "rezvan",
     summary: "An Android peer-to-peer communication prototype combining Kotlin, Rust, Bluetooth LE, Wi-Fi Direct, and encrypted local storage for off-grid messaging scenarios.",
     highlights: ["Kotlin ↔ Rust JNI boundary", "BLE and Wi-Fi Direct transport work", "Local encrypted persistence", "Rust core for routing, crypto, and session responsibilities"],
-    evidenceLabel: "Mark / mobile-interface evidence", proof: "RezvanMesh marks and mobile interfaces", proofDetail: "The supplied marks and captures document application surfaces only; they do not by themselves establish live mesh behavior, multi-device validation, or a complete product.", github: "https://github.com/SMozaff/Rezvan-Mesh", caseStudy: "https://rezvanmesh-ctebutsc.manus.space/",
+    evidenceLabel: "Mark / mobile-interface evidence", proof: "RezvanMesh marks and mobile interfaces", proofDetail: "The supplied marks and captures document application surfaces only; they do not by themselves establish live mesh behavior, multi-device validation, or a complete product.", github: "https://github.com/SMozaff/Rezvan-Mesh",
     detail: { problem: "Communication may fail when normal connectivity is unavailable.", constraints: "The prototype cannot assume a central server or an ordinary network path.", architecture: "Android radio and interface concerns are separated from a Rust routing, crypto, and session core through JNI boundaries.", implementation: "BLE and Wi-Fi Direct transport work, encrypted local storage, Rust-core responsibilities, and device-oriented integration tooling.", evidence: "Visible source organization, Rust tests, Android build workflow, and documented physical-device procedure.", limits: "Multi-hop hardware validation, receiver voice playback, and relay behavior are not presented as complete or fully verified." },
   },
   {
     id: "vector-converter", number: "03", title: "Watermelon Vector Graphics Converter", category: "Mobile Application / Graphics Processing", status: "Active project", evidenceKind: "vector",
     summary: "A native Android graphics processing application built with separated application and processing layers.",
     highlights: ["Application and processing layer separation", "Native Android architecture", "Vector graphics processing"],
-    evidenceLabel: "GUI capture", proof: "GUI capture", proofDetail: "Interface evidence showing light and dark modes.", github: "https://github.com/SMozaff/Watermelon-VectorConverter", caseStudy: "https://watervector-hz2inn6j.manus.space/",
+    evidenceLabel: "GUI capture", proof: "GUI capture", proofDetail: "Interface evidence showing light and dark modes.", github: "https://github.com/SMozaff/Watermelon-VectorConverter",
     detail: { problem: "Vector graphics processing on mobile requires clear separation between the UI and the processing engine.", constraints: "Processing must not block the main thread and its boundaries must be transparent.", architecture: "UI and processing are strictly separated into distinct layers communicating through explicit interfaces.", implementation: "Built for the Android OS adhering to modern architecture standards.", evidence: "Source code and application output images.", limits: "Focused specifically on vector graphics and not intended as a universal image processor." }
   },
   {
     id: "mediaplayer", number: "04", title: "Watermelon MediaPlayer", subtitle: "Offline Android Media System", category: "Product Engineering / Mobile Engineering", status: "Active development", evidenceKind: "media",
     summary: "A privacy-oriented offline Android media-player architecture built around explicit Kotlin interfaces, modular playback/storage/subtitle boundaries, and RTL-aware product design.",
     highlights: ["Strict modular boundaries", "Shared contract and interface module", "Media3 / ExoPlayer playback architecture", "Storage migration and subtitle-engine separation"],
-    evidenceLabel: "Design system", proof: "Design-system artifact", proofDetail: "Design evidence only; it is not represented as proof of a released or complete consumer application.", github: "https://github.com/SMozaff/Watermelon-MediaPlayer", caseStudy: "https://watermelonmp-b828xakc.manus.space/",
+    evidenceLabel: "Design system", proof: "Design-system artifact", proofDetail: "Design evidence only; it is not represented as proof of a released or complete consumer application.", github: "https://github.com/SMozaff/Watermelon-MediaPlayer",
     detail: { problem: "Local media users need a focused offline player with clean architecture and RTL-aware interaction.", constraints: "Privacy and maintainable module boundaries must remain legible as the feature set grows.", architecture: "Shared interfaces hold contracts while dedicated modules own playback, storage, subtitles, and presentation; the app boundary composes implementations.", implementation: "Kotlin and Compose modules with Media3, storage and subtitle boundaries, and CI-backed Android build and migration checks.", evidence: "Module structure, visible workflow configuration, and the visual-system artifact shown here.", limits: "No published consumer release is claimed. The visual-system artifact is not a running-product demonstration." },
   },
   {
     id: "onyx", number: "05", title: "ONYX Framework", subtitle: "Mission Operations Architecture", category: "Systems Architecture / Distributed Systems", status: "Architecture Case Study — In Progress", evidenceKind: "onyx",
     summary: "An in-progress Rust-centric mission-operations architecture spanning local-first synchronization, persistence, observability, multiple client surfaces, transport layers, and deployment infrastructure.",
     highlights: ["Multi-crate Rust workspace", "CRDT and synchronization architecture", "Kernel / domain / application / infrastructure separation", "Docker, Helm, and Terraform deployment artifacts"],
-    evidenceLabel: "Mark / interface evidence", proof: "ONYX mark and interface captures", proofDetail: "The supplied mark and interface captures document client surfaces only; they do not by themselves establish a finished mission-operations product, operational deployment, or system behavior.", github: "https://github.com/SMozaff/Onyx-Framwork", caseStudy: "https://onyxcase-bxl5ndbk.manus.space/",
+    evidenceLabel: "Mark / interface evidence", proof: "ONYX mark and interface captures", proofDetail: "The supplied mark and interface captures document client surfaces only; they do not by themselves establish a finished mission-operations product, operational deployment, or system behavior.", github: "https://github.com/SMozaff/Onyx-Framwork",
     detail: { problem: "Mission coordination needs authority-aware local operation and synchronization.", constraints: "Multi-platform and multi-transport work must remain modular while claims stay aligned with delivered scope.", architecture: "Kernel, domain, application, infrastructure, and transport responsibilities are separated across a Rust-centric workspace and several client surfaces.", implementation: "Rust workspace components, web/desktop/mobile surfaces, deployment scaffolding, tests, and conformance documentation.", evidence: "Repository architecture, test surface, infrastructure artifacts, and the conformance register.", limits: "Important areas remain incomplete. Cloud Relay is a blocking gap for certain multi-device claims; full FFI and conformance coverage are not claimed." },
   },
   {

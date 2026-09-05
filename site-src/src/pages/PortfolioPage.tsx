@@ -9,7 +9,6 @@ import {
   ChevronDown,
   CircleDot,
   Code2,
-  ExternalLink,
   FileText,
   Github,
   Layers3,
@@ -127,8 +126,8 @@ function RezvanContextVisuals({ isFa }: { isFa: boolean }) {
 
 function ProjectCard({ project, isFa }: { project: Project; isFa: boolean }) {
   const labels = isFa
-    ? { details: "بررسی پروندهٔ پروژه", problem: "مسئله", constraints: "محدودیت‌ها", architecture: "معماری", implementation: "پیاده‌سازی", evidence: "راستی‌آزمایی و شواهد", limits: "وضعیت و حدود فعلی", caseStudy: "مطالعهٔ موردی کامل", methodology: "روش‌شناسی IFEM", code: "مشاهدهٔ کد" }
-    : { details: "Open project record", problem: "Problem", constraints: "Constraints", architecture: "Architecture", implementation: "Implementation", evidence: "Verification & evidence", limits: "Current limits", caseStudy: "View full case study", methodology: "IFEM methodology", code: "View code" };
+    ? { details: "بررسی پروندهٔ پروژه", problem: "مسئله", constraints: "محدودیت‌ها", architecture: "معماری", implementation: "پیاده‌سازی", evidence: "راستی‌آزمایی و شواهد", limits: "وضعیت و حدود فعلی", methodology: "روش‌شناسی IFEM", code: "مشاهدهٔ کد" }
+    : { details: "Open project record", problem: "Problem", constraints: "Constraints", architecture: "Architecture", implementation: "Implementation", evidence: "Verification & evidence", limits: "Current limits", methodology: "IFEM methodology", code: "View code" };
   return (
     <article className={`project-card project-${project.id}`} id={project.id} data-reveal>
       <div className="project-serial" aria-hidden="true">{project.number}</div>
@@ -147,7 +146,6 @@ function ProjectCard({ project, isFa }: { project: Project; isFa: boolean }) {
           </div>
         )}
         <div className="project-actions">
-          {project.caseStudy && <a className="text-link case-study-link" href={project.caseStudy} target="_blank" rel="noopener noreferrer">{labels.caseStudy}<ExternalLink size={15} /></a>}
           {project.primary && <a className="text-link" href={project.primary.href} target="_blank" rel="noopener noreferrer">{project.primary.label}<ArrowUpRight size={15} /></a>}
           {project.secondary && <a className="text-link" href={project.secondary.href} target="_blank" rel="noopener noreferrer">{project.secondary.label}<FileText size={15} /></a>}
           {project.id !== "ifem" && <a className="text-link" href={links.ifem} target="_blank" rel="noopener noreferrer">{labels.methodology}<Orbit size={15} /></a>}
