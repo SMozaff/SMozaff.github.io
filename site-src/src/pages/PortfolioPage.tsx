@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import type { ReactNode } from "react";
 import { enCopy, faCopy, links, type Locale, type Project } from "@/lib/portfolio";
+import InteractiveSystems from "@/components/InteractiveSystems";
 
 const storage = "https://smozaff.github.io/manus-storage";
 
@@ -213,6 +214,8 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
             <p><BidiText text={copy.heroCaption} isFa={isFa} /></p>
           </div>
         </section>
+
+        <InteractiveSystems locale={locale} />
 
         <section id="about" className="about-section section-shell editorial-section" data-reveal>
           <p className="section-rail">{copy.aboutRail}</p>
