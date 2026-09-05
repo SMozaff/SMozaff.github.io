@@ -337,3 +337,115 @@ nav a:hover:after{transform:scaleX(1)}
   .back-to-top{right:.8rem;bottom:.8rem}
   .fa-page .back-to-top{left:.8rem;right:auto}
 }
+
+
+/* Part 1 visual foundation: static technical shell only. Runtime prototype systems are intentionally deferred. */
+:root{
+  --paper:#070b12;
+  --paper-bright:#0d1420;
+  --paper-deep:#111c2b;
+  --wash:#0a111c;
+  --ink:#e6edf5;
+  --ink-soft:#b8c5d4;
+  --muted:#73839a;
+  --hairline:#223249;
+  --line:var(--hairline);
+  --text:var(--ink-soft);
+  --text-muted:var(--muted);
+  --accent:#27d3ee;
+  --accent-strong:#8cf3ff;
+  --brand:var(--accent);
+  --sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --display:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+html{background:var(--paper)}
+body{background:var(--paper);color:var(--ink)}
+.portfolio-page{position:relative;isolation:isolate;background:var(--paper);overflow-x:clip}
+.portfolio-page:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.48;background-image:linear-gradient(rgba(39,211,238,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(39,211,238,.045) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(to bottom,black,transparent 78%)}
+.language-bar{min-height:2.4rem;background:#05080e;color:var(--accent);border-bottom:1px solid #1b3449;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.62rem;letter-spacing:.16em;transition:background 160ms ease,color 160ms ease}
+.language-bar:before,.language-bar:after{width:1rem;background:var(--accent);opacity:.7}
+.language-bar:hover{background:#0b1724;color:#b8f8ff}
+.site-header{top:2.4rem;padding:.85rem clamp(1.1rem,4vw,4rem);border-bottom:1px solid rgba(74,106,135,.45);background:rgba(7,11,18,.84);box-shadow:0 12px 36px rgba(0,0,0,.18)}
+.brand{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.brand>span:last-child{font-size:.78rem;letter-spacing:.05em}
+.brand small{color:var(--accent);font-size:.52rem;letter-spacing:.18em}
+.brand-mark{width:26px;height:26px;border-color:var(--accent);background:rgba(39,211,238,.05)}
+.brand-mark span{background:var(--accent)}
+.brand-mark span:nth-child(2){background:#a78bfa}
+nav a{color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.6rem;letter-spacing:.14em}
+nav a:hover{color:var(--accent)}
+.section-shell{position:relative}
+.hero{min-height:calc(100svh - 5.25rem);padding-top:clamp(4rem,8vw,7rem);background:radial-gradient(circle at 78% 30%,rgba(39,211,238,.09),transparent 28rem)}
+.hero:before{content:"SYSTEMS / SOFTWARE / RECORD";position:absolute;top:clamp(1.5rem,4vw,3rem);right:4vw;color:#35506b;font:500 .56rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.18em}
+.hero-copy{border-left:1px solid rgba(39,211,238,.6)}
+.eyebrow,.kicker,.section-rail,.project-meta,.evidence-label{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);font-size:.58rem;letter-spacing:.16em}
+.eyebrow:before{background:var(--accent)}
+.hero h1{color:#f1f7fb;font-weight:650;text-shadow:0 0 28px rgba(39,211,238,.12)}
+.role{color:var(--accent-strong);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem}
+.hero-statement{color:var(--ink-soft)}
+.button{border-color:#41617d;background:rgba(13,20,32,.72);color:var(--ink);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.6rem;letter-spacing:.12em}
+.button-dark{border-color:var(--accent);background:var(--accent);color:#031018}
+.button-dark:hover{background:#8cf3ff;border-color:#8cf3ff;color:#031018}
+.button-light{background:rgba(13,20,32,.48)}
+.button-light:hover{background:#14283a;border-color:var(--accent);color:#fff}
+.hero-art{margin-right:clamp(0rem,2vw,2rem);padding:.8rem;background:rgba(13,20,32,.78);border:1px solid #29455f;box-shadow:16px 16px 0 rgba(39,211,238,.09),0 22px 70px rgba(0,0,0,.3)}
+.hero-art:before{content:"01 / SYSTEMS LEDGER";position:absolute;top:.8rem;left:1.5rem;z-index:1;color:#9feefa;font:500 .55rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.13em}
+.hero-art img{filter:saturate(.75) contrast(1.12);opacity:.9}
+.hero-art p{border-top-color:#29455f;color:var(--ink-soft);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.68rem}
+.editorial-section,.work-section{border-top-color:rgba(74,106,135,.55)}
+.section-rail:after{background:var(--accent);opacity:.7}
+.section-content h2,.work-intro h2,.project-card h3{color:#f1f7fb}
+.section-content>p:not(.kicker),.work-intro>div>p,.project-summary{color:var(--ink-soft)}
+.about-section{background:rgba(13,20,32,.5)}
+.work-section{background:rgba(7,11,18,.58)}
+.project-list{border-top-color:var(--accent)}
+.project-card{border-bottom-color:rgba(74,106,135,.45);transition:background 220ms ease,transform 220ms ease,box-shadow 220ms ease}
+.project-card:hover{background:rgba(13,24,38,.58);transform:translateY(-2px);box-shadow:0 18px 55px rgba(0,0,0,.18)}
+.project-serial{color:#4c708d;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.project-meta{border-bottom-color:rgba(74,106,135,.45)}
+.project-status{color:#8eddeb}
+.project-highlights li{color:var(--ink-soft)}
+.project-highlights li:before{border-color:var(--accent);background:rgba(39,211,238,.16)}
+.text-link{color:#dce8f2;border-bottom-color:#52708a;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.59rem;letter-spacing:.12em}
+.text-link:hover{color:var(--accent-strong);border-color:var(--accent)}
+.project-actions .case-study-link{border-color:var(--accent);color:var(--accent-strong)}
+.evidence-panel{background:rgba(13,20,32,.86);border-color:#29455f;box-shadow:0 14px 40px rgba(0,0,0,.18)}
+.evidence-label:after{background:var(--accent)}
+.evidence-visual{background:#08101a}
+.evidence-panel h4{color:#eaf4fb}
+.evidence-panel>p:last-child,.detail-grid p{color:var(--ink-soft)}
+.project-detail{border-top-color:#29455f}
+.project-detail summary{color:#9ab0c2;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.58rem}
+.project-detail[open] summary{color:var(--accent-strong)}
+.detail-grid h4{color:var(--accent);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.detail-limit{border-left-color:var(--accent);background:rgba(39,211,238,.06)}
+.methodology-section{position:relative;background:#05080e;border-top:1px solid #1c3349}
+.methodology-section:before{content:"IFEM / METHOD / RECORD";position:absolute;top:clamp(2rem,5vw,4rem);right:4vw;color:#36516a;font:500 .56rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em}
+.methodology-section h2{color:#f1f7fb}
+.methodology-section blockquote{border-left-color:var(--accent);color:#e6f8fc}
+.profiles-section{background:rgba(13,20,32,.72)}
+.profile-grid{border-color:#29455f;background:#29455f}
+.profile-card{background:#0d1420;border-color:#29455f;color:var(--ink);transition:background 180ms ease,transform 180ms ease}
+.profile-card:hover{background:#122235}
+.profile-symbol{border-color:#36536d;color:var(--accent)}
+.profile-card bdi{color:#839ab0}
+.site-footer{background:#05080e;border-top-color:#1c3349}
+.site-footer .brand-mark{border-color:var(--accent)}
+.site-footer .brand-mark span{background:var(--accent)}
+.site-footer .brand-mark span:nth-child(2){background:#a78bfa}
+.footer-contact{color:#cfeaf1}
+.footer-contact:hover{color:var(--accent)}
+.back-to-top{border-color:var(--accent);background:#0d1420;color:var(--accent);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.back-to-top:hover{background:var(--accent);color:#031018}
+.onyx-media-gallery,.rezvan-context-flow{border-top-color:#29455f}
+.onyx-media-grid figure,.rezvan-context-visual{border-color:#29455f;background:#0d1420}
+.onyx-media-grid figcaption{color:#8da3b7}
+.rezvan-context-visual__screens{background:#05080e}
+
+@media(max-width:600px){
+  .site-header{top:2.4rem}
+  .hero{padding-top:3.8rem;background:radial-gradient(circle at 75% 18%,rgba(39,211,238,.08),transparent 18rem)}
+  .hero:before{display:none}
+  .hero-art{box-shadow:8px 8px 0 rgba(39,211,238,.09),0 18px 46px rgba(0,0,0,.25)}
+  .methodology-section:before{display:none}
+}
