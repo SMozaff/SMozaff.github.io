@@ -1,5 +1,7 @@
 (() => {
   'use strict';
+  const BOUND_EN = 'https://bound-method.github.io/';
+  const BOUND_DOI = 'https://doi.org/10.5281/zenodo.22257583';
   const IFEM_EN = 'https://ifem-doctrine.github.io/';
   const IFEM_FA = 'https://ifem-doctrine.github.io/fa/';
   const DOI = 'https://doi.org/10.5281/zenodo.20621561';
@@ -25,21 +27,26 @@
     }
 
     const heroButtons = page.querySelectorAll('.hero-actions .button');
+    if (heroButtons[0]) {
+      heroButtons[0].href = BOUND_EN;
+      heroButtons[0].target = '_blank'; heroButtons[0].rel = 'noreferrer';
+      heroButtons[0].textContent = isFa ? 'آشنایی با روش BOUND ↗' : 'Explore BOUND Method ↗';
+    }
     if (heroButtons[1]) {
-      heroButtons[1].href = isFa ? IFEM_FA : IFEM_EN;
+      heroButtons[1].href = BOUND_DOI;
       heroButtons[1].target = '_blank'; heroButtons[1].rel = 'noreferrer';
-      heroButtons[1].textContent = isFa ? 'ورود به IFEM ↗' : 'Explore IFEM Doctrine ↗';
+      heroButtons[1].textContent = isFa ? 'مطالعهٔ انتشار BOUND ↗' : 'Read the Publication ↗';
     }
 
     const methodology = page.querySelector('#methodology .section-content');
     if (methodology) {
       const existing = methodology.querySelector('.strong-link');
       if (existing && existing.href.includes('zenodo')) {
-        existing.href = isFa ? IFEM_FA : IFEM_EN;
-        existing.textContent = isFa ? 'ورود به وب‌سایت IFEM ↗' : 'Explore IFEM Doctrine ↗';
+        existing.href = BOUND_EN;
+        existing.textContent = isFa ? 'ورود به روش BOUND ↗' : 'Explore BOUND Method ↗';
         const doi = document.createElement('a');
-        doi.className = 'text-link strong-link'; doi.href = DOI; doi.target = '_blank'; doi.rel = 'noreferrer';
-        doi.textContent = isFa ? 'مطالعهٔ سند اصلی ↗' : 'Read the primary document ↗';
+        doi.className = 'text-link strong-link'; doi.href = BOUND_DOI; doi.target = '_blank'; doi.rel = 'noreferrer';
+        doi.textContent = isFa ? 'مطالعهٔ انتشار BOUND ↗' : 'Read BOUND publication ↗';
         existing.insertAdjacentElement('afterend', doi);
       }
     }

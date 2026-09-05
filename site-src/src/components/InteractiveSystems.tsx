@@ -7,10 +7,11 @@ type InteractiveSystemsProps = { locale: Locale };
 type TerminalLine = { tone: "prompt" | "output" | "accent" | "error"; text: string };
 
 const bootLines = [
-  "initialising visual shell",
+  "initialising bound_core",
+  "loading boundary_registry",
+  "starting continuous_verification",
   "loading accessible interaction layer",
-  "registering content-safe commands",
-  "ready: continue to portfolio",
+  "ready: BOUND Method v3.0 / IFEM lineage available",
 ];
 
 function useReducedMotion() {
@@ -43,7 +44,7 @@ function BootSequence({ isFa, reduced }: { isFa: boolean; reduced: boolean }) {
   return (
     <div className="interactive-boot" role="status" aria-live="polite">
       <div className="interactive-boot__panel">
-        <div className="interactive-kicker">/ visual shell / safe startup</div>
+      <div className="interactive-kicker">/ bound_core / safe startup</div>
         <div className="interactive-boot__log">
           {bootLines.slice(0, index).map((line) => <div key={line}><span>[ok]</span> {line}</div>)}
         </div>
@@ -64,7 +65,7 @@ function StatusBar({ isFa, onPalette }: { isFa: boolean; onPalette: () => void }
   }, []);
   return (
     <div className="interactive-status" aria-label={isFa ? "نوار وضعیت نمایشی" : "Decorative visual status bar"}>
-      <span className="interactive-status__brand">SM<span>::</span>VISUAL SHELL</span>
+      <span className="interactive-status__brand">BOUND<span>::</span>METHOD v3.0</span>
       <span className="interactive-status__time">{time}</span>
       <span className="interactive-status__note">{isFa ? "دادهٔ واقعی سامانه نیست" : "fictional visual telemetry"}</span>
       <button type="button" className="interactive-status__command" onClick={onPalette}><Command size={12} /> <kbd>⌘</kbd><kbd>K</kbd></button>
@@ -78,7 +79,7 @@ function useTerminal(isFa: boolean) {
   ]);
   const commands: Record<string, TerminalLine[]> = {
     help: [
-      { tone: "accent", text: "available: help, about, projects, skills, contact, neofetch, clear" },
+      { tone: "accent", text: "available: help, about, projects, skills, contact, bound, ifem, lineage, neofetch, clear" },
       { tone: "output", text: "commands expose verified portfolio facts only" },
     ],
     about: [
@@ -109,11 +110,30 @@ function useTerminal(isFa: boolean) {
       { tone: "output", text: "Email: Soheil.Mozaffari@gmail.com" },
     ],
     neofetch: [
-      { tone: "accent", text: "SOHEIL MOZAFARI / SYSTEMS LEDGER" },
+      { tone: "accent", text: "SOHEIL MOZAFARI / BOUND METHOD v3.0" },
       { tone: "output", text: "Role: Software engineer and systems architect" },
-      { tone: "output", text: "Records: 6 (five engineering records plus IFEM methodology/publication)" },
+      { tone: "output", text: "Primary: BOUND Method v3.0 — Boundary-Oriented Unified Development" },
+      { tone: "output", text: "Lineage: IFEM — earlier interface-first execution material" },
+      { tone: "output", text: "Records: 6 production records" },
       { tone: "output", text: "Route set: English and Persian" },
       { tone: "output", text: "Host: smozaff.github.io" },
+    ],
+    bound: [
+      { tone: "accent", text: "BOUND Method v3.0 — Boundary-Oriented Unified Development" },
+      { tone: "output", text: "Boundary → Contract → Independent Execution → Continuous Verification" },
+      { tone: "output", text: "Define the boundaries. Freeze the contracts. Execute independently. Verify continuously." },
+      { tone: "output", text: "Freedom within boundaries. Discipline across them." },
+    ],
+    ifem: [
+      { tone: "accent", text: "IFEM — earlier lineage" },
+      { tone: "output", text: "Interface → Contract → Execution → Verification" },
+      { tone: "output", text: "BOUND Method v3.0 is the renamed continuation and conceptual refinement of IFEM." },
+    ],
+    lineage: [
+      { tone: "accent", text: "IFEM → BOUND lineage" },
+      { tone: "output", text: "IFEM: Interface → Contract → Execution → Verification" },
+      { tone: "output", text: "BOUND: Domain → Boundary → Contract → Execution → Verification" },
+      { tone: "output", text: "Interfaces emerge from boundaries; boundaries should not be inferred from interfaces." },
     ],
   };
   const execute = (raw: string) => {

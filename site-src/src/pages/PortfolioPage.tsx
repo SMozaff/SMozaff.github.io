@@ -26,7 +26,7 @@ function Ltr({ children, className = "" }: { children: ReactNode; className?: st
   return <bdi className={className} lang="en" dir="ltr">{children}</bdi>;
 }
 
-const technicalTokens = /(Soheil Mozaffari|Raven Metadata Extractor|Rezvan Mesh|Watermelon MediaPlayer|ONYX Framework|Interface-First Execution Methodology \(IFEM\)|IFEM|CLI|CI|FFI|CRDT|DOI|RTL|BLE|JNI|C2PA|EXIF|XMP|GPS|Rust|Kotlin|Python|Android|Bluetooth LE|Wi‑Fi Direct|Media3|ExoPlayer|Cloud Relay|Docker|Helm|Terraform|GitHub|ORCID|Systems Ledger)/;
+const technicalTokens = /(Soheil Mozaffari|BOUND Method v3\.0|BOUND|Raven Metadata Extractor|Rezvan Mesh|Watermelon MediaPlayer|ONYX Framework|Interface-First Execution Methodology \(IFEM\)|IFEM|CLI|CI|FFI|CRDT|DOI|RTL|BLE|JNI|C2PA|EXIF|XMP|GPS|Rust|Kotlin|Python|Android|Bluetooth LE|Wi‑Fi Direct|Media3|ExoPlayer|Cloud Relay|Docker|Helm|Terraform|GitHub|ORCID|Systems Ledger)/;
 
 function BidiText({ text, isFa }: { text: string; isFa: boolean }) {
   if (!isFa) return <>{text}</>;
@@ -192,9 +192,9 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
     <div className={`portfolio-page ${isFa ? "fa-page" : "en-page"}`} dir={htmlDir} lang={locale}>
       <a className="language-bar" href={copy.languageHref}>{copy.languageLabel}<ArrowDownRight size={16} /></a>
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="Soheil Mozaffari home"><BrandMark /><span><Ltr>Soheil Mozaffari</Ltr><small>{isFa ? "سامانه و نرم‌افزار" : "Systems & software"}</small></span></a>
+          <a className="brand" href="#top" aria-label="Soheil Mozaffari home"><BrandMark /><span><Ltr>Soheil Mozaffari</Ltr><small>{isFa ? "سامانه و نرم‌افزار" : "Systems & software"}</small></span></a>
         <nav aria-label={isFa ? "پیمایش اصلی" : "Main navigation"}>
-          <a href="#top">{isFa ? "خانه" : "Home"}</a><a href="#about">{copy.nav.about}</a><a href="#work">{copy.nav.work}</a><a href="#methodology">{copy.nav.methodology}</a><a className="nav-ifem" href={links.ifem} target="_blank" rel="noreferrer">{isFa ? "IFEM ↗" : "IFEM Doctrine ↗"}</a><a href="#profiles">{copy.nav.profiles}</a><a href="#contact">{copy.nav.contact}</a>
+          <a href="#top">{isFa ? "خانه" : "Home"}</a><a href="#about">{copy.nav.about}</a><a href="#work">{copy.nav.work}</a><a href="#methodology">{copy.nav.methodology}</a><a className="nav-ifem" href={links.ifem} target="_blank" rel="noreferrer">{isFa ? "تبار IFEM ↗" : "IFEM lineage ↗"}</a><a href="#profiles">{copy.nav.profiles}</a><a href="#contact">{copy.nav.contact}</a>
         </nav>
       </header>
       <main id="top">
@@ -204,8 +204,9 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
             <h1><Ltr>Soheil Mozaffari</Ltr></h1>
             {isFa && <p className="localized-name">{copy.localizedName}</p>}
             <p className="role"><BidiText text={copy.role} isFa={isFa} /></p>
+            <p className="authority-line"><BidiText text={copy.authority} isFa={isFa} /></p>
             <p className="hero-statement"><BidiText text={copy.hero} isFa={isFa} /></p>
-            <div className="hero-actions"><a className="button button-dark" href="#work">{copy.heroPrimary}<ArrowDownRight size={17} /></a><a className="button button-light" href={links.ifem} target="_blank" rel="noreferrer">{copy.heroSecondary}<ArrowUpRight size={17} /></a></div>
+            <div className="hero-actions"><a className="button button-dark" href={links.bound} target="_blank" rel="noreferrer">{copy.heroPrimary}<ArrowUpRight size={17} /></a><a className="button button-light" href={links.boundDoi} target="_blank" rel="noreferrer">{copy.heroSecondary}<FileText size={17} /></a></div>
           </div>
           <div className="hero-art" data-reveal aria-label={isFa ? "نشانهٔ تصویری مرزهای سامانه" : "System-boundary visual"}>
             <img src={`${storage}/soheil-hero-systems-ledger_7e8329be.jpg`} alt="" />
@@ -227,7 +228,7 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
 
         <section id="methodology" className="methodology-section section-shell editorial-section" data-reveal>
           <p className="section-rail">{copy.methodologyRail}</p>
-          <div className="section-content"><p className="kicker"><Ltr>IFEM</Ltr></p><h2>{copy.methodologyHeading}</h2><p><BidiText text={copy.methodologyBody} isFa={isFa} /></p><div className="methodology-actions"><a className="text-link strong-link" href={isFa ? "https://ifem-doctrine.github.io/fa/" : links.ifem} target="_blank" rel="noreferrer">{isFa ? "ورود به وب‌سایت IFEM" : "Explore IFEM Doctrine"}<ArrowUpRight size={16} /></a><a className="text-link strong-link" href={links.primaryDoi} target="_blank" rel="noreferrer">{copy.methodologyCta}<FileText size={16} /></a></div><blockquote data-reveal><BidiText text={copy.methodologyQuote} isFa={isFa} /></blockquote></div>
+          <div className="section-content"><p className="kicker"><Ltr>BOUND v3.0</Ltr></p><h2>{copy.methodologyHeading}</h2><p><BidiText text={copy.methodologyBody} isFa={isFa} /></p><div className="methodology-actions"><a className="text-link strong-link" href={links.bound} target="_blank" rel="noreferrer">{isFa ? "ورود به روش BOUND" : "Explore BOUND Method"}<ArrowUpRight size={16} /></a><a className="text-link strong-link" href={links.boundDoi} target="_blank" rel="noreferrer">{isFa ? "مطالعهٔ انتشار BOUND" : "Read BOUND publication"}<FileText size={16} /></a><a className="text-link" href={isFa ? "https://ifem-doctrine.github.io/fa/" : links.ifem} target="_blank" rel="noreferrer">{isFa ? "مطالعهٔ تبار IFEM" : "Read earlier IFEM material"}<ArrowUpRight size={16} /></a></div><blockquote data-reveal><BidiText text={copy.methodologyQuote} isFa={isFa} /></blockquote></div>
         </section>
 
         <section id="profiles" className="profiles-section section-shell editorial-section" data-reveal>
