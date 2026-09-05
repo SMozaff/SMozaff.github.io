@@ -20,7 +20,7 @@ import type { ReactNode } from "react";
 import { enCopy, faCopy, links, type Locale, type Project } from "@/lib/portfolio";
 import InteractiveSystems from "@/components/InteractiveSystems";
 
-const storage = "https://smozaff.github.io/manus-storage";
+const storage = "/manus-storage";
 
 const writingTitles = [
   "Why Parallel Software Engineering Fails at Boundaries",
@@ -225,7 +225,7 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
             <div className="hero-actions"><a className="button button-dark" href={links.bound} target="_blank" rel="noreferrer">{copy.heroPrimary}<ArrowUpRight size={17} /></a><a className="button button-light" href={links.boundDoi} target="_blank" rel="noreferrer">{copy.heroSecondary}<FileText size={17} /></a></div>
           </div>
           <div className="hero-art" data-reveal aria-label={isFa ? "نشانهٔ تصویری مرزهای سامانه" : "System-boundary visual"}>
-            <img src={`${storage}/soheil-hero-systems-ledger_7e8329be.jpg`} alt="" />
+            <img src={`${storage}/soheil-hero-systems-ledger_7e8329be.jpg`} alt={isFa ? "تصویر انتزاعی از مرزهای سامانه و نرم‌افزار" : "Abstract systems-boundary visualization for software and systems architecture"} />
             <p><BidiText text={copy.heroCaption} isFa={isFa} /></p>
           </div>
         </section>

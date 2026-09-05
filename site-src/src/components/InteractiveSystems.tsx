@@ -195,7 +195,7 @@ function CommandPalette({ isFa, open, close }: { isFa: boolean; open: boolean; c
       <button type="button" className="interactive-palette__scrim" aria-label={isFa ? "بستن" : "Close command palette"} onClick={close} />
       <div className="interactive-palette__panel">
         <div className="interactive-palette__heading"><span id="interactive-palette-title"><Command size={14} /> {isFa ? "پیمایش" : "Navigate"}</span><button type="button" onClick={close} aria-label={isFa ? "بستن" : "Close"}><X size={16} /></button></div>
-        <input autoFocus value={value} onChange={(event) => setValue(event.target.value)} placeholder={isFa ? "جست‌وجوی بخش..." : "Search a section..."} />
+        <input autoFocus aria-label={isFa ? "جست‌وجوی بخش" : "Search a section"} value={value} onChange={(event) => setValue(event.target.value)} placeholder={isFa ? "جست‌وجوی بخش..." : "Search a section..."} />
         <div className="interactive-palette__options">{filtered.map(([id, label]) => <button type="button" key={id} onClick={() => goto(id)}>{label}<ArrowRight size={14} /></button>)}{filtered.length === 0 && <p>{isFa ? "نتیجه‌ای نیست" : "No matching section"}</p>}</div>
         <small>Esc {isFa ? "برای بستن" : "to close"}</small>
       </div>
