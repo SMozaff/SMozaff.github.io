@@ -78,7 +78,7 @@ function useTerminal(isFa: boolean) {
   ]);
   const commands: Record<string, TerminalLine[]> = {
     help: [
-      { tone: "accent", text: "available: help, about, projects, contact, clear" },
+      { tone: "accent", text: "available: help, about, projects, skills, contact, neofetch, clear" },
       { tone: "output", text: "commands expose verified portfolio facts only" },
     ],
     about: [
@@ -87,13 +87,33 @@ function useTerminal(isFa: boolean) {
       { tone: "output", text: "Boundaries, responsibilities, and verification paths made explicit." },
     ],
     projects: [
-      { tone: "accent", text: "current records: Raven Metadata Extractor · Rezvan Mesh · Watermelon Vector Graphics Converter" },
-      { tone: "output", text: "Watermelon MediaPlayer · ONYX Framework · IFEM" },
+      { tone: "accent", text: "01 Raven Metadata Extractor — Active project" },
+      { tone: "output", text: "02 Rezvan Mesh — Beta / validation in progress" },
+      { tone: "output", text: "03 Watermelon Vector Graphics Converter — Active project" },
+      { tone: "output", text: "04 Watermelon MediaPlayer — Active development" },
+      { tone: "output", text: "05 ONYX Framework — Architecture case study / in progress" },
+      { tone: "output", text: "06 Interface-First Execution Methodology (IFEM) — Methodology / publication" },
+    ],
+    skills: [
+      { tone: "accent", text: "verified focus areas" },
+      { tone: "output", text: "Software architecture · Complex systems" },
+      { tone: "output", text: "AI-assisted engineering · Technical-method design" },
+      { tone: "output", text: "Boundaries · Contracts · Independent verification" },
     ],
     contact: [
       { tone: "output", text: `GitHub: ${links.github}` },
       { tone: "output", text: `ORCID: ${links.orcid}` },
+      { tone: "output", text: `LinkedIn: ${links.linkedin}` },
+      { tone: "output", text: `IFEM Doctrine: ${links.ifem}` },
+      { tone: "output", text: `Zenodo: ${links.primaryDoi}` },
       { tone: "output", text: "Email: Soheil.Mozaffari@gmail.com" },
+    ],
+    neofetch: [
+      { tone: "accent", text: "SOHEIL MOZAFARI / SYSTEMS LEDGER" },
+      { tone: "output", text: "Role: Software engineer and systems architect" },
+      { tone: "output", text: "Records: 6 (five engineering records plus IFEM methodology/publication)" },
+      { tone: "output", text: "Route set: English and Persian" },
+      { tone: "output", text: "Host: smozaff.github.io" },
     ],
   };
   const execute = (raw: string) => {
