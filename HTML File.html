@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soheil Mozaffari — Innovation · Math · Electronics · Cybersecurity · Programming</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/space-grotesk@5.0.16/index.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.0.18/index.min.css">
+<script>
+tailwind.config = {
+  theme: { extend: {
+    colors: {
+      ink: '#05080f', panel: '#0a111e', line: '#1c2740',
+      neon: { cyan: '#22d3ee', green: '#34d399', amber: '#fbbf24', violet: '#a78bfa', rose: '#fb7185' }
+    },
+    fontFamily: {
+      disp: ['"Space Grotesk"', 'sans-serif'],
+      mono: ['"JetBrains Mono"', 'monospace']
+    }
+  }}
+};
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { background: #05080f; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #05080f; }
+  ::-webkit-scrollbar-thumb { background: #1c2740; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #22d3ee; }
+
+  .tech-grid {
+    background-image:
+      linear-gradient(to right, rgba(34,211,238,0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(34,211,238,0.04) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse at 50% 40%, black 30%, transparent 75%);
+  }
+
+  .reveal { opacity: 0; transform: translateY(26px); transition: all .8s cubic-bezier(.16,1,.3,1); }
+  .reveal.on { opacity: 1; transform: none; }
+
+  @keyframes marqueeMove { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .marquee-track { animation: marqueeMove 36s linear infinite; }
+
+  @keyframes ringPulse {
+    0% { transform: scale(.4); opacity: .9; }
+    100% { transform: scale(1.6); opacity: 0; }
+  }
+  .pulse-ring { animation: ringPulse 2.4s ease-out infinite; }
+  .pulse-ring.d2 { animation-delay: .8s; }
+  .pulse-ring.d3 { animation-delay: 1.6s; }
+
+  @keyframes traceFlow { to { stroke-dashoffset: -240; } }
+  .trace-anim { stroke-dasharray: 12 108; animation: traceFlow 3.2s linear infinite; }
+  .trace-anim.t2 { animation-delay: 1.1s; }
+  .trace-anim.t3 { animation-delay: 2.2s; }
+
+  @keyframes caretBlink { 0%,49% {opacity:1;} 50%,100% {opacity:0;} }
+  .caret { animation: caretBlink 1s steps(1) infinite; }
+
+  .case-card { transition: all .45s cubic-bezier(.16,1,.3,1); }
+  .case-card:hover { transform: translateY(-4px); border-color: #22d3ee55; box-shadow: 0 20px 60px -20px rgba(34,211,238,.15); }
+
+  .tab-btn.active { color: #22d3ee; border-color: #22d3ee; background: rgba(34,211,238,.08); }
+
+  .gate-in { transition: all .2s; }
+  .gate-in.hi { background: #22d3ee; color: #05080f; border-color: #22d3ee; box-shadow: 0 0 14px rgba(34,211,238,.5); }
+  .gate-out.hi { background: #34d399; border-color: #34d399; box-shadow: 0 0 16px rgba(52,211,153,.6); }
+
+  input[type="range"] { accent-color: #22d3ee; }
+
+  .vec-path { stroke-dasharray: 6 8; animation: traceFlow 2.6s linear infinite; }
+</style>
+</head>
+<body class="antialiased text-slate-300 font-disp selection:bg-cyan-900 selection:text-cyan-100">
+
+<!-- scroll progress -->
+<div id="progressBar" class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-cyan-500 via-emerald-400 to-violet-500 z-[60] w-0"></div>
+
+<!-- NAV -->
+<nav class="fixed top-0 w-full z-50 border-b border-line/60 bg-ink/85 backdrop-blur-md">
+  <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-3 font-mono text-sm text-slate-400">
+      <span class="relative flex w-2.5 h-2.5">
+        <span class="absolute inset-0 rounded-full bg-cyan-400 pulse-ring"></span>
+        <span class="relative w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+      </span>
+      SM<span class="text-cyan-400">::</span>SYSTEMS
+    </a>
+    <div class="hidden md:flex items-center gap-7 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-500">
+      <a href="#domains" class="hover:text-cyan-300 transition-colors">Domains</a>
+      <a href="#lab" class="hover:text-cyan-300 transition-colors">Lab</a>
+      <a href="#work" class="hover:text-cyan-300 transition-colors">Case Studies</a>
+      <a href="#ifem" class="hover:text-cyan-300 transition-colors">IFEM</a>
+      <a href="#records" class="hover:text-cyan-300 transition-colors">Records</a>
+    </div>
+    <button id="mobileBtn" class="md:hidden text-slate-400 hover:text-white">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div id="mobileMenu" class="hidden md:hidden border-t border-line/60 bg-ink px-5 py-4 space-y-3 font-mono text-xs uppercase tracking-widest text-slate-400">
+    <a href="#domains" class="block hover:text-cyan-300">Domains</a>
+    <a href="#lab" class="block hover:text-cyan-300">Lab</a>
+    <a href="#work" class="block hover:text-cyan-300">Case Studies</a>
+    <a href="#ifem" class="block hover:text-cyan-300">IFEM</a>
+    <a href="#records" class="block hover:text-cyan-300">Records</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header id="top" class="relative min-h-screen flex items-center pt-16 overflow-hidden">
+  <canvas id="heroCanvas" class="absolute inset-0 w-full h-full"></canvas>
+  <div class="absolute inset-0 tech-grid pointer-events-none"></div>
+  <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-5 w-full grid lg:grid-cols-12 gap-12 items-center py-20">
+    <div class="lg:col-span-7">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-line bg-panel/60 mb-8 font-mono text-[11px] text-slate-400">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        INDEPENDENT PRACTICE / SYSTEMS &amp; SOFTWARE
+      </div>
+      <h1 id="heroTitle" data-decode class="text-5xl md:text-7xl font-semibold tracking-tight text-white leading-[1.05] mb-6">SOHEIL MOZAFFARI</h1>
+      <p class="text-lg md:text-xl text-slate-400 max-w-2xl mb-4 leading-relaxed">
+        Software engineer • systems architect • creator of <span class="text-white font-medium">IFEM</span>.
+      </p>
+      <p class="font-mono text-sm text-slate-500 max-w-2xl mb-10 leading-relaxed">
+        Working across <span class="text-neon-amber">innovation</span>, <span class="text-neon-violet">mathematics</span>,
+        <span class="text-neon-green">electronics</span>, <span class="text-neon-cyan">cybersecurity</span> and
+        <span class="text-neon-rose">programming</span> — keeping boundaries, responsibilities and verification paths explicit and traceable.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#work" class="px-7 py-3 bg-cyan-400 text-ink font-semibold text-sm hover:bg-cyan-300 transition-colors rounded-sm shadow-[0_0_30px_rgba(34,211,238,.35)]">Review Case Studies</a>
+        <a href="https://ifem-doctrine.github.io/" target="_blank" rel="noopener" class="px-7 py-3 border border-line text-slate-300 font-medium text-sm hover:border-cyan-400/60 hover:text-white transition-all rounded-sm flex items-center gap-2">
+          Explore IFEM Doctrine
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="lg:col-span-5">
+      <div class="border border-line rounded-md bg-panel/80 backdrop-blur shadow-2xl overflow-hidden">
+        <div class="flex items-center gap-2 px-4 py-3 border-b border-line bg-ink/60">
+          <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
+          <span class="ml-3 font-mono text-[11px] text-slate-500">~/soheil — zsh</span>
+        </div>
+        <div id="termBody" class="p-5 font-mono text-[12px] md:text-[13px] leading-relaxed min-h-[240px]"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MARQUEE -->
+<div class="border-y border-line/70 bg-panel/40 overflow-hidden py-3">
+  <div class="marquee-track flex whitespace-nowrap font-mono text-[11px] tracking-[0.25em] text-slate-500 uppercase">
+    <span class="px-4">λ-CALCULUS</span><span class="text-cyan-500">◆</span><span class="px-4">AES-256</span><span class="text-emerald-500">◆</span><span class="px-4">RUST FFI</span><span class="text-violet-500">◆</span><span class="px-4">CRDT SYNC</span><span class="text-amber-500">◆</span><span class="px-4">BLUETOOTH LE</span><span class="text-rose-500">◆</span><span class="px-4">C2PA PROVENANCE</span><span class="text-cyan-500">◆</span><span class="px-4">SIGNAL MATH</span><span class="text-emerald-500">◆</span><span class="px-4">KOTLIN / JNI</span><span class="text-violet-500">◆</span><span class="px-4">WI-FI DIRECT</span><span class="text-amber-500">◆</span><span class="px-4">EXIF / XMP FORENSICS</span><span class="text-rose-500">◆</span><span class="px-4">BOOLEAN ALGEBRA</span><span class="text-cyan-500">◆</span>
+    <span class="px-4">λ-CALCULUS</span><span class="text-cyan-500">◆</span><span class="px-4">AES-256</span><span class="text-emerald-500">◆</span><span class="px-4">RUST FFI</span><span class="text-violet-500">◆</span><span class="px-4">CRDT SYNC</span><span class="text-amber-500">◆</span><span class="px-4">BLUETOOTH LE</span><span class="text-rose-500">◆</span><span class="px-4">C2PA PROVENANCE</span><span class="text-cyan-500">◆</span><span class="px-4">SIGNAL MATH</span><span class="text-emerald-500">◆</span><span class="px-4">KOTLIN / JNI</span><span class="text-violet-500">◆</span><span class="px-4">WI-FI DIRECT</span><span class="text-amber-500">◆</span><span class="px-4">EXIF / XMP FORENSICS</span><span class="text-rose-500">◆</span><span class="px-4">BOOLEAN ALGEBRA</span><span class="text-cyan-500">◆</span>
+  </div>
+</div>
+
+<!-- DOMAINS -->
+<section id="domains" class="py-24 scroll-mt-20">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="flex items-end justify-between mb-4 reveal">
+      <div>
+        <p class="font-mono text-xs text-cyan-400 mb-3 tracking-[0.3em]">// 01 — FIELDS OF PRACTICE</p>
+        <h2 data-decode class="text-3xl md:text-5xl font-semibold text-white">Five Interlocking Domains</h2>
+      </div>
+      <span class="hidden md:block font-mono text-xs text-slate-600">[ INNOVATION ⊕ MATH ⊕ ELECTRONICS ⊕ SECURITY ⊕ CODE ]</span>
+    </div>
+    <p class="text-slate-500 max-w-2xl mb-14 reveal">Each discipline feeds the others: mathematics defines the models, electronics grounds them in physics, cybersecurity protects them, programming realizes them, and innovation chooses which problems deserve the effort.</p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
+      <!-- Innovation -->
+      <div class="reveal border border-line bg-panel/60 rounded-md p-6 hover:border-neon-amber/50 transition-colors group">
+        <div class="relative w-14 h-14 mb-6 flex items-center justify-center">
+          <span class="absolute inset-0 rounded-full border border-neon-amber/40 pulse-ring"></span>
+          <span class="absolute inset-0 rounded-full border border-neon-amber/40 pulse-ring d2"></span>
+          <span class="absolute inset-0 rounded-full border border-neon-amber/40 pulse-ring d3"></span>
+          <svg class="w-7 h-7 text-neon-amber" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+        </div>
+        <h3 class="text-white font-semibold mb-2 group-hover:text-neon-amber transition-colors">Innovation</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Products and methods designed around explicit boundaries — from IFEM to off-grid communication.</p>
+        <p class="mt-5 font-mono text-[10px] text-slate-600">IFEM · PRODUCT DESIGN · METHOD</p>
+      </div>
+
+      <!-- Mathematics -->
+      <div class="reveal border border-line bg-panel/60 rounded-md p-6 hover:border-neon-violet/50 transition-colors group">
+        <canvas id="mathWaveCanvas" class="w-full h-14 mb-6"></canvas>
+        <h3 class="text-white font-semibold mb-2 group-hover:text-neon-violet transition-colors">Mathematics</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Formal models, CRDT synchronization, evidence tiers, signal analysis and boolean algebra in practice.</p>
+        <p class="mt-5 font-mono text-[10px] text-slate-600">CRDT · LISSAJOUS · PROOF TIERS</p>
+      </div>
+
+      <!-- Electronics -->
+      <div class="reveal border border-line bg-panel/60 rounded-md p-6 hover:border-neon-green/50 transition-colors group relative overflow-hidden">
+        <div class="relative w-full h-14 mb-6 overflow-hidden rounded-sm">
+          <img src="https://image.qwenlm.ai/public_source/f31044d9-49fa-4ad7-b6e2-79380ecccb4f/150305972-637c-47dc-9f09-c85c7579aad6.png" alt="Circuit board with glowing traces" class="absolute inset-0 w-full h-full object-cover opacity-70">
+          <svg class="absolute inset-0 w-full h-full" viewBox="0 0 200 56" fill="none">
+            <path class="trace-anim" d="M0 14 H60 L74 28 H130 L144 14 H200" stroke="#34d399" stroke-width="1.4"/>
+            <path class="trace-anim t2" d="M0 42 H50 L64 28 H120 L134 42 H200" stroke="#22d3ee" stroke-width="1.4"/>
+            <path class="trace-anim t3" d="M0 28 H200" stroke="#fbbf24" stroke-width="1"/>
+          </svg>
+        </div>
+        <h3 class="text-white font-semibold mb-2 group-hover:text-neon-green transition-colors">Electronics</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Hardware-adjacent engineering: BLE &amp; Wi-Fi Direct transports, radio paths, JNI boundaries to Rust cores.</p>
+        <p class="mt-5 font-mono text-[10px] text-slate-600">BLE · WI-FI DIRECT · RF PATHS</p>
+      </div>
+
+      <!-- Cybersecurity -->
+      <div class="reveal border border-line bg-panel/60 rounded-md p-6 hover:border-neon-cyan/50 transition-colors group">
+        <canvas id="cyberRainCanvas" class="w-full h-14 mb-6 rounded-sm bg-ink/70"></canvas>
+        <h3 class="text-white font-semibold mb-2 group-hover:text-neon-cyan transition-colors">Cybersecurity</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Encrypted local persistence, C2PA provenance, and carefully bounded AI-origin indicators — never sold as proof.</p>
+        <p class="mt-5 font-mono text-[10px] text-slate-600">XOR · AES · C2PA · EVIDENCE TIERS</p>
+      </div>
+
+      <!-- Programming -->
+      <div class="reveal border border-line bg-panel/60 rounded-md p-6 hover:border-neon-rose/50 transition-colors group">
+        <pre class="w-full h-14 mb-6 rounded-sm bg-ink/70 p-2 font-mono text-[10px] text-neon-rose overflow-hidden leading-snug"><span id="codeTypeEl"></span><span class="caret text-white">▊</span></pre>
+        <h3 class="text-white font-semibold mb-2 group-hover:text-neon-rose transition-colors">Programming</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Rust, Kotlin, Python — explicit interfaces, modular boundaries, tests and CI as first-class artifacts.</p>
+        <p class="mt-5 font-mono text-[10px] text-slate-600">RUST · KOTLIN · PYTHON · CI</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LAB -->
+<section id="lab" class="py-24 border-y border-line/60 bg-panel/30 scroll-mt-20">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="mb-12 reveal">
+      <p class="font-mono text-xs text-cyan-400 mb-3 tracking-[0.3em]">// 02 — INTERACTIVE LAB</p>
+      <h2 data-decode class="text-3xl md:text-5xl font-semibold text-white">Touch the Concepts</h2>
+      <p class="text-slate-500 max-w-2xl mt-4">Small live instruments: signal synthesis, boolean logic, symmetric ciphers and fractal geometry. Verification by interaction.</p>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-8 reveal">
+      <button data-tab="signal" class="tab-btn active px-5 py-2 border border-line rounded-sm font-mono text-xs uppercase tracking-widest text-slate-400 transition-all">Signal</button>
+      <button data-tab="gates" class="tab-btn px-5 py-2 border border-line rounded-sm font-mono text-xs uppercase tracking-widest text-slate-400 transition-all">Logic Gates</button>
+      <button data-tab="cipher" class="tab-btn px-5 py-2 border border-line rounded-sm font-mono text-xs uppercase tracking-widest text-slate-400 transition-all">XOR Cipher</button>
+      <button data-tab="fractal" class="tab-btn px-5 py-2 border border-line rounded-sm font-mono text-xs uppercase tracking-widest text-slate-400 transition-all">Fractal</button>
+    </div>
+
+    <div class="border border-line rounded-md bg-ink/70 p-6 md:p-10 reveal">
+      <!-- SIGNAL -->
+      <div data-panel="signal">
+        <div class="grid lg:grid-cols-3 gap-8 items-center">
+          <div class="lg:col-span-2">
+            <canvas id="signalCanvas" class="w-full h-56 md:h-72 rounded-sm bg-panel/60 border border-line/60"></canvas>
+          </div>
+          <div class="space-y-6 font-mono text-xs">
+            <div>
+              <div class="flex justify-between mb-2"><span class="text-cyan-400">WAVE A — f</span><span id="freqAVal" class="text-slate-400">2.0</span></div>
+              <input id="freqA" type="range" min="0.5" max="8" step="0.1" value="2" class="w-full">
+            </div>
+            <div>
+              <div class="flex justify-between mb-2"><span class="text-violet-400">WAVE B — f</span><span id="freqBVal" class="text-slate-400">5.0</span></div>
+              <input id="freqB" type="range" min="0.5" max="8" step="0.1" value="5" class="w-full">
+            </div>
+            <p class="text-slate-500 leading-relaxed">Superposition: y(t) = A·sin(2πf₁t) + B·sin(2πf₂t). The white trace is the composite signal — the same math behind audio codecs and radio DSP.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- GATES -->
+      <div data-panel="gates" class="hidden">
+        <p class="font-mono text-xs text-slate-500 mb-8">Click the inputs. The lamp shows the boolean output — the arithmetic underneath every CPU.</p>
+        <div id="gatesBox" class="grid sm:grid-cols-2 gap-6"></div>
+      </div>
+
+      <!-- CIPHER -->
+      <div data-panel="cipher" class="hidden">
+        <div class="grid lg:grid-cols-2 gap-8">
+          <div class="space-y-6">
+            <div>
+              <label class="block font-mono text-xs text-cyan-400 mb-2">PLAINTEXT</label>
+              <input id="cipherText" type="text" value="IFEM" maxlength="24" class="w-full bg-panel/70 border border-line rounded-sm px-4 py-3 font-mono text-sm text-white focus:outline-none focus:border-cyan-400">
+            </div>
+            <div>
+              <div class="flex justify-between font-mono text-xs mb-2"><span class="text-cyan-400">KEY (0–255)</span><span id="cipherKeyVal" class="text-slate-400">66</span></div>
+              <input id="cipherKey" type="range" min="0" max="255" value="66" class="w-full">
+            </div>
+            <p class="font-mono text-xs text-slate-500 leading-relaxed">C = P ⊕ K. The same key reverses it: P = C ⊕ K. XOR is the primitive inside every modern stream cipher — Rezvan Mesh's storage layer builds on constructions like this.</p>
+          </div>
+          <div class="bg-panel/70 border border-line rounded-sm p-5 font-mono text-[11px] leading-relaxed overflow-auto max-h-72">
+            <div class="text-slate-500 mb-3">CHAR → BINARY(C⊕K) → HEX</div>
+            <div id="cipherOut" class="text-emerald-300 space-y-1"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FRACTAL -->
+      <div data-panel="fractal" class="hidden">
+        <div class="flex flex-col md:flex-row gap-8 items-center">
+          <canvas id="fractalCanvas" width="560" height="360" class="w-full max-w-xl rounded-sm border border-line/60"></canvas>
+          <div class="font-mono text-xs text-slate-500 space-y-4 max-w-xs">
+            <p>The Mandelbrot set: z ← z² + c. Infinite complexity from a two-line recurrence — mathematics as generative engine.</p>
+            <p>Iterations: 80 · Plane: [-2.2, 0.8] × [-1.2, 1.2]</p>
+            <button id="fractalBtn" class="px-5 py-2 border border-line rounded-sm text-slate-300 hover:border-violet-400 hover:text-violet-300 transition-all uppercase tracking-widest">Cycle Palette</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section id="work" class="py-24 scroll-mt-20">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="flex items-end justify-between mb-14 reveal">
+      <div>
+        <p class="font-mono text-xs text-cyan-400 mb-3 tracking-[0.3em]">// 03 — ENGINEERING CASE STUDIES</p>
+        <h2 data-decode class="text-3xl md:text-5xl font-semibold text-white">Selected Work</h2>
+      </div>
+      <span class="hidden md:block font-mono text-xs text-slate-600">01 — 05</span>
+    </div>
+
+    <div class="space-y-8">
+      <!-- 01 RAVEN -->
+      <article class="case-card reveal border border-line bg-panel/50 rounded-md overflow-hidden grid lg:grid-cols-2">
+        <div class="relative h-64 lg:h-auto">
+          <img src="https://image.qwenlm.ai/public_source/f31044d9-49fa-4ad7-b6e2-79380ecccb4f/15cd1baee-f7cc-4f6f-a42a-c0f5411b2885.png" alt="Raven Metadata Extractor interface" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+          <div class="absolute inset-0 bg-gradient-to-r from-transparent to-panel/80 hidden lg:block"></div>
+        </div>
+        <div class="p-8">
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono text-xs text-cyan-400">01 / CYBERSECURITY · PROGRAMMING</span>
+            <span class="font-mono text-[10px] px-2 py-0.5 border border-line text-slate-500 rounded">ACTIVE</span>
+          </div>
+          <h3 class="text-2xl font-semibold text-white mb-3">Raven Metadata Extractor</h3>
+          <p class="text-sm text-slate-400 leading-relaxed mb-6">Cross-platform desktop + CLI tool turning image-folder scans into explainable metadata reports across EXIF, XMP, GPS, C2PA and bounded AI-origin indicators.</p>
+          <div class="grid sm:grid-cols-3 gap-4 font-mono text-[11px] text-slate-500 mb-6">
+            <div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">PROBLEM</span>Fragmented, uninterpretable metadata tooling.</div>
+            <div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">ARCHITECTURE</span>Source extractors → explainable evidence model.</div>
+            <div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">VERIFY</span>Repo structure, cross-platform builds, live UI.</div>
+          </div>
+          <div class="flex gap-6 font-mono text-xs">
+            <a href="https://github.com/SMozaff" target="_blank" rel="noopener" class="text-white hover:text-cyan-300 underline decoration-line underline-offset-4 transition-colors">View code ↗</a>
+            <a href="#ifem" class="text-slate-500 hover:text-white transition-colors">IFEM methodology</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 02 REZVAN -->
+      <article class="case-card reveal border border-line bg-panel/50 rounded-md overflow-hidden grid lg:grid-cols-2">
+        <div class="relative h-64 lg:h-auto lg:order-2">
+          <img src="https://image.qwenlm.ai/public_source/f31044d9-49fa-4ad7-b6e2-79380ecccb4f/1ab761402-b2e9-4bed-b7c9-392963c5d3d1.png" alt="Rezvan Mesh off-grid network visualization" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+          <div class="absolute inset-0 bg-gradient-to-l from-transparent to-panel/80 hidden lg:block"></div>
+        </div>
+        <div class="p-8 lg:order-1">
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono text-xs text-emerald-400">02 / ELECTRONICS · CYBERSECURITY</span>
+            <span class="font-mono text-[10px] px-2 py-0.5 border border-line text-slate-500 rounded">BETA VALIDATION</span>
+          </div>
+          <h3 class="text-2xl font-semibold text-white mb-3">Rezvan Mesh</h3>
+          <p class="text-sm text-slate-400 leading-relaxed mb-6">Offline Android P2P communication prototype: Kotlin ↔ Rust JNI boundary, BLE + Wi-Fi Direct transports, encrypted local storage for off-grid messaging.</p>
+          <div class="grid sm:grid-cols-3 gap-4 font-mono text-[11px] text-slate-500 mb-6">
+            <div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">PROBLEM</span>Communication when normal connectivity fails.</div>
+            <div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">ARCHITECTURE</span>Radio/UI in Kotlin; routing + crypto in Rust.</div>
+            <div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">VERIFY</span>Rust tests, build workflow, device procedure.</div>
+          </div>
+          <div class="flex gap-6 font-mono text-xs">
+            <a href="https://github.com/SMozaff" target="_blank" rel="noopener" class="text-white hover:text-emerald-300 underline decoration-line underline-offset-4 transition-colors">View code ↗</a>
+            <a href="#ifem" class="text-slate-500 hover:text-white transition-colors">IFEM methodology</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 03 WATERMELON VECTOR -->
+      <article class="case-card reveal border border-line bg-panel/50 rounded-md overflow-hidden grid lg:grid-cols-2">
+        <div class="relative h-64 lg:h-auto bg-ink/80 flex items-center justify-center">
+          <svg viewBox="0 0 300 200" class="w-4/5 h-4/5" fill="none">
+            <path class="vec-path" d="M20 160 C 80 20, 150 200, 210 60 S 280 40, 285 90" stroke="#fb7185" stroke-width="2"/>
+            <path d="M20 160 C 80 20, 150 200, 210 60 S 280 40, 285 90" stroke="#a78bfa" stroke-width="1" opacity=".5"/>
+            <circle cx="20" cy="160" r="4" fill="#fb7185"/><circle cx="210" cy="60" r="4" fill="#a78bfa"/><circle cx="285" cy="90" r="4" fill="#22d3ee"/>
+            <line x1="20" y1="160" x2="80" y2="20" stroke="#334155" stroke-dasharray="3 4"/>
+            <line x1="210" y1="60" x2="150" y2="200" stroke="#334155" stroke-dasharray="3 4"/>
+            <circle cx="80" cy="20" r="3" fill="none" stroke="#64748b"/><circle cx="150" cy="200" r="3" fill="none" stroke="#64748b"/>
+            <text x="24" y="180" fill="#475569" font-size="9" font-family="monospace">P0</text>
+            <text x="216" y="52" fill="#475569" font-size="9" font-family="monospace">P1</text>
+          </svg>
+        </div>
+        <div class="p-8">
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono text-xs text-rose-400">03 / PROGRAMMING · MATHEMATICS</span>
+            <span class="font-mono text-[10px] px-2 py-0.5 border border-line text-slate-500 rounded">ACTIVE</span>
+          </div>
+          <h3 class="text-2xl font-semibold text-white mb-3">Watermelon Vector Graphics Converter</h3>
+          <p class="text-sm text-slate-400 leading-relaxed mb-6">Native Android graphics processing app with strictly separated application and processing layers — Bézier geometry off the main thread, boundaries transparent.</p>
+          <div class="grid sm:grid-cols-3 gap-4 font-mono text-[11px] text-slate-500 mb-6">
+            <div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">PROBLEM</span>Vector math must never block the UI thread.</div>
+            <div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">ARCHITECTURE</span>UI ↔ engine through explicit interfaces.</div>
+            <div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">VERIFY</span>Source structure + rendered output artifacts.</div>
+          </div>
+          <div class="flex gap-6 font-mono text-xs">
+            <a href="https://github.com/SMozaff" target="_blank" rel="noopener" class="text-white hover:text-rose-300 underline decoration-line underline-offset-4 transition-colors">View code ↗</a>
+            <a href="#ifem" class="text-slate-500 hover:text-white transition-colors">IFEM methodology</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 04 MEDIA PLAYER -->
+      <article class="case-card reveal border border-line bg-panel/50 rounded-md overflow-hidden grid lg:grid-cols-2">
+        <div class="relative h-64 lg:h-auto lg:order-2">
+          <img src="https://image.qwenlm.ai/public_source/f31044d9-49fa-4ad7-b6e2-79380ecccb4f/1e2e8b281-570c-4d50-8f6b-27995d19dd67.png" alt="Watermelon MediaPlayer interface" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+          <div class="absolute inset-0 bg-gradient-to-l from-transparent to-panel/80 hidden lg:block"></div>
+        </div>
+        <div class="p-8 lg:order-1">
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono text-xs text-amber-400">04 / INNOVATION · PROGRAMMING</span>
+            <span class="font-mono text-[10px] px-2 py-0.5 border border-line text-slate-500 rounded">ACTIVE DEV</span>
+          </div>
+          <h3 class="text-2xl font-semibold text-white mb-3">Watermelon MediaPlayer</h3>
+          <p class="text-sm text-slate-400 leading-relaxed mb-6">Privacy-oriented offline Android media system: explicit Kotlin contracts, modular playback/storage/subtitle boundaries, Media3 architecture, RTL-aware design.</p>
+          <div class="grid sm:grid-cols-3 gap-4 font-mono text-[11px] text-slate-500 mb-6">
+            <div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">PROBLEM</span>Focused offline player with legible boundaries.</div>
+            <div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">ARCHITECTURE</span>Shared contract module; composed implementations.</div>
+            <div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">VERIFY</span>Module structure, CI workflows, visual artifact.</div>
+          </div>
+          <div class="flex gap-6 font-mono text-xs">
+            <a href="https://github.com/SMozaff" target="_blank" rel="noopener" class="text-white hover:text-amber-300 underline decoration-line underline-offset-4 transition-colors">View code ↗</a>
+            <a href="#ifem" class="text-slate-500 hover:text-white transition-colors">IFEM methodology</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 05 ONYX -->
+      <article class="case-card reveal border border-line bg-panel/50 rounded-md overflow-hidden grid lg:grid-cols-2">
+        <div class="relative h-64 lg:h-auto">
+          <img src="https://image.qwenlm.ai/public_source/f31044d9-49fa-4ad7-b6e2-79380ecccb4f/11ded691a-9591-460c-a5d6-85f4cc3e283a.png" alt="ONYX mission operations dashboard" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+          <div class="absolute inset-0 bg-gradient-to-r from-transparent to-panel/80 hidden lg:block"></div>
+        </div>
+        <div class="p-8">
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono text-xs text-violet-400">05 / MATHEMATICS · ELECTRONICS · SYSTEMS</span>
+            <span class="font-mono text-[10px] px-2 py-0.5 border border-line text-slate-500 rounded">CASE STUDY</span>
+          </div>
+          <h3 class="text-2xl font-semibold text-white mb-3">ONYX Framework</h3>
+          <p class="text-sm text-slate-400 leading-relaxed mb-6">Rust-centric mission-operations architecture: local-first CRDT synchronization, multi-surface clients, transport layers, Docker/Helm/Terraform deployment artifacts.</p>
+          <div class="grid sm:grid-cols-3 gap-4 font-mono text-[11px] text-slate-500 mb-6">
+            <div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">PROBLEM</span>Authority-aware local operation + sync.</div>
+            <div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">ARCHITECTURE</span>Kernel / domain / app / infra separation.</div>
+            <div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">VERIFY</span>Tests, infra artifacts, conformance register.</div>
+          </div>
+          <div class="flex gap-6 font-mono text-xs">
+            <a href="https://github.com/SMozaff" target="_blank" rel="noopener" class="text-white hover:text-violet-300 underline decoration-line underline-offset-4 transition-colors">View code ↗</a>
+            <a href="#ifem" class="text-slate-500 hover:text-white transition-colors">IFEM methodology</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- IFEM -->
+<section id="ifem" class="py-24 border-t border-line/60 bg-panel/30 scroll-mt-20">
+  <div class="max-w-7xl mx-auto px-5 grid lg:grid-cols-2 gap-14 items-center">
+    <div class="reveal relative">
+      <div class="absolute -inset-6 bg-violet-900/10 blur-3xl rounded-full"></div>
+      <img src="https://image.qwenlm.ai/public_source/f31044d9-49fa-4ad7-b6e2-79380ecccb4f/1505117af-5bab-4a5f-b7e4-f11b03030537.png" alt="IFEM blueprint: interface, contract, boundary, verification" class="relative border border-line rounded-md w-full" loading="lazy">
+    </div>
+    <div class="reveal">
+      <p class="font-mono text-xs text-violet-400 mb-3 tracking-[0.3em]">// 04 — METHODOLOGY &amp; PUBLICATION</p>
+      <h2 data-decode class="text-3xl md:text-5xl font-semibold text-white mb-6">IFEM</h2>
+      <p class="text-slate-400 leading-relaxed mb-8">Interface-First Execution Methodology organizes complex software work around explicit interfaces, contracts, responsibility boundaries and independent verification — before parallel implementation begins. Bilingual (English / فارسی), dependency-free, DOI-linked.</p>
+      <div class="grid sm:grid-cols-2 gap-4 mb-10">
+        <div class="border border-line bg-ink/60 p-4 rounded-sm"><span class="font-mono text-[10px] text-violet-400">STEP 01</span><p class="text-sm text-white mt-1">Explicit Interfaces</p><p class="text-xs text-slate-500 mt-1">Contracts defined before implementation logic.</p></div>
+        <div class="border border-line bg-ink/60 p-4 rounded-sm"><span class="font-mono text-[10px] text-violet-400">STEP 02</span><p class="text-sm text-white mt-1">Legible Responsibility</p><p class="text-xs text-slate-500 mt-1">Ownership boundaries that stay readable under change.</p></div>
+        <div class="border border-line bg-ink/60 p-4 rounded-sm"><span class="font-mono text-[10px] text-violet-400">STEP 03</span><p class="text-sm text-white mt-1">Bounded Claims</p><p class="text-xs text-slate-500 mt-1">Indicators are indicators — never overstated as proof.</p></div>
+        <div class="border border-line bg-ink/60 p-4 rounded-sm"><span class="font-mono text-[10px] text-violet-400">STEP 04</span><p class="text-sm text-white mt-1">Independent Verification</p><p class="text-xs text-slate-500 mt-1">Tests, builds and records as first-class artifacts.</p></div>
+      </div>
+      <blockquote class="border-l-2 border-violet-500 pl-5 text-slate-300 italic mb-10">"Interfaces, contracts, responsibility, and verification are part of the engineering work itself — not additions made later."</blockquote>
+      <div class="flex flex-wrap gap-4">
+        <a href="https://ifem-doctrine.github.io/" target="_blank" rel="noopener" class="px-6 py-3 bg-violet-500 hover:bg-violet-400 text-ink font-semibold text-sm rounded-sm transition-colors">Explore the Doctrine ↗</a>
+        <a href="https://doi.org/10.5281/zenodo.20621561" target="_blank" rel="noopener" class="px-6 py-3 border border-line text-slate-300 text-sm font-mono hover:border-violet-400 hover:text-white rounded-sm transition-all">DOI 10.5281/zenodo.20621561</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER / RECORDS -->
+<footer id="records" class="py-20 border-t border-line/60 scroll-mt-20">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="grid lg:grid-cols-3 gap-12 mb-16">
+      <div class="reveal">
+        <h3 class="text-xl font-semibold text-white mb-4">Identity &amp; Records</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Reference links for source code, publication records and professional identity — use them for verification and citation.</p>
+      </div>
+      <div class="lg:col-span-2 grid sm:grid-cols-2 gap-4 reveal">
+        <a href="https://github.com/SMozaff" target="_blank" rel="noopener" class="group border border-line bg-panel/50 p-5 rounded-sm hover:border-cyan-400/50 transition-all">
+          <p class="font-mono text-[10px] text-slate-500 mb-2">SOURCE CODE</p>
+          <p class="text-white text-sm font-medium group-hover:text-cyan-300 transition-colors">GitHub / SMozaff ↗</p>
+        </a>
+        <a href="https://ifem-doctrine.github.io/" target="_blank" rel="noopener" class="group border border-line bg-panel/50 p-5 rounded-sm hover:border-violet-400/50 transition-all">
+          <p class="font-mono text-[10px] text-slate-500 mb-2">DOCTRINE SITE</p>
+          <p class="text-white text-sm font-medium group-hover:text-violet-300 transition-colors">ifem-doctrine.github.io ↗</p>
+        </a>
+        <a href="https://doi.org/10.5281/zenodo.20621561" target="_blank" rel="noopener" class="group border border-line bg-panel/50 p-5 rounded-sm hover:border-emerald-400/50 transition-all">
+          <p class="font-mono text-[10px] text-slate-500 mb-2">ARCHIVE / DOI</p>
+          <p class="text-white text-sm font-medium group-hover:text-emerald-300 transition-colors">Zenodo 10.5281/zenodo.20621561 ↗</p>
+        </a>
+        <a href="https://orcid.org/0009-0001-2428-1295" target="_blank" rel="noopener" class="group border border-line bg-panel/50 p-5 rounded-sm hover:border-amber-400/50 transition-all">
+          <p class="font-mono text-[10px] text-slate-500 mb-2">RESEARCH ID</p>
+          <p class="text-white text-sm font-medium group-hover:text-amber-300 transition-colors">ORCID 0009-0001-2428-1295 ↗</p>
+        </a>
+      </div>
+    </div>
+    <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-line/50 font-mono text-[11px] text-slate-600">
+      <p>© 2026 Soheil Mozaffari — independent practice. Boundaries explicit; claims bounded.</p>
+      <div class="flex gap-5 mt-4 md:mt-0">
+        <span class="hover:text-slate-300 cursor-pointer">فارسی</span><span>/</span><span class="text-slate-300">English</span>
+        <a href="#top" class="text-cyan-500 hover:text-cyan-300 transition-colors">↑ TOP</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- helpers ---------- */
+function fitCanvas(cnv) {
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const w = cnv.clientWidth, h = cnv.clientHeight;
+  if (w === 0 || h === 0) return null;
+  cnv.width = w * dpr; cnv.height = h * dpr;
+  const ctx = cnv.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return { ctx, w, h };
+}
+
+/* ---------- scroll progress ---------- */
+window.addEventListener('scroll', function () {
+  const doc = document.documentElement;
+  const max = doc.scrollHeight - doc.clientHeight;
+  const bar = document.getElementById('progressBar');
+  bar.style.width = (max > 0 ? (doc.scrollTop / max) * 100 : 0) + '%';
+}, { passive: true });
+
+/* ---------- mobile menu ---------- */
+document.getElementById('mobileBtn').addEventListener('click', function () {
+  document.getElementById('mobileMenu').classList.toggle('hidden');
+});
+document.querySelectorAll('#mobileMenu a').forEach(function (lnk) {
+  lnk.addEventListener('click', function () { document.getElementById('mobileMenu').classList.add('hidden'); });
+});
+
+/* ---------- master animation loop registry ---------- */
+const visibleEls = new Set();
+const loopRegistry = [];
+function registerLoop(el, drawFn) {
+  loopRegistry.push({ el: el, fn: drawFn });
+  const obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (ent) {
+      if (ent.isIntersecting) visibleEls.add(el); else visibleEls.delete(el);
+    });
+  }, { threshold: 0 });
+  obs.observe(el);
+}
+function masterTick(ts) {
+  for (let r = 0; r < loopRegistry.length; r++) {
+    if (visibleEls.has(loopRegistry[r].el)) loopRegistry[r].fn(ts);
+  }
+  requestAnimationFrame(masterTick);
+}
+requestAnimationFrame(masterTick);
+
+/* ---------- hero particle field ---------- */
+(function () {
+  const cnv = document.getElementById('heroCanvas');
+  let ctx = null, W = 0, H = 0, parts = [];
+  const glyphs = ['∑', '∫', 'π', 'λ', 'Ω', '√', '∂', 'Δ', '0', '1', '⊕', '≡'];
+  function rebuild() {
+    const f = fitCanvas(cnv); if (!f) return;
+    ctx = f.ctx; W = f.w; H = f.h;
+    const count = Math.min(80, Math.floor(W * H / 18000));
+    parts = [];
+    for (let k = 0; k < count; k++) {
+      parts.push({
+        x: Math.random() * W, y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
+        r: Math.random() * 1.4 + 0.6,
+        glyph: glyphs[(Math.random() * glyphs.length) | 0],
+        isGlyph: Math.random() < 0.2
+      });
+    }
+  }
+  rebuild();
+  window.addEventListener('resize', rebuild);
+  registerLoop(cnv, function () {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, W, H);
+    for (let a = 0; a < parts.length; a++) {
+      const p = parts[a];
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+      for (let b = a + 1; b < parts.length; b++) {
+        const q = parts[b];
+        const dx = p.x - q.x, dy = p.y - q.y;
+        const d2 = dx * dx + dy * dy;
+        if (d2 < 12100) {
+          ctx.strokeStyle = 'rgba(34,211,238,' + (0.14 * (1 - d2 / 12100)).toFixed(3) + ')';
+          ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+        }
+      }
+      if (p.isGlyph) {
+        ctx.fillStyle = 'rgba(167,139,250,0.5)';
+        ctx.font = '11px "JetBrains Mono", monospace';
+        ctx.fillText(p.glyph, p.x, p.y);
+      } else {
+        ctx.fillStyle = 'rgba(34,211,238,0.55)';
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+  });
+})();
+
+/* ---------- terminal typing ---------- */
+(function () {
+  const termLines = [
+    { t: '> whoami', c: 'text-emerald-400' },
+    { t: 'soheil.mozaffari :: systems_architect', c: 'text-slate-300' },
+    { t: '> domains --list', c: 'text-emerald-400' },
+    { t: '[innovation] [mathematics] [electronics]', c: 'text-cyan-300' },
+    { t: '[cybersecurity] [programming]', c: 'text-cyan-300' },
+    { t: '> doctrine --load IFEM', c: 'text-emerald-400' },
+    { t: 'interfaces ▸ contracts ▸ boundaries ▸ verification', c: 'text-slate-300' },
+    { t: '> status', c: 'text-emerald-400' },
+    { t: 'ACTIVE — building verifiable systems', c: 'text-amber-300' }
+  ];
+  const body = document.getElementById('termBody');
+  let li = 0;
+  function sleep(ms) { return new Promise(function (res) { setTimeout(res, ms); }); }
+  async function runTerm() {
+    for (; li < termLines.length; li++) {
+      const line = termLines[li];
+      const div = document.createElement('div');
+      div.className = line.c;
+      body.appendChild(div);
+      for (let ci = 0; ci <= line.t.length; ci++) {
+        div.textContent = line.t.slice(0, ci);
+        await sleep(14);
+      }
+      await sleep(160);
+    }
+    const cur = document.createElement('span');
+    cur.className = 'caret text-emerald-400';
+    cur.textContent = '▊';
+    body.appendChild(cur);
+  }
+  runTerm();
+})();
+
+/* ---------- scramble decode ---------- */
+function decodeText(el) {
+  const original = el.dataset.decodeText || el.textContent;
+  el.dataset.decodeText = original;
+  const chars = '!<>-_/[]{}=+*^?#01';
+  const items = original.split('').map(function (ch, idx) {
+    const s = idx * 1.4 + Math.random() * 8;
+    return { ch: ch, start: s, end: s + 10 + Math.random() * 10 };
+  });
+  let frame = 0;
+  function tick() {
+    frame++;
+    let out = '', done = 0;
+    for (let k = 0; k < items.length; k++) {
+      const it = items[k];
+      if (frame >= it.end) { out += it.ch; done++; }
+      else if (frame >= it.start) { out += it.ch === ' ' ? ' ' : chars[(Math.random() * chars.length) | 0]; }
+      else out += ' ';
+    }
+    el.textContent = out;
+    if (done < items.length) requestAnimationFrame(tick);
+    else el.textContent = original;
+  }
+  tick();
+}
+
+/* ---------- reveal observer ---------- */
+(function () {
+  const obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (ent) {
+      if (ent.isIntersecting) {
+        ent.target.classList.add('on');
+        if (ent.target.hasAttribute('data-decode')) decodeText(ent.target);
+        obs.unobserve(ent.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal, [data-decode]').forEach(function (el) { obs.observe(el); });
+})();
+
+/* ---------- domain: lissajous ---------- */
+(function () {
+  const cnv = document.getElementById('mathWaveCanvas');
+  registerLoop(cnv, function (ts) {
+    const f = fitCanvas(cnv); if (!f) return;
+    const ctx = f.ctx, W = f.w, H = f.h;
+    ctx.clearRect(0, 0, W, H);
+    const cx = W / 2, cy = H / 2, R = Math.min(W, H) * 0.42;
+    const delta = ts * 0.0005;
+    ctx.strokeStyle = 'rgba(167,139,250,0.85)';
+    ctx.lineWidth = 1.4;
+    ctx.beginPath();
+    for (let t = 0; t <= Math.PI * 2 + 0.02; t += 0.02) {
+      const px = cx + R * Math.sin(3 * t + delta);
+      const py = cy + R * Math.sin(2 * t);
+      if (t === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+  });
+})();
+
+/* ---------- domain: binary rain ---------- */
+(function () {
+  const cnv = document.getElementById('cyberRainCanvas');
+  let drops = [], lastTs = 0;
+  const chars = '01<>/#$⊕';
+  registerLoop(cnv, function (ts) {
+    if (ts - lastTs < 50) return;
+    lastTs = ts;
+    const f = fitCanvas(cnv); if (!f) return;
+    const ctx = f.ctx, W = f.w, H = f.h;
+    const cols = Math.floor(W / 10);
+    if (drops.length !== cols) drops = new Array(cols).fill(0).map(function () { return Math.random() * H; });
+    ctx.fillStyle = 'rgba(5,8,15,0.25)';
+    ctx.fillRect(0, 0, W, H);
+    ctx.font = '10px "JetBrains Mono", monospace';
+    for (let c = 0; c < cols; c++) {
+      ctx.fillStyle = Math.random() < 0.08 ? '#22d3ee' : 'rgba(34,211,238,0.55)';
+      ctx.fillText(chars[(Math.random() * chars.length) | 0], c * 10, drops[c]);
+      drops[c] = drops[c] > H ? 0 : drops[c] + 10;
+    }
+  });
+})();
+
+/* ---------- domain: code typing ---------- */
+(function () {
+  const el = document.getElementById('codeTypeEl');
+  const snippets = [
+    'fn verify(b: Boundary) {\n  assert!(b.legible());\n}',
+    'val mesh = P2P.offGrid()\nmesh.encrypt(storage)',
+    'def ifem(spec):\n  return contracts(spec)',
+    'λx.λy. x ⊕ y  -- xor'
+  ];
+  let sIdx = 0, cIdx = 0, deleting = false;
+  setInterval(function () {
+    const cur = snippets[sIdx];
+    if (!deleting) {
+      cIdx++;
+      if (cIdx >= cur.length) { deleting = true; }
+    } else {
+      cIdx -= 3;
+      if (cIdx <= 0) { cIdx = 0; deleting = false; sIdx = (sIdx + 1) % snippets.length; }
+    }
+    el.textContent = cur.slice(0, cIdx);
+  }, 60);
+})();
+
+/* ---------- lab tabs ---------- */
+(function () {
+  const btns = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('[data-panel]');
+  btns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      btns.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      panels.forEach(function (p) {
+        p.classList.toggle('hidden', p.dataset.panel !== btn.dataset.tab);
+      });
+      if (btn.dataset.tab === 'fractal') renderFractal();
+    });
+  });
+})();
+
+/* ---------- signal lab ---------- */
+(function () {
+  const cnv = document.getElementById('signalCanvas');
+  const sA = document.getElementById('freqA');
+  const sB = document.getElementById('freqB');
+  const vA = document.getElementById('freqAVal');
+  const vB = document.getElementById('freqBVal');
+  sA.addEventListener('input', function () { vA.textContent = parseFloat(sA.value).toFixed(1); });
+  sB.addEventListener('input', function () { vB.textContent = parseFloat(sB.value).toFixed(1); });
+  registerLoop(cnv, function (ts) {
+    const f = fitCanvas(cnv); if (!f) return;
+    const ctx = f.ctx, W = f.w, H = f.h, mid = H / 2;
+    const phase = ts * 0.0016;
+    const fa = parseFloat(sA.value), fb = parseFloat(sB.value);
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(28,39,64,0.8)';
+    ctx.lineWidth = 1;
+    for (let gx = 0; gx < W; gx += 44) { ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, H); ctx.stroke(); }
+    ctx.beginPath(); ctx.moveTo(0, mid); ctx.lineTo(W, mid); ctx.stroke();
+    function drawWave(fn, color, width, dash) {
+      ctx.strokeStyle = color; ctx.lineWidth = width; ctx.setLineDash(dash);
+      ctx.beginPath();
+      for (let x = 0; x <= W; x += 2) {
+        const t = (x / W) * Math.PI * 2;
+        const y = mid - fn(t) * (H * 0.3);
+        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke(); ctx.setLineDash([]);
+    }
+    drawWave(function (t) { return Math.sin(t * fa + phase); }, 'rgba(34,211,238,0.9)', 1.6, []);
+    drawWave(function (t) { return 0.6 * Math.sin(t * fb - phase * 1.3); }, 'rgba(167,139,250,0.8)', 1.2, [5, 5]);
+    drawWave(function (t) { return (Math.sin(t * fa + phase) + 0.6 * Math.sin(t * fb - phase * 1.3)) / 1.6; }, 'rgba(255,255,255,0.95)', 2, []);
+  });
+})();
+
+/* ---------- logic gates ---------- */
+(function () {
+  const box = document.getElementById('gatesBox');
+  const gateDefs = [
+    { name: 'AND', fn: function (a, b) { return a && b; }, expr: 'A · B' },
+    { name: 'OR', fn: function (a, b) { return a || b; }, expr: 'A + B' },
+    { name: 'XOR', fn: function (a, b) { return a !== b; }, expr: 'A ⊕ B' },
+    { name: 'NAND', fn: function (a, b) { return !(a && b); }, expr: '¬(A · B)' }
+  ];
+  gateDefs.forEach(function (g) {
+    g.state = [false, false];
+    const row = document.createElement('div');
+    row.className = 'border border-line bg-panel/50 rounded-sm p-5 flex items-center gap-4';
+    const inA = document.createElement('button');
+    const inB = document.createElement('button');
+    [inA, inB].forEach(function (btn, bi) {
+      btn.className = 'gate-in w-10 h-10 border border-line rounded-sm font-mono text-sm text-slate-400';
+      btn.textContent = '0';
+      btn.addEventListener('click', function () {
+        g.state[bi] = !g.state[bi];
+        updateGates();
+      });
+    });
+    const chip = document.createElement('div');
+    chip.className = 'flex-1 text-center border border-line bg-ink/70 rounded-sm py-3';
+    chip.innerHTML = '<span class="font-mono text-white text-sm">' + g.name + '</span><br><span class="font-mono text-[10px] text-slate-500">' + g.expr + '</span>';
+    const lamp = document.createElement('div');
+    lamp.className = 'gate-out w-6 h-6 rounded-full border border-line bg-ink';
+    const res = document.createElement('span');
+    res.className = 'font-mono text-xs text-slate-500 w-4';
+    row.appendChild(inA); row.appendChild(inB); row.appendChild(chip); row.appendChild(lamp); row.appendChild(res);
+    box.appendChild(row);
+    g.els = { inA: inA, inB: inB, lamp: lamp, res: res };
+  });
+  function updateGates() {
+    gateDefs.forEach(function (g) {
+      const out = g.fn(g.state[0], g.state[1]);
+      g.els.inA.textContent = g.state[0] ? '1' : '0';
+      g.els.inB.textContent = g.state[1] ? '1' : '0';
+      g.els.inA.classList.toggle('hi', g.state[0]);
+      g.els.inB.classList.toggle('hi', g.state[1]);
+      g.els.lamp.classList.toggle('hi', out);
+      g.els.res.textContent = out ? '1' : '0';
+    });
+  }
+  updateGates();
+})();
+
+/* ---------- xor cipher ---------- */
+(function () {
+  const txt = document.getElementById('cipherText');
+  const key = document.getElementById('cipherKey');
+  const keyVal = document.getElementById('cipherKeyVal');
+  const out = document.getElementById('cipherOut');
+  function compute() {
+    const k = parseInt(key.value, 10);
+    keyVal.textContent = k;
+    const src = (txt.value || '').slice(0, 24);
+    let html = '';
+    for (let ci = 0; ci < src.length; ci++) {
+      const code = src.charCodeAt(ci) ^ k;
+      const bin = code.toString(2).padStart(8, '0');
+      const hex = code.toString(16).padStart(2, '0').toUpperCase();
+      html += '<div><span class="text-white inline-block w-8">' + src[ci].replace(/</g, '&lt;') + '</span> ' + bin + '  <span class="text-cyan-400">0x' + hex + '</span></div>';
+    }
+    out.innerHTML = html || '<div class="text-slate-600">— type plaintext —</div>';
+  }
+  txt.addEventListener('input', compute);
+  key.addEventListener('input', compute);
+  compute();
+})();
+
+/* ---------- fractal ---------- */
+(function () {
+  const cnv = document.getElementById('fractalCanvas');
+  const btn = document.getElementById('fractalBtn');
+  let paletteIdx = 0;
+  const palettes = [
+    function (v) { return [v * 30, 60 + v * 160, 120 + v * 135]; },
+    function (v) { return [40 + v * 215, 90 + v * 110, 20]; },
+    function (v) { return [60 + v * 195, 30 + v * 60, 120 + v * 135]; }
+  ];
+  window.renderFractal = function () {
+    const ctx = cnv.getContext('2d');
+    const W = cnv.width, H = cnv.height;
+    const img = ctx.createImageData(W, H);
+    const maxIter = 80;
+    const pal = palettes[paletteIdx % palettes.length];
+    for (let py = 0; py < H; py++) {
+      for (let px = 0; px < W; px++) {
+        const x0 = -2.2 + (px / W) * 3.0;
+        const y0 = -1.2 + (py / H) * 2.4;
+        let x = 0, y = 0, iter = 0;
+        while (x * x + y * y <= 4 && iter < maxIter) {
+          const xt = x * x - y * y + x0;
+          y = 2 * x * y + y0;
+          x = xt;
+          iter++;
+        }
+        const o = (py * W + px) * 4;
+        if (iter === maxIter) {
+          img.data[o] = 5; img.data[o + 1] = 8; img.data[o + 2] = 15;
+        } else {
+          const v = iter / maxIter;
+          const col = pal(Math.sqrt(v));
+          img.data[o] = col[0]; img.data[o + 1] = col[1]; img.data[o + 2] = col[2];
+        }
+        img.data[o + 3] = 255;
+      }
+    }
+    ctx.putImageData(img, 0, 0);
+  };
+  btn.addEventListener('click', function () { paletteIdx++; renderFractal(); });
+  renderFractal();
+})();
+</script>
+</body>
+</html>
