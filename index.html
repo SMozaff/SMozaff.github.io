@@ -6,7 +6,7 @@
     <meta name="description" content="Software engineer and systems architect, author of BOUND Method v3.0. Focused on software architecture, complex systems, AI-assisted engineering, and reliable parallel development.">
     <meta name="author" content="Soheil Mozaffari">
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-    <meta name="theme-color" content="#05080f">
+    <meta name="theme-color" content="#0b1020">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="canonical" href="https://smozaff.github.io/">
     <link rel="alternate" hreflang="en" href="https://smozaff.github.io/">
@@ -118,7 +118,7 @@
 tailwind.config = {
   theme: { extend: {
     colors: {
-      ink: '#05080f', panel: '#0a111e', line: '#1c2740',
+      ink: '#0b1020', panel: '#121c30', line: '#2b3b59',
       neon: { cyan: '#22d3ee', green: '#34d399', amber: '#fbbf24', violet: '#a78bfa', rose: '#fb7185' }
     },
     fontFamily: {
@@ -130,9 +130,9 @@ tailwind.config = {
 </script>
 <style>
   html { scroll-behavior: smooth; }
-  body { background: #05080f; }
+  body { background: #0b1020; }
   ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: #05080f; }
+  ::-webkit-scrollbar-track { background: #0b1020; }
   ::-webkit-scrollbar-thumb { background: #1c2740; border-radius: 3px; }
   ::-webkit-scrollbar-thumb:hover { background: #22d3ee; }
 
@@ -300,11 +300,146 @@ tailwind.config = {
   /* Boot sequence overlay */
   #bootOverlay {
     position: fixed; inset: 0; z-index: 100;
-    background: #05080f;
+    background: #080d18;
     display: flex; align-items: center; justify-content: center;
     transition: opacity 0.55s ease-out;
   }
   #bootOverlay.fade-out { opacity: 0; pointer-events: none; }
+
+
+  /* ===== COMPOSITION + COMFORT PASS ===== */
+  :root {
+    --surface-0: #0b1020;
+    --surface-1: #10182a;
+    --surface-2: #141f34;
+    --surface-3: #182640;
+    --line-soft: #2b3b59;
+  }
+  body {
+    background:
+      radial-gradient(circle at 12% 4%, rgba(34,211,238,.055), transparent 31rem),
+      radial-gradient(circle at 88% 18%, rgba(167,139,250,.05), transparent 28rem),
+      var(--surface-0);
+  }
+  .scanlines { opacity: .55; }
+  .orb { opacity: .18; filter: blur(105px); }
+  .term-window {
+    background: rgba(15,24,42,.92);
+    border-color: rgba(76,96,130,.56);
+    box-shadow: 0 22px 54px -30px rgba(0,0,0,.62), 0 0 34px rgba(34,211,238,.035);
+  }
+  .term-window:hover {
+    box-shadow: 0 24px 58px -28px rgba(0,0,0,.62), 0 0 42px rgba(34,211,238,.065);
+  }
+  .term-titlebar {
+    background: linear-gradient(180deg, #1b2740 0%, #131d31 100%);
+    border-bottom-color: rgba(77,99,136,.55);
+  }
+  #heroSpotlight {
+    background: radial-gradient(650px circle at var(--mx, 50%) var(--my, 50%), rgba(34,211,238,.052), transparent 48%);
+  }
+
+  /* always-visible language control */
+  .lang-float {
+    position: fixed;
+    top: 94px;
+    right: 18px;
+    z-index: 58;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 38px;
+    padding: 8px 12px;
+    border: 1px solid rgba(34,211,238,.42);
+    border-radius: 999px;
+    background: rgba(18,28,48,.94);
+    color: #e6edf7;
+    box-shadow: 0 12px 36px rgba(0,0,0,.28), 0 0 22px rgba(34,211,238,.055);
+    backdrop-filter: blur(16px);
+    font-size: 11px;
+    line-height: 1;
+    transition: transform .2s ease, border-color .2s ease, background .2s ease;
+  }
+  .lang-float:hover { transform: translateY(-2px); border-color: rgba(34,211,238,.82); background: rgba(22,36,60,.98); }
+  .lang-float .lang-code { font-family: 'JetBrains Mono', monospace; color: #67e8f9; font-weight: 700; letter-spacing: .08em; }
+  .lang-float .lang-name { color: #f1f5f9; }
+  .lang-float .lang-dot { width: 6px; height: 6px; border-radius: 50%; background: #34d399; box-shadow: 0 0 8px rgba(52,211,153,.65); }
+
+  /* section rhythm: not every section is the same black rectangle anymore */
+  #domains, #lab, #work, #ifem, #publications, #records { position: relative; isolation: isolate; }
+  #domains { background: linear-gradient(180deg, rgba(15,24,42,.66), rgba(11,16,32,.9)); }
+  #lab { background: linear-gradient(135deg, rgba(20,31,52,.9), rgba(14,22,38,.92)); border-color: rgba(70,91,126,.5); }
+  #work { background: linear-gradient(180deg, rgba(11,16,32,.93), rgba(15,23,40,.88)); }
+  #ifem { background: linear-gradient(135deg, rgba(18,29,49,.96), rgba(12,19,34,.96)); border-color: rgba(70,91,126,.45); }
+  #publications { background: linear-gradient(180deg, rgba(15,24,42,.84), rgba(11,16,32,.96)); }
+  #records { background: #09101d; border-color: rgba(70,91,126,.45); }
+  #domains::before, #work::before, #publications::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background-image: linear-gradient(rgba(91,114,150,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(91,114,150,.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+  }
+
+  /* stronger section headers */
+  #domains h2, #lab h2, #work h2, #ifem h2, #publications h2 { line-height: 1.05; letter-spacing: -.025em; }
+  #domains > div > p, #publications > div > div > p { color: #8493aa; }
+
+  /* professional focus: 3 + 2 composition instead of five narrow cards */
+  .focus-grid { grid-template-columns: repeat(6, minmax(0, 1fr)) !important; }
+  .focus-grid > * { grid-column: span 2 / span 2; min-height: 240px; background: rgba(20,31,52,.78) !important; }
+  .focus-grid > *:nth-child(4), .focus-grid > *:nth-child(5) { grid-column: span 3 / span 3; min-height: 220px; }
+  .focus-grid > *:hover { background: rgba(24,38,64,.9) !important; transform: translateY(-3px); }
+
+  /* lab: editorial context on the left, instrument on the right */
+  .lab-layout {
+    display: grid;
+    grid-template-columns: minmax(250px,.68fr) minmax(0,1.45fr);
+    column-gap: clamp(32px,5vw,72px);
+    row-gap: 16px;
+    align-items: start;
+  }
+  .lab-layout > .lab-intro { grid-column: 1; grid-row: 1 / span 2; margin: 0; position: sticky; top: 128px; padding: 6px 0 26px; }
+  .lab-layout > .lab-tabs { grid-column: 2; margin-bottom: 0; padding: 10px; border: 1px solid rgba(76,96,130,.46); background: rgba(11,16,32,.38); border-radius: 8px; }
+  .lab-layout > .lab-panel { grid-column: 2; background: rgba(17,27,47,.84) !important; border-color: rgba(76,96,130,.6) !important; box-shadow: 0 26px 70px -44px rgba(0,0,0,.7); }
+  .lab-intro::after { content: ''; display: block; width: 76px; height: 2px; margin-top: 28px; background: linear-gradient(90deg,#22d3ee,#a78bfa,transparent); }
+
+  /* work: readable two-column project atlas instead of six long alternating strips */
+  .work-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; }
+  .work-grid > article { display: flex !important; flex-direction: column; min-width: 0; background: rgba(18,28,48,.76) !important; }
+  .work-grid > article > div:first-child { order: 0 !important; height: 270px !important; min-height: 270px; }
+  .work-grid > article > div:nth-child(2) { order: 1 !important; padding: 28px !important; }
+  .work-grid > article img { padding: 22px !important; }
+  .work-grid .case-card:hover { transform: translateY(-5px); background: rgba(22,35,59,.92) !important; }
+
+  /* methodology gets more breathing room and clearer visual hierarchy */
+  #ifem > div { gap: clamp(40px,6vw,88px) !important; }
+  #ifem img { background: rgba(14,23,40,.76) !important; padding: clamp(26px,4vw,54px) !important; border-color: rgba(76,96,130,.58) !important; }
+  #ifem blockquote { background: rgba(34,211,238,.035); padding-top: 14px; padding-bottom: 14px; padding-right: 16px; border-radius: 0 6px 6px 0; }
+
+  /* publication/records surfaces */
+  #publications a.group, #records a.group { background: rgba(18,28,48,.74) !important; }
+  #publications article { background: rgba(14,23,40,.72) !important; }
+
+  @media (max-width: 1023px) {
+    .focus-grid { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+    .focus-grid > *, .focus-grid > *:nth-child(4), .focus-grid > *:nth-child(5) { grid-column: span 1 / span 1; }
+    .focus-grid > *:last-child { grid-column: 1 / -1; }
+    .lab-layout { display: block; }
+    .lab-layout > .lab-intro { position: static; margin-bottom: 28px; }
+    .lab-layout > .lab-tabs { margin-bottom: 18px; }
+    .work-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 639px) {
+    .lang-float { top: 91px; right: 10px; min-height: 36px; padding: 7px 10px; }
+    .focus-grid { grid-template-columns: 1fr !important; }
+    .focus-grid > *, .focus-grid > *:last-child { grid-column: 1 !important; min-height: 0; }
+    .work-grid > article > div:first-child { height: 220px !important; min-height: 220px; }
+  }
+
 </style>
 </head>
 <body class="antialiased text-slate-300 font-disp selection:bg-cyan-900 selection:text-cyan-100">
@@ -324,6 +459,9 @@ tailwind.config = {
     </div>
   </div>
 </div>
+
+
+<a href="fa/index.html" class="lang-float" hreflang="fa" lang="fa" aria-label="نمایش نسخه فارسی"><span class="lang-dot"></span><span class="lang-code">FA</span><span class="lang-name">فارسی</span></a>
 
 <!-- scroll progress -->
 <div id="progressBar" class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-cyan-500 via-emerald-400 to-violet-500 z-[60] w-0"></div>
@@ -358,11 +496,11 @@ tailwind.config = {
   <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
     <a href="#top" class="flex items-center gap-3 font-mono text-sm text-slate-400"><span class="relative flex w-2.5 h-2.5"><span class="absolute inset-0 rounded-full bg-cyan-400 pulse-ring"></span><span class="relative w-2.5 h-2.5 rounded-full bg-cyan-400"></span></span>SM<span class="text-cyan-400">::</span>SYSTEMS</a>
     <div class="hidden md:flex items-center gap-6 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-500">
-      <a href="#domains" class="hover:text-cyan-300 transition-colors">Focus</a><a href="#lab" class="hover:text-cyan-300 transition-colors">Lab</a><a href="#work" class="hover:text-cyan-300 transition-colors">Case Studies</a><a href="#ifem" class="hover:text-cyan-300 transition-colors">BOUND</a><a href="#publications" class="hover:text-cyan-300 transition-colors">Writing</a><a href="#records" class="hover:text-cyan-300 transition-colors">Records</a><a href="fa/index.html" class="text-slate-300 hover:text-white" hreflang="fa" lang="fa">FA</a>
+      <a href="#domains" class="hover:text-cyan-300 transition-colors">Focus</a><a href="#lab" class="hover:text-cyan-300 transition-colors">Lab</a><a href="#work" class="hover:text-cyan-300 transition-colors">Case Studies</a><a href="#ifem" class="hover:text-cyan-300 transition-colors">BOUND</a><a href="#publications" class="hover:text-cyan-300 transition-colors">Writing</a><a href="#records" class="hover:text-cyan-300 transition-colors">Records</a>
     </div>
     <button id="mobileBtn" aria-label="Open navigation" class="md:hidden text-slate-400 hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
   </div>
-  <div id="mobileMenu" class="hidden md:hidden border-t border-line/60 bg-ink px-5 py-4 space-y-3 font-mono text-xs uppercase tracking-widest text-slate-400"><a href="#domains" class="block hover:text-cyan-300">Focus</a><a href="#lab" class="block hover:text-cyan-300">Lab</a><a href="#work" class="block hover:text-cyan-300">Case Studies</a><a href="#ifem" class="block hover:text-cyan-300">BOUND</a><a href="#publications" class="block hover:text-cyan-300">Writing</a><a href="#records" class="block hover:text-cyan-300">Records</a><a href="fa/index.html" class="block text-white" hreflang="fa" lang="fa">فارسی</a></div>
+  <div id="mobileMenu" class="hidden md:hidden border-t border-line/60 bg-ink px-5 py-4 space-y-3 font-mono text-xs uppercase tracking-widest text-slate-400"><a href="#domains" class="block hover:text-cyan-300">Focus</a><a href="#lab" class="block hover:text-cyan-300">Lab</a><a href="#work" class="block hover:text-cyan-300">Case Studies</a><a href="#ifem" class="block hover:text-cyan-300">BOUND</a><a href="#publications" class="block hover:text-cyan-300">Writing</a><a href="#records" class="block hover:text-cyan-300">Records</a></div>
 </nav>
 
 <!-- COMMAND PALETTE OVERLAY -->
@@ -420,7 +558,7 @@ tailwind.config = {
 
 <!-- DOMAINS -->
 <section id="domains" class="py-24 scroll-mt-20"><div class="max-w-7xl mx-auto px-5"><div class="flex items-end justify-between mb-4 reveal"><div><p class="font-mono text-xs text-cyan-400 mb-3 tracking-[0.3em]">// 01 — PROFESSIONAL FOCUS</p><h2 data-decode data-text="Five Interlocking Focus Areas" class="text-3xl md:text-5xl font-semibold text-white">Five Interlocking Focus Areas</h2></div><span class="hidden md:block font-mono text-xs text-slate-600">[ ARCHITECTURE ⊕ SYSTEMS ⊕ AI ⊕ VERIFICATION ⊕ CODE ]</span></div><p class="text-slate-500 max-w-3xl mb-14 reveal">The work spans software architecture and complex systems, then extends into AI-assisted engineering, verification discipline, and implementation. The common thread is explicit responsibility.</p>
-<div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
+<div class="focus-grid grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
 <div class="reveal border border-line bg-panel/60 rounded-md p-6 hover:border-neon-amber/50 transition-colors group"><div class="relative w-14 h-14 mb-6 flex items-center justify-center"><span class="absolute inset-0 rounded-full border border-neon-amber/40 pulse-ring"></span><svg class="w-7 h-7 text-neon-amber" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.6" d="M4 17l4-4 4 4 8-8"/></svg></div><h3 class="text-white font-semibold mb-2 group-hover:text-neon-amber">Software Architecture</h3><p class="text-sm text-slate-500 leading-relaxed">Responsibility boundaries, modular decomposition, contracts, ownership, and system shape.</p><p class="mt-5 font-mono text-[10px] text-slate-600">BOUNDARIES · CONTRACTS · OWNERSHIP</p></div>
 <div class="reveal border border-line bg-panel/60 rounded-md p-6 hover:border-neon-violet/50 transition-colors group"><canvas id="mathWaveCanvas" class="w-full h-14 mb-6"></canvas><h3 class="text-white font-semibold mb-2 group-hover:text-neon-violet">Complex Systems</h3><p class="text-sm text-slate-500 leading-relaxed">Local-first state, CRDT synchronization, protocols, runtime constraints, and distributed behavior.</p><p class="mt-5 font-mono text-[10px] text-slate-600">CRDT · LOCAL-FIRST · PROTOCOLS</p></div>
 <div class="reveal border border-line bg-panel/60 rounded-md p-6 hover:border-neon-green/50 transition-colors group relative overflow-hidden"><div class="relative w-full h-14 mb-6 overflow-hidden rounded-sm"><img src="/manus-storage/rezvanmesh-network.png" alt="RezvanMesh network interface" class="absolute inset-0 w-full h-full object-cover opacity-45"><svg class="absolute inset-0 w-full h-full" viewBox="0 0 200 56" fill="none"><path class="trace-anim" d="M0 14 H60 L74 28 H130 L144 14 H200" stroke="#34d399" stroke-width="1.4"/><path class="trace-anim t2" d="M0 42 H50 L64 28 H120 L134 42 H200" stroke="#22d3ee" stroke-width="1.4"/></svg></div><h3 class="text-white font-semibold mb-2 group-hover:text-neon-green">AI-Assisted Engineering</h3><p class="text-sm text-slate-500 leading-relaxed">Structured execution contexts that constrain system-wide assumptions while preserving local implementation freedom.</p><p class="mt-5 font-mono text-[10px] text-slate-600">TEAM BRIEFS · AGENTS · CONSTRAINTS</p></div>
@@ -430,19 +568,19 @@ tailwind.config = {
 
 <!-- LAB -->
 <section id="lab" class="py-24 border-y border-line/60 bg-panel/30 scroll-mt-20">
-  <div class="max-w-7xl mx-auto px-5">
-    <div class="mb-12 reveal">
+  <div class="lab-layout max-w-7xl mx-auto px-5">
+    <div class="lab-intro mb-12 reveal">
       <p class="font-mono text-xs text-cyan-400 mb-3 tracking-[0.3em]">// 02 — SYSTEMS IN PRACTICE</p>
       <h2 data-decode data-text="Interactive Engineering Lab" class="text-3xl md:text-5xl font-semibold text-white">Interactive Engineering Lab</h2>
       <p class="text-slate-500 max-w-2xl mt-4">Four compact instruments make recurring systems ideas tangible: signal composition, decision logic, reversible data transformation, and emergent complexity. Together they connect software, security, communications, and mathematical reasoning through direct interaction.</p>
     </div>
-    <div class="flex flex-wrap gap-2 mb-8 reveal">
+    <div class="lab-tabs flex flex-wrap gap-2 mb-8 reveal">
       <button data-tab="signal" class="tab-btn active px-5 py-2 border border-line rounded-sm font-mono text-xs uppercase tracking-widest text-slate-400 transition-all">Signals</button>
       <button data-tab="gates" class="tab-btn px-5 py-2 border border-line rounded-sm font-mono text-xs uppercase tracking-widest text-slate-400 transition-all">Logic</button>
       <button data-tab="cipher" class="tab-btn px-5 py-2 border border-line rounded-sm font-mono text-xs uppercase tracking-widest text-slate-400 transition-all">XOR Transform</button>
       <button data-tab="fractal" class="tab-btn px-5 py-2 border border-line rounded-sm font-mono text-xs uppercase tracking-widest text-slate-400 transition-all">Fractal Systems</button>
     </div>
-    <div class="border border-line rounded-md bg-ink/70 p-6 md:p-10 reveal">
+    <div class="lab-panel border border-line rounded-md bg-ink/70 p-6 md:p-10 reveal">
       <div data-panel="signal">
         <div class="grid lg:grid-cols-3 gap-8 items-center">
           <div class="lg:col-span-2"><canvas id="signalCanvas" class="w-full h-56 md:h-72 rounded-sm bg-panel/60 border border-line/60"></canvas></div>
@@ -485,7 +623,7 @@ tailwind.config = {
 </section>
 
 <!-- CASE STUDIES -->
-<section id="work" class="py-24 scroll-mt-20"><div class="max-w-7xl mx-auto px-5"><div class="flex items-end justify-between mb-14 reveal"><div><p class="font-mono text-xs text-cyan-400 mb-3 tracking-[0.3em]">// 03 — ENGINEERING CASE STUDIES</p><h2 data-decode data-text="Selected Work" class="text-3xl md:text-5xl font-semibold text-white">Selected Work</h2></div><span class="hidden md:block font-mono text-xs text-slate-600">01 — 06</span></div><div class="space-y-8"><article class="case-card reveal border border-line bg-panel/50 rounded-md overflow-hidden grid lg:grid-cols-2"><div class="relative h-64 lg:h-auto bg-ink/80 flex items-center justify-center"><img src="/manus-storage/raven-metadata-gui_e2db5b00.png" alt="Raven Metadata Extractor interface" class="absolute inset-0 w-full h-full object-contain p-4" loading="lazy"><div class="absolute inset-0 bg-gradient-to-r from-transparent to-panel/70 hidden lg:block"></div></div><div class="p-8"><div class="flex items-center justify-between mb-4"><span class="font-mono text-xs text-cyan-400">01 / DEVTOOLS · DESKTOP</span><span class="font-mono text-[10px] px-2 py-0.5 border border-line text-slate-500 rounded">ACTIVE PROJECT</span></div><h3 class="text-2xl font-semibold text-white mb-3">Raven Metadata Extractor</h3><p class="text-sm text-slate-400 leading-relaxed mb-6">Cross-platform desktop and CLI tool for explainable image metadata reports across EXIF, XMP, GPS, C2PA, and bounded AI-origin indicators.</p><div class="grid sm:grid-cols-3 gap-4 font-mono text-[11px] text-slate-500 mb-6"><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">BOUNDARY</span>Responsibilities separated explicitly.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">EVIDENCE</span>Claims limited to visible repository and supplied artifacts.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">STATUS</span>Active project</div></div><div class="flex gap-6 font-mono text-xs flex-wrap"><a href="https://github.com/SMozaff/Raven-Metadata-Extractor" target="_blank" rel="noopener" class="text-white hover:text-cyan-300 underline decoration-line underline-offset-4">Open reference ↗</a></div></div></article><article class="case-card reveal border border-line bg-panel/50 rounded-md overflow-hidden grid lg:grid-cols-2"><div class="relative h-64 lg:h-auto lg:order-2 bg-ink/80 flex items-center justify-center"><img src="/manus-storage/rezvanmesh-coin-mark.png" alt="RezvanMesh project mark" class="absolute inset-0 w-full h-full object-contain p-4" loading="lazy"><div class="absolute inset-0 bg-gradient-to-r from-transparent to-panel/70 hidden lg:block"></div></div><div class="p-8 lg:order-1"><div class="flex items-center justify-between mb-4"><span class="font-mono text-xs text-emerald-400">02 / SYSTEMS · MOBILE</span><span class="font-mono text-[10px] px-2 py-0.5 border border-line text-slate-500 rounded">BETA / VALIDATION IN PROGRESS</span></div><h3 class="text-2xl font-semibold text-white mb-3">Rezvan Mesh</h3><p class="text-sm text-slate-400 leading-relaxed mb-6">Offline Android peer-to-peer communication prototype combining Kotlin, Rust, Bluetooth LE, Wi-Fi Direct, and encrypted local storage for off-grid messaging scenarios.</p><div class="grid sm:grid-cols-3 gap-4 font-mono text-[11px] text-slate-500 mb-6"><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">BOUNDARY</span>Responsibilities separated explicitly.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">EVIDENCE</span>Claims limited to visible repository and supplied artifacts.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">STATUS</span>Beta / validation in progress</div></div><div class="flex gap-6 font-mono text-xs flex-wrap"><span class="text-slate-600">Repository link unresolved</span></div></div></article><article class="case-card reveal border border-line bg-panel/50 rounded-md overflow-hidden grid lg:grid-cols-2"><div class="relative h-64 lg:h-auto bg-ink/80 flex items-center justify-center"><img src="/manus-storage/watermelon-vector-converter.png" alt="Watermelon Vector Graphics Converter interface" class="absolute inset-0 w-full h-full object-contain p-4" loading="lazy"><div class="absolute inset-0 bg-gradient-to-r from-transparent to-panel/70 hidden lg:block"></div></div><div class="p-8"><div class="flex items-center justify-between mb-4"><span class="font-mono text-xs text-rose-400">03 / MOBILE · GRAPHICS</span><span class="font-mono text-[10px] px-2 py-0.5 border border-line text-slate-500 rounded">ACTIVE PROJECT</span></div><h3 class="text-2xl font-semibold text-white mb-3">Watermelon Vector Graphics Converter</h3><p class="text-sm text-slate-400 leading-relaxed mb-6">Native Android graphics-processing application with separated application and processing layers and explicit execution boundaries.</p><div class="grid sm:grid-cols-3 gap-4 font-mono text-[11px] text-slate-500 mb-6"><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">BOUNDARY</span>Responsibilities separated explicitly.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">EVIDENCE</span>Claims limited to visible repository and supplied artifacts.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">STATUS</span>Active project</div></div><div class="flex gap-6 font-mono text-xs flex-wrap"><a href="https://github.com/SMozaff/Watermelon-VectorConverter" target="_blank" rel="noopener" class="text-white hover:text-rose-300 underline decoration-line underline-offset-4">Open reference ↗</a></div></div></article><article class="case-card reveal border border-line bg-panel/50 rounded-md overflow-hidden grid lg:grid-cols-2"><div class="relative h-64 lg:h-auto lg:order-2 bg-ink/80 flex items-center justify-center"><img src="/manus-storage/watermelon-mediaplayer-ui_fcb60a06.png" alt="Watermelon MediaPlayer design artifact" class="absolute inset-0 w-full h-full object-contain p-4" loading="lazy"><div class="absolute inset-0 bg-gradient-to-r from-transparent to-panel/70 hidden lg:block"></div></div><div class="p-8 lg:order-1"><div class="flex items-center justify-between mb-4"><span class="font-mono text-xs text-amber-400">04 / PRODUCT · MOBILE</span><span class="font-mono text-[10px] px-2 py-0.5 border border-line text-slate-500 rounded">ACTIVE DEVELOPMENT</span></div><h3 class="text-2xl font-semibold text-white mb-3">Watermelon MediaPlayer</h3><p class="text-sm text-slate-400 leading-relaxed mb-6">Privacy-oriented offline Android media-player architecture built around explicit Kotlin interfaces, modular playback/storage/subtitle boundaries, and RTL-aware product design.</p><div class="grid sm:grid-cols-3 gap-4 font-mono text-[11px] text-slate-500 mb-6"><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">BOUNDARY</span>Responsibilities separated explicitly.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">EVIDENCE</span>Claims limited to visible repository and supplied artifacts.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">STATUS</span>Active development</div></div><div class="flex gap-6 font-mono text-xs flex-wrap"><a href="https://github.com/SMozaff/Watermelon-MediaPlayer" target="_blank" rel="noopener" class="text-white hover:text-amber-300 underline decoration-line underline-offset-4">Open reference ↗</a></div></div></article><article class="case-card reveal border border-line bg-panel/50 rounded-md overflow-hidden grid lg:grid-cols-2"><div class="relative h-64 lg:h-auto bg-ink/80 flex items-center justify-center"><img src="/manus-storage/onyx-logo.png" alt="ONYX Framework mark" class="absolute inset-0 w-full h-full object-contain p-4" loading="lazy"><div class="absolute inset-0 bg-gradient-to-r from-transparent to-panel/70 hidden lg:block"></div></div><div class="p-8"><div class="flex items-center justify-between mb-4"><span class="font-mono text-xs text-violet-400">05 / SYSTEMS · DISTRIBUTED</span><span class="font-mono text-[10px] px-2 py-0.5 border border-line text-slate-500 rounded">ARCHITECTURE CASE STUDY — IN PROGRESS</span></div><h3 class="text-2xl font-semibold text-white mb-3">ONYX Framework</h3><p class="text-sm text-slate-400 leading-relaxed mb-6">Rust-centric mission-operations architecture spanning local-first synchronization, persistence, observability, client surfaces, transport layers, and deployment infrastructure.</p><div class="grid sm:grid-cols-3 gap-4 font-mono text-[11px] text-slate-500 mb-6"><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">BOUNDARY</span>Responsibilities separated explicitly.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">EVIDENCE</span>Claims limited to visible repository and supplied artifacts.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">STATUS</span>Architecture case study — in progress</div></div><div class="flex gap-6 font-mono text-xs flex-wrap"><a href="https://github.com/SMozaff/Onyx-Framwork" target="_blank" rel="noopener" class="text-white hover:text-violet-300 underline decoration-line underline-offset-4">Open reference ↗</a></div></div></article><article class="case-card reveal border border-line bg-panel/50 rounded-md overflow-hidden grid lg:grid-cols-2"><div class="relative h-64 lg:h-auto lg:order-2 bg-ink/80 flex items-center justify-center"><img src="/manus-storage/ifem-contract-boundaries_5ce6019e.jpg" alt="IFEM contract-boundary publication visual" class="absolute inset-0 w-full h-full object-contain p-4" loading="lazy"><div class="absolute inset-0 bg-gradient-to-r from-transparent to-panel/70 hidden lg:block"></div></div><div class="p-8 lg:order-1"><div class="flex items-center justify-between mb-4"><span class="font-mono text-xs text-cyan-400">06 / RESEARCH · METHODOLOGY</span><span class="font-mono text-[10px] px-2 py-0.5 border border-line text-slate-500 rounded">METHODOLOGY / PUBLICATION</span></div><h3 class="text-2xl font-semibold text-white mb-3">Interface-First Execution Methodology (IFEM)</h3><p class="text-sm text-slate-400 leading-relaxed mb-6">Earlier methodology and publication lineage centered on explicit interfaces, contracts, responsibility boundaries, and independent verification.</p><div class="grid sm:grid-cols-3 gap-4 font-mono text-[11px] text-slate-500 mb-6"><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">BOUNDARY</span>Responsibilities separated explicitly.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">EVIDENCE</span>Claims limited to visible repository and supplied artifacts.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">STATUS</span>Methodology / publication</div></div><div class="flex gap-6 font-mono text-xs flex-wrap"><a href="https://ifem-doctrine.github.io/" target="_blank" rel="noopener" class="text-white hover:text-cyan-300 underline decoration-line underline-offset-4">Open reference ↗</a></div></div></article></div></div></section>
+<section id="work" class="py-24 scroll-mt-20"><div class="max-w-7xl mx-auto px-5"><div class="flex items-end justify-between mb-14 reveal"><div><p class="font-mono text-xs text-cyan-400 mb-3 tracking-[0.3em]">// 03 — ENGINEERING CASE STUDIES</p><h2 data-decode data-text="Selected Work" class="text-3xl md:text-5xl font-semibold text-white">Selected Work</h2></div><span class="hidden md:block font-mono text-xs text-slate-600">01 — 06</span></div><div class="work-grid"><article class="case-card reveal border border-line bg-panel/50 rounded-md overflow-hidden grid lg:grid-cols-2"><div class="relative h-64 lg:h-auto bg-ink/80 flex items-center justify-center"><img src="/manus-storage/raven-metadata-gui_e2db5b00.png" alt="Raven Metadata Extractor interface" class="absolute inset-0 w-full h-full object-contain p-4" loading="lazy"><div class="absolute inset-0 bg-gradient-to-r from-transparent to-panel/70 hidden lg:block"></div></div><div class="p-8"><div class="flex items-center justify-between mb-4"><span class="font-mono text-xs text-cyan-400">01 / DEVTOOLS · DESKTOP</span><span class="font-mono text-[10px] px-2 py-0.5 border border-line text-slate-500 rounded">ACTIVE PROJECT</span></div><h3 class="text-2xl font-semibold text-white mb-3">Raven Metadata Extractor</h3><p class="text-sm text-slate-400 leading-relaxed mb-6">Cross-platform desktop and CLI tool for explainable image metadata reports across EXIF, XMP, GPS, C2PA, and bounded AI-origin indicators.</p><div class="grid sm:grid-cols-3 gap-4 font-mono text-[11px] text-slate-500 mb-6"><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">BOUNDARY</span>Responsibilities separated explicitly.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">EVIDENCE</span>Claims limited to visible repository and supplied artifacts.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">STATUS</span>Active project</div></div><div class="flex gap-6 font-mono text-xs flex-wrap"><a href="https://github.com/SMozaff/Raven-Metadata-Extractor" target="_blank" rel="noopener" class="text-white hover:text-cyan-300 underline decoration-line underline-offset-4">Open reference ↗</a></div></div></article><article class="case-card reveal border border-line bg-panel/50 rounded-md overflow-hidden grid lg:grid-cols-2"><div class="relative h-64 lg:h-auto lg:order-2 bg-ink/80 flex items-center justify-center"><img src="/manus-storage/rezvanmesh-coin-mark.png" alt="RezvanMesh project mark" class="absolute inset-0 w-full h-full object-contain p-4" loading="lazy"><div class="absolute inset-0 bg-gradient-to-r from-transparent to-panel/70 hidden lg:block"></div></div><div class="p-8 lg:order-1"><div class="flex items-center justify-between mb-4"><span class="font-mono text-xs text-emerald-400">02 / SYSTEMS · MOBILE</span><span class="font-mono text-[10px] px-2 py-0.5 border border-line text-slate-500 rounded">BETA / VALIDATION IN PROGRESS</span></div><h3 class="text-2xl font-semibold text-white mb-3">Rezvan Mesh</h3><p class="text-sm text-slate-400 leading-relaxed mb-6">Offline Android peer-to-peer communication prototype combining Kotlin, Rust, Bluetooth LE, Wi-Fi Direct, and encrypted local storage for off-grid messaging scenarios.</p><div class="grid sm:grid-cols-3 gap-4 font-mono text-[11px] text-slate-500 mb-6"><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">BOUNDARY</span>Responsibilities separated explicitly.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">EVIDENCE</span>Claims limited to visible repository and supplied artifacts.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">STATUS</span>Beta / validation in progress</div></div><div class="flex gap-6 font-mono text-xs flex-wrap"><span class="text-slate-600">Repository link unresolved</span></div></div></article><article class="case-card reveal border border-line bg-panel/50 rounded-md overflow-hidden grid lg:grid-cols-2"><div class="relative h-64 lg:h-auto bg-ink/80 flex items-center justify-center"><img src="/manus-storage/watermelon-vector-converter.png" alt="Watermelon Vector Graphics Converter interface" class="absolute inset-0 w-full h-full object-contain p-4" loading="lazy"><div class="absolute inset-0 bg-gradient-to-r from-transparent to-panel/70 hidden lg:block"></div></div><div class="p-8"><div class="flex items-center justify-between mb-4"><span class="font-mono text-xs text-rose-400">03 / MOBILE · GRAPHICS</span><span class="font-mono text-[10px] px-2 py-0.5 border border-line text-slate-500 rounded">ACTIVE PROJECT</span></div><h3 class="text-2xl font-semibold text-white mb-3">Watermelon Vector Graphics Converter</h3><p class="text-sm text-slate-400 leading-relaxed mb-6">Native Android graphics-processing application with separated application and processing layers and explicit execution boundaries.</p><div class="grid sm:grid-cols-3 gap-4 font-mono text-[11px] text-slate-500 mb-6"><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">BOUNDARY</span>Responsibilities separated explicitly.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">EVIDENCE</span>Claims limited to visible repository and supplied artifacts.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">STATUS</span>Active project</div></div><div class="flex gap-6 font-mono text-xs flex-wrap"><a href="https://github.com/SMozaff/Watermelon-VectorConverter" target="_blank" rel="noopener" class="text-white hover:text-rose-300 underline decoration-line underline-offset-4">Open reference ↗</a></div></div></article><article class="case-card reveal border border-line bg-panel/50 rounded-md overflow-hidden grid lg:grid-cols-2"><div class="relative h-64 lg:h-auto lg:order-2 bg-ink/80 flex items-center justify-center"><img src="/manus-storage/watermelon-mediaplayer-ui_fcb60a06.png" alt="Watermelon MediaPlayer design artifact" class="absolute inset-0 w-full h-full object-contain p-4" loading="lazy"><div class="absolute inset-0 bg-gradient-to-r from-transparent to-panel/70 hidden lg:block"></div></div><div class="p-8 lg:order-1"><div class="flex items-center justify-between mb-4"><span class="font-mono text-xs text-amber-400">04 / PRODUCT · MOBILE</span><span class="font-mono text-[10px] px-2 py-0.5 border border-line text-slate-500 rounded">ACTIVE DEVELOPMENT</span></div><h3 class="text-2xl font-semibold text-white mb-3">Watermelon MediaPlayer</h3><p class="text-sm text-slate-400 leading-relaxed mb-6">Privacy-oriented offline Android media-player architecture built around explicit Kotlin interfaces, modular playback/storage/subtitle boundaries, and RTL-aware product design.</p><div class="grid sm:grid-cols-3 gap-4 font-mono text-[11px] text-slate-500 mb-6"><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">BOUNDARY</span>Responsibilities separated explicitly.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">EVIDENCE</span>Claims limited to visible repository and supplied artifacts.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">STATUS</span>Active development</div></div><div class="flex gap-6 font-mono text-xs flex-wrap"><a href="https://github.com/SMozaff/Watermelon-MediaPlayer" target="_blank" rel="noopener" class="text-white hover:text-amber-300 underline decoration-line underline-offset-4">Open reference ↗</a></div></div></article><article class="case-card reveal border border-line bg-panel/50 rounded-md overflow-hidden grid lg:grid-cols-2"><div class="relative h-64 lg:h-auto bg-ink/80 flex items-center justify-center"><img src="/manus-storage/onyx-logo.png" alt="ONYX Framework mark" class="absolute inset-0 w-full h-full object-contain p-4" loading="lazy"><div class="absolute inset-0 bg-gradient-to-r from-transparent to-panel/70 hidden lg:block"></div></div><div class="p-8"><div class="flex items-center justify-between mb-4"><span class="font-mono text-xs text-violet-400">05 / SYSTEMS · DISTRIBUTED</span><span class="font-mono text-[10px] px-2 py-0.5 border border-line text-slate-500 rounded">ARCHITECTURE CASE STUDY — IN PROGRESS</span></div><h3 class="text-2xl font-semibold text-white mb-3">ONYX Framework</h3><p class="text-sm text-slate-400 leading-relaxed mb-6">Rust-centric mission-operations architecture spanning local-first synchronization, persistence, observability, client surfaces, transport layers, and deployment infrastructure.</p><div class="grid sm:grid-cols-3 gap-4 font-mono text-[11px] text-slate-500 mb-6"><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">BOUNDARY</span>Responsibilities separated explicitly.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">EVIDENCE</span>Claims limited to visible repository and supplied artifacts.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">STATUS</span>Architecture case study — in progress</div></div><div class="flex gap-6 font-mono text-xs flex-wrap"><a href="https://github.com/SMozaff/Onyx-Framwork" target="_blank" rel="noopener" class="text-white hover:text-violet-300 underline decoration-line underline-offset-4">Open reference ↗</a></div></div></article><article class="case-card reveal border border-line bg-panel/50 rounded-md overflow-hidden grid lg:grid-cols-2"><div class="relative h-64 lg:h-auto lg:order-2 bg-ink/80 flex items-center justify-center"><img src="/manus-storage/ifem-contract-boundaries_5ce6019e.jpg" alt="IFEM contract-boundary publication visual" class="absolute inset-0 w-full h-full object-contain p-4" loading="lazy"><div class="absolute inset-0 bg-gradient-to-r from-transparent to-panel/70 hidden lg:block"></div></div><div class="p-8 lg:order-1"><div class="flex items-center justify-between mb-4"><span class="font-mono text-xs text-cyan-400">06 / RESEARCH · METHODOLOGY</span><span class="font-mono text-[10px] px-2 py-0.5 border border-line text-slate-500 rounded">METHODOLOGY / PUBLICATION</span></div><h3 class="text-2xl font-semibold text-white mb-3">Interface-First Execution Methodology (IFEM)</h3><p class="text-sm text-slate-400 leading-relaxed mb-6">Earlier methodology and publication lineage centered on explicit interfaces, contracts, responsibility boundaries, and independent verification.</p><div class="grid sm:grid-cols-3 gap-4 font-mono text-[11px] text-slate-500 mb-6"><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">BOUNDARY</span>Responsibilities separated explicitly.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">EVIDENCE</span>Claims limited to visible repository and supplied artifacts.</div><div class="border-t border-line pt-3"><span class="text-slate-300 block mb-1">STATUS</span>Methodology / publication</div></div><div class="flex gap-6 font-mono text-xs flex-wrap"><a href="https://ifem-doctrine.github.io/" target="_blank" rel="noopener" class="text-white hover:text-cyan-300 underline decoration-line underline-offset-4">Open reference ↗</a></div></div></article></div></div></section>
 
 <!-- IFEM -->
 <section id="ifem" class="py-24 border-t border-line/60 bg-panel/30 scroll-mt-20"><div class="max-w-7xl mx-auto px-5 grid lg:grid-cols-2 gap-14 items-center"><div class="reveal relative"><div class="absolute -inset-6 bg-cyan-900/10 blur-3xl rounded-full"></div><img src="/manus-storage/soheil-boundary-glyph_be8674fd.png" alt="BOUND boundary-oriented methodology visual" class="relative border border-line rounded-md w-full bg-ink/70 p-8" loading="lazy"></div><div class="reveal"><p class="font-mono text-xs text-cyan-400 mb-3 tracking-[0.3em]">// 04 — METHODOLOGY</p><h2 data-decode data-text="BOUND Method v3.0" class="text-3xl md:text-5xl font-semibold text-white mb-3">BOUND Method v3.0</h2><p class="text-cyan-300 font-mono text-xs mb-6">BOUNDARY-ORIENTED UNIFIED DEVELOPMENT</p><p class="text-slate-400 leading-relaxed mb-7">BOUND is a software engineering methodology for reliable parallel development. It starts by making responsibility boundaries explicit, formalizes what crosses them as contracts, enables independent implementation, and verifies conformance continuously.</p><div class="grid sm:grid-cols-2 gap-4 mb-8"><div class="border border-line bg-ink/60 p-4 rounded-sm"><span class="font-mono text-[10px] text-cyan-400">01</span><p class="text-sm text-white mt-1">Boundary</p></div><div class="border border-line bg-ink/60 p-4 rounded-sm"><span class="font-mono text-[10px] text-violet-400">02</span><p class="text-sm text-white mt-1">Contract</p></div><div class="border border-line bg-ink/60 p-4 rounded-sm"><span class="font-mono text-[10px] text-emerald-400">03</span><p class="text-sm text-white mt-1">Independent Execution</p></div><div class="border border-line bg-ink/60 p-4 rounded-sm"><span class="font-mono text-[10px] text-amber-400">04</span><p class="text-sm text-white mt-1">Continuous Verification</p></div></div><blockquote class="border-l-2 border-cyan-500 pl-5 text-slate-300 italic mb-8">“Define the boundaries. Freeze the contracts. Execute independently. Verify continuously.”</blockquote><p class="text-sm text-slate-500 leading-relaxed mb-8"><strong class="text-slate-300">From IFEM to BOUND:</strong> BOUND v3.0 is the renamed continuation and conceptual refinement of IFEM. IFEM: Interface → Contract → Execution → Verification. BOUND: Domain → Boundary → Contract → Execution → Verification. Interfaces emerge from boundaries; boundaries should not be inferred from interfaces.</p><div class="flex flex-wrap gap-4"><a href="https://bound-method.github.io/" target="_blank" rel="noopener" class="px-6 py-3 bg-cyan-400 hover:bg-cyan-300 text-ink font-semibold text-sm rounded-sm transition-colors">Explore BOUND ↗</a><a href="https://doi.org/10.5281/zenodo.22257583" target="_blank" rel="noopener" class="px-6 py-3 border border-line text-slate-300 text-sm font-mono hover:border-cyan-400 hover:text-white rounded-sm transition-all">BOUND DOI</a><a href="https://doi.org/10.5281/zenodo.20621561" target="_blank" rel="noopener" class="px-6 py-3 border border-line text-slate-400 text-sm font-mono hover:border-violet-400 hover:text-white rounded-sm transition-all">IFEM lineage DOI</a></div></div></div></section>
