@@ -465,7 +465,7 @@ tailwind.config = {
       <div class="flex items-center gap-3 mb-2">
         <span class="text-[10px] font-mono text-slate-500">LOADING USER SPACE</span>
         <div class="flex-1 h-[3px] bg-line rounded-full overflow-hidden">
-          <div id="bootBar" class="h-full bg-gradient-to-r from-cyan-500 to-violet-500 rounded-full transition-all duration-200" style="width:0%"></div>
+          <div id="bootBar" class="h-full bg-gradient-to-r from-cyan-500 to-violet-500 rounded-full transition-all duration-75" style="width:0%"></div>
         </div>
         <span id="bootPct" class="text-[10px] font-mono text-cyan-400 w-10 text-right">0%</span>
       </div>
@@ -695,11 +695,11 @@ function fitCanvas(cnv) {
       progress.classList.remove('hidden');
       let p = 0;
       const iv = setInterval(function () {
-        p += Math.random() * 20 + 8;
-        if (p >= 100) { p = 100; clearInterval(iv); setTimeout(finishBoot, 250); }
+        p += Math.random() * 14 + 18;
+        if (p >= 100) { p = 100; clearInterval(iv); setTimeout(finishBoot, 100); }
         bar.style.width = p + '%';
         pct.textContent = Math.floor(p) + '%';
-      }, 90);
+      }, 25);
       return;
     }
     const l = lines[li];
@@ -712,13 +712,13 @@ function fitCanvas(cnv) {
     }
     log.appendChild(div);
     li++;
-    setTimeout(addLine, 45 + Math.random() * 55);
+    setTimeout(addLine, 45 + Math.random() * 25);
   }
   function finishBoot() {
     overlay.classList.add('fade-out');
-    setTimeout(function () { overlay.style.display = 'none'; }, 550);
+    setTimeout(function () { overlay.style.display = 'none'; }, 200);
   }
-  setTimeout(addLine, 180);
+  setTimeout(addLine, 80);
 })();
 
 /* ========== STATUS BAR ========== */
