@@ -1,49 +1,48 @@
 # Soheil Mozaffari — Personal Website
 
-Canonical bilingual portfolio and professional identity site for **Soheil Mozaffari**, Software Engineer · Systems Architect · creator of IFEM.
+Canonical bilingual portfolio and professional identity site for **Soheil Mozaffari**, Software Engineer & Systems Architect and author of **BOUND Method v3.0 — Boundary-Oriented Unified Development**.
 
 - English: https://smozaff.github.io/
 - Persian: https://smozaff.github.io/fa/
+- BOUND Method: https://bound-method.github.io/
+- BOUND publication: https://doi.org/10.5281/zenodo.22257583
 - GitHub: https://github.com/SMozaff
 - ORCID: https://orcid.org/0009-0001-2428-1295
-- IFEM Doctrine: https://ifem-doctrine.github.io/
+- IFEM lineage: https://doi.org/10.5281/zenodo.20621561
 
-## Engineering case studies
+## Current deployed architecture
 
-The portfolio links to five evidence-led project case studies:
+GitHub Pages publishes directly from `main:/`.
 
-- [Raven Metadata Extractor](https://ravenmeta-b9c2fz9g.manus.space/)
-- [Rezvan Mesh](https://rezvanmesh-ctebutsc.manus.space/)
-- [Watermelon Vector Graphics Converter](https://watervector-hz2inn6j.manus.space/)
-- [Watermelon MediaPlayer](https://watermelonmp-b828xakc.manus.space/)
-- [ONYX Framework](https://onyxcase-bxl5ndbk.manus.space/)
+The canonical deployed pages are:
 
-The current `manus.space` addresses are external case-study destinations. See `CASE_STUDY_INTEGRATION_NOTES.md` for the future stable-URL migration plan.
+- `/index.html`
+- `/fa/index.html`
 
-## Repository structure
+They now use the repository's original `HTML File.html` visual/interaction language directly: Linux/terminal shell, boot sequence, status bar, command palette, animated core, four-part interactive lab, technical marquee, system panels and dark multi-signal palette. Verified portfolio content, BOUND-first positioning, IFEM lineage, DOI records, metadata, JSON-LD and bilingual routing are layered into that shell.
 
-- `site-src/` — editable React/Vite source and source HTML documents.
-- `assets/`, root `index.html`, and `fa/` — deployed GitHub Pages output.
-- `manus-storage/` — portfolio evidence imagery.
-- `sitemap.xml` / `robots.txt` — crawl and discovery metadata.
+`site-src/` remains in the repository as the previous React/Vite implementation and reference source. It is **not** the current deployed visual authority. Running the old Vite workflow and copying its output over the root pages would overwrite the current static implementation.
 
-## Development
+## Engineering records
 
-```bash
-pnpm install
-pnpm check
-pnpm build
-```
+The deployed site presents six records:
 
-The root package scripts use Vite and TypeScript. A normal production update should regenerate deployed assets from the editable source before publishing.
+1. Raven Metadata Extractor
+2. Rezvan Mesh
+3. Watermelon Vector Graphics Converter
+4. Watermelon MediaPlayer
+5. ONYX Framework
+6. Interface-First Execution Methodology (IFEM) — earlier methodology / BOUND lineage
+
+Project claims remain evidence-bounded. Unverified case-study URLs and repository destinations are not invented.
 
 ## Search and identity architecture
 
-The English and Persian pages provide:
+The English and Persian pages preserve:
 
 - self-canonical URLs;
 - reciprocal `hreflang` relationships;
-- crawler-readable semantic fallback content;
-- `Person`, `WebSite`, and engineering-case-study `ItemList` JSON-LD;
+- `Person`, `WebSite`, `ScholarlyArticle`, and engineering-record `ItemList` JSON-LD;
 - Open Graph and Twitter/X metadata;
-- links to GitHub, ORCID, IFEM Doctrine, and the full project case studies.
+- BOUND and IFEM publication relationships;
+- links to GitHub, ORCID, LinkedIn, BOUND, and Zenodo.
