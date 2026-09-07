@@ -302,7 +302,7 @@ tailwind.config = {
     position: fixed; inset: 0; z-index: 100;
     background: #05080f;
     display: flex; align-items: center; justify-content: center;
-    transition: opacity 0.8s ease-out;
+    transition: opacity 0.55s ease-out;
   }
   #bootOverlay.fade-out { opacity: 0; pointer-events: none; }
 </style>
@@ -317,7 +317,7 @@ tailwind.config = {
       <div class="flex items-center gap-3 mb-2">
         <span class="text-[10px] font-mono text-slate-500">LOADING USER SPACE</span>
         <div class="flex-1 h-[3px] bg-line rounded-full overflow-hidden">
-          <div id="bootBar" class="h-full bg-gradient-to-r from-cyan-500 to-violet-500 rounded-full transition-all duration-300" style="width:0%"></div>
+          <div id="bootBar" class="h-full bg-gradient-to-r from-cyan-500 to-violet-500 rounded-full transition-all duration-200" style="width:0%"></div>
         </div>
         <span id="bootPct" class="text-[10px] font-mono text-cyan-400 w-10 text-right">0%</span>
       </div>
@@ -405,11 +405,13 @@ tailwind.config = {
         <div class="flex flex-wrap gap-4 mb-10"><a href="https://bound-method.github.io/" target="_blank" rel="noopener" class="magnetic-btn px-7 py-3 bg-cyan-400 text-ink font-semibold text-sm hover:bg-cyan-300 transition-colors rounded-sm shadow-[0_0_30px_rgba(34,211,238,.35)]">Explore BOUND Method</a><a href="https://doi.org/10.5281/zenodo.22257583" target="_blank" rel="noopener" class="magnetic-btn px-7 py-3 border border-line text-slate-300 font-medium text-sm hover:border-cyan-400/60 hover:text-white transition-all rounded-sm flex items-center gap-2">Read the Publication ↗</a></div>
         <div class="grid grid-cols-3 gap-6 max-w-lg"><div><div class="stat-num text-2xl md:text-3xl font-semibold text-white" data-count="6">0</div><div class="font-mono text-[10px] text-slate-500 uppercase tracking-widest mt-1">Records</div></div><div><div class="stat-num text-2xl md:text-3xl font-semibold text-white" data-count="2">0</div><div class="font-mono text-[10px] text-slate-500 uppercase tracking-widest mt-1">Publications</div></div><div><div class="stat-num text-2xl md:text-3xl font-semibold text-white" data-count="1">0</div><div class="font-mono text-[10px] text-slate-500 uppercase tracking-widest mt-1">Method</div></div></div>
       </div>
-      <div class="lg:col-span-3 hidden lg:block"><div class="term-window p-0 overflow-hidden"><div class="term-titlebar px-3 py-1.5 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-rose-500/80"></span><span class="w-2 h-2 rounded-full bg-amber-400/80"></span><span class="w-2 h-2 rounded-full bg-emerald-400/80"></span><span class="ml-2 text-[9px] font-mono text-slate-600">htop — boundary monitor</span></div><div class="p-3 font-mono text-[10px]" id="htopMonitor"><div class="text-slate-500 mb-2 flex justify-between"><span>CPU [<span id="htopCpuBar" class="text-cyan-400">▓▓▓▓░░░░░░</span>]</span><span id="htopCpuPct" class="text-cyan-400">32%</span></div><div class="text-slate-500 mb-3 flex justify-between"><span>MEM [<span id="htopMemBar" class="text-violet-400">▓▓▓░░░░░░░</span>]</span><span id="htopMemPct" class="text-violet-400">24%</span></div><div class="border-t border-line/60 pt-2 space-y-1.5" id="htopProcesses"><div class="text-slate-600 text-[9px] flex justify-between border-b border-line/30 pb-1"><span>PID</span><span>DOMAIN</span><span>CPU%</span><span>STATUS</span></div></div></div></div><div class="mt-4 term-window p-3 overflow-hidden"><div class="text-[9px] font-mono text-slate-600 mb-2">lsmod — loaded modules</div><div id="moduleList" class="space-y-2"></div></div></div>
+      <div class="lg:col-span-3 flex items-center justify-center self-center">
+        <div class="hero-core-wrap w-full max-w-[360px] mx-auto" aria-label="Animated systems network visualization">
+          <canvas id="heroCore" class="w-full aspect-square block"></canvas>
+        </div>
+      </div>
     </div>
-    <div class="grid lg:grid-cols-12 gap-6 items-center"><div class="lg:col-span-5 order-2 lg:order-1"><div class="term-window p-0 overflow-hidden" id="interactiveTerm"><div class="term-titlebar px-3 py-2 flex items-center justify-between"><div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-rose-500/80 cursor-pointer" onclick="termAction('close')"></span><span class="w-2.5 h-2.5 rounded-full bg-amber-400/80 cursor-pointer" onclick="termAction('minimize')"></span><span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80 cursor-pointer" onclick="termAction('maximize')"></span></div><span class="text-[10px] font-mono text-slate-500">smozaff@arch: ~/portfolio — zsh</span><span class="text-[9px] font-mono text-slate-600">type <span class="text-cyan-400">help</span></span></div><div id="termOutput" class="term-body p-4 min-h-[200px] max-h-[260px] overflow-y-auto"></div><div class="px-4 pb-3 flex items-center gap-1"><span class="text-emerald-400 font-mono text-xs">❯</span><input id="termInput" type="text" class="flex-1 bg-transparent text-white font-mono text-xs focus:outline-none placeholder-slate-700" placeholder="type 'help' to begin..." autocomplete="off" spellcheck="false"></div></div></div>
-      <div class="lg:col-span-7 order-1 lg:order-2"><div class="hero-core-wrap"><canvas id="heroCore" class="w-full aspect-square max-w-lg mx-auto block"></canvas></div></div>
-    </div>
+    <div class="max-w-4xl mx-auto mt-4"><div class="term-window p-0 overflow-hidden" id="interactiveTerm"><div class="term-titlebar px-3 py-2 flex items-center justify-between"><div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-rose-500/80 cursor-pointer" onclick="termAction('close')"></span><span class="w-2.5 h-2.5 rounded-full bg-amber-400/80 cursor-pointer" onclick="termAction('minimize')"></span><span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80 cursor-pointer" onclick="termAction('maximize')"></span></div><span class="text-[10px] font-mono text-slate-500">smozaff@arch: ~/portfolio — zsh</span><span class="text-[9px] font-mono text-slate-600">type <span class="text-cyan-400">help</span></span></div><div id="termOutput" class="term-body p-4 min-h-[200px] max-h-[260px] overflow-y-auto"></div><div class="px-4 pb-3 flex items-center gap-1"><span class="text-emerald-400 font-mono text-xs">❯</span><input id="termInput" type="text" class="flex-1 bg-transparent text-white font-mono text-xs focus:outline-none placeholder-slate-700" placeholder="type 'help' to begin..." autocomplete="off" spellcheck="false"></div></div></div></div>
   </div><div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500 font-mono text-[10px] uppercase tracking-widest"><span>Scroll</span><div class="w-[1px] h-10 bg-gradient-to-b from-cyan-400 to-transparent animate-pulse"></div></div>
 </header>
 
@@ -430,15 +432,15 @@ tailwind.config = {
 <section id="lab" class="py-24 border-y border-line/60 bg-panel/30 scroll-mt-20">
   <div class="max-w-7xl mx-auto px-5">
     <div class="mb-12 reveal">
-      <p class="font-mono text-xs text-cyan-400 mb-3 tracking-[0.3em]">// 02 — INTERACTIVE LAB</p>
-      <h2 data-decode data-text="Touch the Concepts" class="text-3xl md:text-5xl font-semibold text-white">Touch the Concepts</h2>
-      <p class="text-slate-500 max-w-2xl mt-4">Small live instruments: signal synthesis, boolean logic, symmetric ciphers and fractal geometry. Verification by interaction.</p>
+      <p class="font-mono text-xs text-cyan-400 mb-3 tracking-[0.3em]">// 02 — SYSTEMS IN PRACTICE</p>
+      <h2 data-decode data-text="Interactive Engineering Lab" class="text-3xl md:text-5xl font-semibold text-white">Interactive Engineering Lab</h2>
+      <p class="text-slate-500 max-w-2xl mt-4">Four compact instruments make recurring systems ideas tangible: signal composition, decision logic, reversible data transformation, and emergent complexity. Together they connect software, security, communications, and mathematical reasoning through direct interaction.</p>
     </div>
     <div class="flex flex-wrap gap-2 mb-8 reveal">
-      <button data-tab="signal" class="tab-btn active px-5 py-2 border border-line rounded-sm font-mono text-xs uppercase tracking-widest text-slate-400 transition-all">Signal</button>
-      <button data-tab="gates" class="tab-btn px-5 py-2 border border-line rounded-sm font-mono text-xs uppercase tracking-widest text-slate-400 transition-all">Logic Gates</button>
-      <button data-tab="cipher" class="tab-btn px-5 py-2 border border-line rounded-sm font-mono text-xs uppercase tracking-widest text-slate-400 transition-all">XOR Cipher</button>
-      <button data-tab="fractal" class="tab-btn px-5 py-2 border border-line rounded-sm font-mono text-xs uppercase tracking-widest text-slate-400 transition-all">Fractal</button>
+      <button data-tab="signal" class="tab-btn active px-5 py-2 border border-line rounded-sm font-mono text-xs uppercase tracking-widest text-slate-400 transition-all">Signals</button>
+      <button data-tab="gates" class="tab-btn px-5 py-2 border border-line rounded-sm font-mono text-xs uppercase tracking-widest text-slate-400 transition-all">Logic</button>
+      <button data-tab="cipher" class="tab-btn px-5 py-2 border border-line rounded-sm font-mono text-xs uppercase tracking-widest text-slate-400 transition-all">XOR Transform</button>
+      <button data-tab="fractal" class="tab-btn px-5 py-2 border border-line rounded-sm font-mono text-xs uppercase tracking-widest text-slate-400 transition-all">Fractal Systems</button>
     </div>
     <div class="border border-line rounded-md bg-ink/70 p-6 md:p-10 reveal">
       <div data-panel="signal">
@@ -542,11 +544,11 @@ function fitCanvas(cnv) {
       progress.classList.remove('hidden');
       let p = 0;
       const iv = setInterval(function () {
-        p += Math.random() * 15 + 5;
-        if (p >= 100) { p = 100; clearInterval(iv); setTimeout(finishBoot, 400); }
+        p += Math.random() * 20 + 8;
+        if (p >= 100) { p = 100; clearInterval(iv); setTimeout(finishBoot, 250); }
         bar.style.width = p + '%';
         pct.textContent = Math.floor(p) + '%';
-      }, 120);
+      }, 90);
       return;
     }
     const l = lines[li];
@@ -559,13 +561,13 @@ function fitCanvas(cnv) {
     }
     log.appendChild(div);
     li++;
-    setTimeout(addLine, 60 + Math.random() * 80);
+    setTimeout(addLine, 45 + Math.random() * 55);
   }
   function finishBoot() {
     overlay.classList.add('fade-out');
-    setTimeout(function () { overlay.style.display = 'none'; }, 800);
+    setTimeout(function () { overlay.style.display = 'none'; }, 550);
   }
-  setTimeout(addLine, 300);
+  setTimeout(addLine, 180);
 })();
 
 /* ========== STATUS BAR ========== */
@@ -589,68 +591,6 @@ function fitCanvas(cnv) {
   }
   update();
   setInterval(update, 1000);
-})();
-
-/* ========== HTOP MONITOR ========== */
-(function () {
-  const processes = [
-    { pid: '001', name: 'bound-method', color: 'text-cyan-400' },
-    { pid: '042', name: 'ifem-lineage', color: 'text-violet-400' },
-    { pid: '108', name: 'verify-path', color: 'text-emerald-400' },
-    { pid: '256', name: 'systems-work', color: 'text-rose-400' },
-    { pid: '512', name: 'writing', color: 'text-amber-400' },
-  ];
-  const box = document.getElementById('htopProcesses');
-  processes.forEach(function (p) {
-    const row = document.createElement('div');
-    row.className = 'flex justify-between items-center text-[10px] hover:bg-white/5 px-1 py-0.5 rounded cursor-default transition-colors';
-    row.innerHTML = '<span class="text-slate-600">' + p.pid + '</span><span class="' + p.color + '">' + p.name + '</span><span class="text-slate-400 w-8 text-right" data-cpu>' + (Math.random() * 12).toFixed(1) + '</span><span class="text-emerald-500 text-[9px]">running</span>';
-    box.appendChild(row);
-  });
-
-  function makeBar(val, max, color) {
-    let s = '';
-    const filled = Math.round((val / max) * 10);
-    for (let i = 0; i < 10; i++) s += i < filled ? '▓' : '░';
-    return s;
-  }
-
-  setInterval(function () {
-    const cpu = Math.floor(20 + Math.random() * 40);
-    const mem = Math.floor(18 + Math.random() * 20);
-    document.getElementById('htopCpuBar').textContent = makeBar(cpu, 100);
-    document.getElementById('htopCpuPct').textContent = cpu + '%';
-    document.getElementById('htopMemBar').textContent = makeBar(mem, 100);
-    document.getElementById('htopMemPct').textContent = mem + '%';
-    box.querySelectorAll('[data-cpu]').forEach(function (el) {
-      el.textContent = (Math.random() * 15).toFixed(1);
-    });
-  }, 2000);
-})();
-
-/* ========== KERNEL MODULES ========== */
-(function () {
-  const modules = [
-    { name: 'bound_core', size: '2.4M', deps: 3 },
-    { name: 'boundary_registry', size: '1.8M', deps: 1 },
-    { name: 'contract_verify', size: '960K', deps: 2 },
-    { name: 'execution_context', size: '1.2M', deps: 0 },
-    { name: 'ifem_lineage', size: '1.1M', deps: 2 },
-  ];
-  const list = document.getElementById('moduleList');
-  modules.forEach(function (m, i) {
-    const row = document.createElement('div');
-    row.className = 'flex items-center gap-2 text-[10px]';
-    row.innerHTML = '<span class="status-led on" style="animation-delay:' + (i * 0.2) + 's"></span><span class="text-slate-400 flex-1">' + m.name + '</span><span class="text-slate-600">' + m.size + '</span>';
-    list.appendChild(row);
-    const barWrap = document.createElement('div');
-    barWrap.className = 'h-[3px] bg-line/40 rounded-full overflow-hidden mt-1';
-    const barInner = document.createElement('div');
-    barInner.className = 'module-bar';
-    barInner.style.animationDelay = (i * 0.3 + 0.5) + 's';
-    barWrap.appendChild(barInner);
-    list.appendChild(barWrap);
-  });
 })();
 
 /* ========== INTERACTIVE TERMINAL ========== */
